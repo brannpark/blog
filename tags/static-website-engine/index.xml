@@ -1,25 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>개발지식공작소</title>
-    <link>http://brannpark.github.io/blog/</link>
-    <description>Recent content on 개발지식공작소</description>
+    <title>Static Website Engine on 개발지식공작소</title>
+    <link>http://brannpark.github.io/blog/tags/static-website-engine/</link>
+    <description>Recent content in Static Website Engine on 개발지식공작소</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Tue, 01 Dec 2015 15:53:08 +0900</lastBuildDate>
-    <atom:link href="http://brannpark.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
-    
-    <item>
-      <title>Resume</title>
-      <link>http://brannpark.github.io/blog/resume/</link>
-      <pubDate>Tue, 01 Dec 2015 15:53:08 +0900</pubDate>
-      
-      <guid>http://brannpark.github.io/blog/resume/</guid>
-      <description>
-
-&lt;h3 id=&#34;준비중:c59a67a3c7bc5faa453847420267045e&#34;&gt;준비중&lt;/h3&gt;
-</description>
-    </item>
+    <lastBuildDate>Tue, 01 Dec 2015 15:36:31 +0900</lastBuildDate>
+    <atom:link href="http://brannpark.github.io/blog/tags/static-website-engine/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Made by HUGO and GitHub Pages</title>
@@ -238,28 +226,6 @@ title = &amp;quot;Made by HUGO and GitHub Pages&amp;quot;
 &lt;h1 id=&#34;deploying-to-github-pages:d818b8a7948ca63ccc8c7bf194ac8a9f&#34;&gt;Deploying to GitHub Pages&lt;/h1&gt;
 
 &lt;p&gt;&amp;hellip;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>블로그를 시작합니다</title>
-      <link>http://brannpark.github.io/blog/posts/new/</link>
-      <pubDate>Tue, 01 Dec 2015 11:47:56 +0900</pubDate>
-      
-      <guid>http://brannpark.github.io/blog/posts/new/</guid>
-      <description>&lt;hr /&gt;
-
-&lt;p&gt;뭐.. 평소에도 계속 프로그래밍 관련 글들을 기록해놓는 블로그를 해볼까 했었습니다만,&lt;/p&gt;
-
-&lt;p&gt;생각보다 시작이 쉽지가 않더군요 ㅎㅎ..&lt;/p&gt;
-
-&lt;p&gt;Github Pages 를 이용한 static website 개설에 흥미가 생겨서 한번 이를 이용한 블로깅을 시작해 볼까 합니다!&lt;/p&gt;
-
-&lt;p&gt;개발 관련 지식들이 눈으로 머리로 한번 훑고 지나가게 되면 금세 뇌세포와 빠이빠이 하더군요. 기록도 남기면서 동시에 리마인드 할 수 있지 않을까 기대합니다.&lt;/p&gt;
-
-&lt;p&gt;아마도 첫번째 포스팅 주제는 사이트 개설기 정도가 되겠네요 ㅎㅎ&lt;/p&gt;
-
-&lt;p&gt;글이 마무리되면 포스팅 하도록 하겠습니다!&lt;/p&gt;
 </description>
     </item>
     
