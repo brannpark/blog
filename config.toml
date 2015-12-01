@@ -12,7 +12,7 @@ theme = "redlounge"
 [params]
     sidebartitle = "D三veloper"
     sidebartagline = "Thoughts on development and life"
-    sidebarphoto = "/img/profile.png"
+    sidebarphoto = "/blog/img/profile.png"
 [[menu.main]]
     name = "Post"
     url = "/posts"
