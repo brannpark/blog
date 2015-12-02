@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>블로깅 시작 on 개발지식공작소</title>
+    <title>블로깅 시작 on 개발지식저장소</title>
     <link>http://brannpark.github.io/blog/tags/%EB%B8%94%EB%A1%9C%EA%B9%85-%EC%8B%9C%EC%9E%91/</link>
-    <description>Recent content in 블로깅 시작 on 개발지식공작소</description>
+    <description>Recent content in 블로깅 시작 on 개발지식저장소</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
     <lastBuildDate>Tue, 01 Dec 2015 11:47:56 +0900</lastBuildDate>
@@ -23,9 +23,7 @@
 
 &lt;p&gt;Github Pages 를 이용한 static website 개설에 흥미가 생겨서 한번 이를 이용한 블로깅을 시작해 볼까 합니다!&lt;/p&gt;
 
-&lt;p&gt;개발 관련 지식들이 눈으로 머리로 한번 훑고 지나가게 되면 금세 뇌세포와 빠이빠이 하더군요. 기록도 남기면서 동시에 리마인드 할 수 있지 않을까 기대합니다.&lt;/p&gt;
-
-&lt;p&gt;아마도 첫번째 포스팅 주제는 사이트 개설기 정도가 되겠네요 ㅎㅎ&lt;/p&gt;
+&lt;p&gt;아마도 첫번째 주제는 사이트 개설기 정도가 되겠네요 ㅎㅎ&lt;/p&gt;
 
 &lt;p&gt;글이 마무리되면 포스팅 하도록 하겠습니다!&lt;/p&gt;
 </description>

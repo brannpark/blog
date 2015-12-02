@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
   <title>
-    Made by HUGO and GitHub Pages // 개발지식공작소
+    Made by HUGO and GitHub Pages // 개발지식저장소
   </title>
 
   <link href="http://gmpg.org/xfn/11" rel="profile">
@@ -42,7 +42,7 @@
   <link rel="shortcut icon" href="/favicon.png">
 
   
-  <link href="" rel="alternate" type="application/rss+xml" title="개발지식공작소" />
+  <link href="" rel="alternate" type="application/rss+xml" title="개발지식저장소" />
 
     
   
@@ -57,7 +57,6 @@
   
 
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-
 
 </head>
 
@@ -118,6 +117,7 @@
 <li><a href="#configuration:d818b8a7948ca63ccc8c7bf194ac8a9f">Configuration</a></li>
 <li><a href="#create-page:d818b8a7948ca63ccc8c7bf194ac8a9f">Create Page</a></li>
 </ul></li>
+<li><a href="#deploying-site-on-local:d818b8a7948ca63ccc8c7bf194ac8a9f">Deploying Site on Local</a></li>
 <li><a href="#github-pages:d818b8a7948ca63ccc8c7bf194ac8a9f">GitHub Pages</a></li>
 <li><a href="#deploying-to-github-pages:d818b8a7948ca63ccc8c7bf194ac8a9f">Deploying to GitHub Pages</a></li>
 </ul>
@@ -158,13 +158,13 @@
 
 <hr />
 
-<p>일반적인 웹사이트의 경우, 여러 웹 컨텐츠들을 다이내믹 하게 생성하여 이용자에게 전달한다.</p>
+<p>일반적인 웹사이트의 경우, 여러 웹 컨텐츠들을 동적으로 생성하여 이용자에게 전달한다.</p>
 
-<p>다시 말해서, 웹어플리케이션이 동적 컨텐츠를 정적 컨텐츠로 변환하는 과정을 수행한다.</p>
+<p>다시 말해서, 웹어플리케이션은 동적 컨텐츠를 정적 컨텐츠로 변환하는 과정을 수행한다.</p>
 
-<p>그러다 보니, 이렇게 생성된 동적 컨텐츠는 일반적으로 브라우저 레벨에서의 캐싱을 이용할 수 없다. 따라서 매 페이지 요청시 마다 웹어플리케이션이 반복적인 일을 해야한다. <strike>내가 힘드냐 기계가 힘들지</strike></p>
+<p>그러다 보니, 이렇게 생성된 동적 컨텐츠는 일반적으로 브라우저 레벨에서의 캐싱을 이용할 수 없다. 따라서 매 페이지 요청시 마다 웹어플리케이션이 반복적인 일을 해야한다.</p>
 
-<p>정적 컨텐츠가 컨텐츠의 대부분을 차지하는 사이트의 경우에는 Static Website 를 만들어서 운영해 볼 수 있다. 이 방법이 나름 재미있다.</p>
+<p>그런데 정적 컨텐츠가 컨텐츠의 대부분을 차지하는 사이트의 경우에 따라서는 정적 웹사이트를 만들어서 운영해 볼 수 있다. 예전에는 정말 단순하고 반복적이지 않은 소수의 페이지들을 제공하는 목적으로 사용되었는데, 요즈음에는 관련 도구들이 매우 뛰어나졌다. 그 적용 방법이 나름 재미있다.</p>
 
 <p><br></p>
 
@@ -186,22 +186,22 @@
 
 <p>본인은 Mac 을 쓰기에 Homebrew 를 이용한 설치 방법을 따랐지만, 그 외의 <a href="https://github.com/spf13/hugo/releases">다양한 플랫폼에 설치하는 방법</a>을 제공한다.</p>
 
-<pre><code>$ brew install hugo
+<pre><code class="language-bash">$ brew install hugo
 </code></pre>
 
-<p>단순하다. hugo는 사이트 URL(gohugo.io) 에서도 알 수 있듯이 go 기반으로 작성되어있기에 의존 패키지와 같은 복잡한 설치 과정 없이 심플하게 설치된다.</p>
+<p>단순하다. hugo는 사이트 URL(gohugo.io) 에서도 알 수 있듯이 golang으로 작성되어있다. 따라서 의존 패키지 설치와 같은 귀찮은 과정 없이 심플하게 설치된다.</p>
 
 <h2 id="create-hugo-project:d818b8a7948ca63ccc8c7bf194ac8a9f">Create Hugo Project</h2>
 
 <p>/usr/local/bin 에 hugo 바이너리가 위치하며 이를 이용해 새 스켈레톤 프로젝트를 생성할 수 있다.</p>
 
-<pre><code>$ cd /path/to/workspace
+<pre><code class="language-bash">$ cd /path/to/workspace
 $ hugo new site &lt;sitename&gt;
 </code></pre>
 
 <p>생성된 파일 및 디렉토리 구조는 다음과 같다.</p>
 
-<pre><code>  ▸ archetypes/
+<pre><code class="language-bash">  ▸ archetypes/
   ▸ content/
   ▸ data/
   ▸ layouts/
@@ -219,7 +219,7 @@ $ hugo new site &lt;sitename&gt;
 
 <p>/archetypes/posts.md 라는 파일을 생성하여 내용을 다음과 같이 작성한다.</p>
 
-<pre><code>+++
+<pre><code class="language-bash">+++
 name = &quot;&quot;
 bio = &quot;&quot;
 genre = &quot;&quot;
@@ -244,21 +244,21 @@ toml 의 형식으로 variable 을 선언하고 특정 데이터를 assign 가�
 
 <p>각각의 a.toml, b.toml 의 내용이 다음과 같다면</p>
 
-<p>[ a.toml ]</p>
+<p><strong>[ a.toml ]</strong></p>
 
-<pre><code>name = &quot;Steve&quot;
+<pre><code class="language-toml">name = &quot;Steve&quot;
 age = 30
 </code></pre>
 
-<p>[ b.toml ]</p>
+<p><strong>[ b.toml ]</strong></p>
 
-<pre><code>name = &quot;Peter&quot;
+<pre><code class="language-toml">name = &quot;Peter&quot;
 age = 20
 </code></pre>
 
 <p>이를 html 템플릿에서 다음과 같이 사용할 수 있다.</p>
 
-<pre><code>{{ range $.Site.Data.human.info }}
+<pre><code class="language-html">{{ range $.Site.Data.human.info }}
 &lt;div&gt;
   &lt;p&gt;Name : {{ .name }}&lt;/p&gt;
   &lt;p&gt;Age  : {{ .age }}&lt;/p&gt;
@@ -283,7 +283,7 @@ age = 20
 
 <p>먼저, 적용하고자 하는 테마의 git 저장소 URL을 확인한다. 그리고, 사이트 프로젝트 root 에서 다음과 같은 명령어들을 수행한다.</p>
 
-<pre><code>$ mkdir themes
+<pre><code class="language-bash">$ mkdir themes
 $ cd themes
 $ git clone &lt;repository_url_of_theme&gt;
 </code></pre>
@@ -302,19 +302,43 @@ $ git clone &lt;repository_url_of_theme&gt;
 
 <h2 id="configuration:d818b8a7948ca63ccc8c7bf194ac8a9f">Configuration</h2>
 
+<p><code>config.[toml|yaml|json]</code></p>
+
 <p>Hugo 프로젝트의 설정파일. toml, yaml, json 모두 사용 가능하다.
-자세한 내용은 <a href="https://gohugo.io/overview/configuration/">이곳</a>을 참조하여 확인하자.</p>
+기본적인 빌드관련 설정과 테마별 추가 파라미터 변수들의 설정또한 이곳에서 처리한다.</p>
+
+<p><strong>[ config.toml]</strong></p>
+
+<pre><code>contentdir = &quot;content&quot;
+layoutdir = &quot;layouts&quot;
+staticdir = &quot;static&quot;
+publishdir = &quot;dist&quot;
+baseurl = &quot;http://brannpark.github.io/blog&quot;
+title = &quot;개발지식저장소&quot;
+theme = &quot;redlounge&quot;
+...
+</code></pre>
+
+<p>위의 내용은 본 블로그 hugo 프로젝트의 configuration 중 일부로써 여기서 중요한 부분은 publishdir, baseurl, theme 정도가 되겠다.</p>
+
+<p>publishdir 의 경우 기본값은 publish 인데, 여기서는 dist 라고 지정되어있다. 이는 GitHub Pages 에 배포하기 위해 사용할 배포 스크립트가 기본적으로 소스 디렉토리 이름을 dist로 사용하기 때문이다. 관련 내용은 젤 마지막 Deploying To GitHub Pages 섹션에서 확인 할 수 있다.</p>
+
+<p>baseurl 은 위와같이 본인의 블로그 사이트 베이스 url 을 입력하면 되고, theme 는 themes 디렉토리 하위의 사용할 테마 디렉토리 이름을 입력하면 된다. 참고로 RedLounge 의 경우 저장소를 그대로 clone 할 경우 디렉토리 이름이 hugo-redlounge 인데 redlounge 로 리네임하였기에 위와같이 적용하하였다.</p>
+
+<p>추가 Hugo Configuration 에 대한 도큐먼트는 <a href="https://gohugo.io/overview/configuration/">이곳</a>을 참조하여 확인하자.</p>
+
+<p>또한 각각의 테마에서 커스텀하게 사용하는 파라미터 설정들은 guide document 에 명시되어있다. <a href="https://github.com/tmaiaroto/hugo-redlounge">예시(RedLounge)</a></p>
 
 <h2 id="create-page:d818b8a7948ca63ccc8c7bf194ac8a9f">Create Page</h2>
 
-<p>새 페이지를 만들기 위해서는 다음과 같은 명령어를 이용한다</p>
+<p>새 페이지를 만들기 위해서는 다음과 같은 명령어를 이용한다.</p>
 
-<pre><code>$ hugo new content/newpost.md
+<pre><code class="language-bash">$ hugo new content/newpost.md
 </code></pre>
 
-<p>혹은, 서브 URL 형태로 컨텐츠를 제공 하고자 한다면</p>
+<p>혹은 서브 URL 형태로 컨텐츠를 제공 하고자 한다면,</p>
 
-<pre><code>$ hugo new content/&lt;subdir&gt;/newpost.md
+<pre><code class="language-bash">$ hugo new content/&lt;subdir&gt;/newpost.md
 </code></pre>
 
 <p>와 같이 명령어를 수행하여 새 컨텐츠를 생성한다.</p>
@@ -333,6 +357,24 @@ title = &quot;Made by HUGO and GitHub Pages&quot;
 </code></pre>
 
 <p>이는, 본 게시글에 적용된 header 로 각각은 테마와 연동되어 사이트의 UI에 표시된다.</p>
+
+<p><br></p>
+
+<h1 id="deploying-site-on-local:d818b8a7948ca63ccc8c7bf194ac8a9f">Deploying Site on Local</h1>
+
+<p>이제 사이트를 로컬환경에서 띄워 볼 준비가 되었다고 볼 수 있다.
+프로젝트의 루트에서 다음과 같은 명령어를 쳐보자</p>
+
+<pre><code>$ hugo server --watch
+</code></pre>
+
+<p>그러면 config 에 설정된 baseurl 을 따라서 호스트 부분 <code>127.0.0.1:1313</code> 으로 변경되어 웹서버가 띄워진다.</p>
+
+<p>브라우저로 <code>http://localhost:1313/blog</code> 로 접속하여 확인 가능하다. (위에 예시로 작성된 설정파일의 baseurl 의 base path 가 <strong>blog</strong> 이다.)</p>
+
+<p><code>--watch</code> 옵션은 특정 파일시스템에 변화가 생기면 자동으로 rebuild 하여 반영해주는 기능을 활성화 한다.</p>
+
+<p>로컬에서 글 수정, 추가 작업 시 요긴하게 쓰인다.</p>
 
 <p><br></p>
 
@@ -364,7 +406,52 @@ title = &quot;Made by HUGO and GitHub Pages&quot;
 
 <h1 id="deploying-to-github-pages:d818b8a7948ca63ccc8c7bf194ac8a9f">Deploying to GitHub Pages</h1>
 
-<p>&hellip;</p>
+<p>Project site 형식으로 GitHub Pages 에 블로그 사이트를 호스팅하는 예를 들겠다.</p>
+
+<p>GitHub 저장소 이름이 blog 라고 한다면,</p>
+
+<p>Pages 에서 호스팅되는 내 블로그 사이트의 base URL 은 다음과 같다.</p>
+
+<p><code>http://&lt;username&gt;.github.io/blog</code></p>
+
+<p>이 주소로 GET request 하게 되면 Pages 는 blog 라는 저장소의 gh-pages 브랜치의 index.html 을 serving 한다.</p>
+
+<p>먼저, blog 저장소의 master 브랜치에는 Hugo 프로젝트가 생성되어 있다고 가정한다.</p>
+
+<p>이제 gh-pages 브랜치를 생성하자. 위에 설명한 대로 orphan 모드로 생성한다.</p>
+
+<p>그리고 브랜치내의 파일들을 삭제 후 커밋하고 origin 에 푸쉬 후, master 브랜치로 체크아웃한다.</p>
+
+<pre><code>$ git clone https://github.com/&lt;username&gt;/blog.git
+$ cd blog
+$ git checkout -b --orphan gh-pages
+$ rm -rf $(git ls-files)
+$ git add .
+$ git commit -am &quot;initial commit&quot;
+$ git push origin gh-pages
+$ git checkout master
+</code></pre>
+
+<p>그리고 다음과 같이 deployment script 를 내려받아 excutable 퍼미션을 할당한다.</p>
+
+<pre><code class="language-bash">$ wget https://github.com/X1011/git-directory-deploy/raw/master/deploy.sh &amp;&amp; chmod +x deploy.sh
+</code></pre>
+
+<p>본인의 경우 해당 스크립트의 설정값 변경없이 바로 사용하였어도 문제없이 배포가 되었지만,</p>
+
+<p>혹여나 문제가 발생하였다면 해당 스크립트에 대한 <a href="https://github.com/X1011/git-directory-deploy">가이드</a>를 꼭 확인해보자.</p>
+
+<p>스크립트를 다운 받았으면 hugo 를 이용해 프로젝트를 빌드하고 결과물을 deploy 스크립트를 이용해 블로그를 배포할 준비가 모두 되었다.</p>
+
+<pre><code class="language-bash">$ hugo -d dist
+$ ./deploy.sh
+</code></pre>
+
+<p><code>hugo -d dist</code> 명령어를 통해 프로젝트를 빌드하여 dist에 빌드 결과물을 저장하고, <code>./deploy.sh</code> 를 이용해 gh-pages 브랜치에 배포하게 된다.</p>
+
+<p>여기서 중요한것은 dist 라는 디렉토리인데, deploy 스크립트는 기본값으로 dist 라는 디렉토리를 배포 소스 디렉토리로 설정되어있다는 점이다.</p>
+
+<p>어찌되었든 성공적으로 수행되었다면, 잠시 후 <code>http://&lt;username&gt;.github.io/blog</code> 로 접속 시 내 블로그 사이트를 볼 수 있다.</p>
 
 	
 			
@@ -388,11 +475,6 @@ title = &quot;Made by HUGO and GitHub Pages&quot;
 				<div class="paging">
 					<span class="paging-label">More Reading</span>
 					
-					<div class="paging-newer">
-						<span class="dark-red">Newer</span><span class="decorative-marker">//</span>
-						<a class="paging-link" href="/blog/resume/">Resume</a>
-		            </div>
-		            
 
 					
 					<div class="paging-older">
