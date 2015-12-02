@@ -3,9 +3,7 @@ Categories = ["Development"]
 Description = ""
 Tags = ["OSX", "El-Capitan"]
 date = "2015-12-02T18:46:37+09:00"
-menu = "main"
 title = "OSX El Capitan 개발환경 세팅"
-
 +++
 
 

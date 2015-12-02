@@ -65,7 +65,9 @@ hugo new 명령어로 컨텐츠를 생성 시, 자동으로 생성되는 header 
 
 예를 들어, /content/musician 의 서브디렉토리 구조가 존재하는 경우,
 
-/archetypes/posts.md 라는 파일을 생성하여 내용을 다음과 같이 작성한다.
+/archetypes/musician.md 라는 파일을 생성하여 내용을 다음과 같이 작성한다.
+
+만약 이름이 매칭되는 archetypes가 없고, /archetypes/default.md 가 존재하는 경우는 해당 파일의 내용을 header에 추가하게 된다.
 
 ```bash
 +++
