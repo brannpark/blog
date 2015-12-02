@@ -78,7 +78,9 @@ $ hugo new site &amp;lt;sitename&amp;gt;
 
 &lt;p&gt;예를 들어, /content/musician 의 서브디렉토리 구조가 존재하는 경우,&lt;/p&gt;
 
-&lt;p&gt;/archetypes/posts.md 라는 파일을 생성하여 내용을 다음과 같이 작성한다.&lt;/p&gt;
+&lt;p&gt;/archetypes/musician.md 라는 파일을 생성하여 내용을 다음과 같이 작성한다.&lt;/p&gt;
+
+&lt;p&gt;만약 이름이 매칭되는 archetypes가 없고, /archetypes/default.md 가 존재하는 경우는 해당 파일의 내용을 header에 추가하게 된다.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;+++
 name = &amp;quot;&amp;quot;

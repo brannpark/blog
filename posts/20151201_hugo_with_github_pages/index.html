@@ -79,8 +79,6 @@
       <ul class="nav-list">
         <li class="nav-item"><span class="nav-item-separator">//</span><a href="http://brannpark.github.io/blog">Home</a></li>
         
-          <li class="nav-item"><span class="nav-item-separator">//</span><a href="/blog/posts/20151202_elcapitan_setup/">OSX El Capitan 개발환경 세팅</a></li>
-        
           <li class="nav-item"><span class="nav-item-separator">//</span><a href="/blog/posts/">Post</a></li>
         
       </ul>
@@ -219,7 +217,9 @@ $ hugo new site &lt;sitename&gt;
 
 <p>예를 들어, /content/musician 의 서브디렉토리 구조가 존재하는 경우,</p>
 
-<p>/archetypes/posts.md 라는 파일을 생성하여 내용을 다음과 같이 작성한다.</p>
+<p>/archetypes/musician.md 라는 파일을 생성하여 내용을 다음과 같이 작성한다.</p>
+
+<p>만약 이름이 매칭되는 archetypes가 없고, /archetypes/default.md 가 존재하는 경우는 해당 파일의 내용을 header에 추가하게 된다.</p>
 
 <pre><code class="language-bash">+++
 name = &quot;&quot;
