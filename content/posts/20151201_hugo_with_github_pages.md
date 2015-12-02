@@ -272,18 +272,17 @@ Pages 에서 호스팅되는 내 블로그 사이트의 base URL 은 다음과 �
 `http://<username>.github.io/blog`
 
 이 주소로 GET request 하게 되면 Pages 는 blog 라는 저장소의 gh-pages 브랜치의 index.html 을 serving 한다.
-
 먼저, blog 저장소의 master 브랜치에는 Hugo 프로젝트가 생성되어 있다고 가정한다.
 
 이제 gh-pages 브랜치를 생성하자. 위에 설명한 대로 orphan 모드로 생성한다.
 
-그리고 브랜치내의 파일들을 삭제 후 커밋하고 origin 에 푸쉬 후, master 브랜치로 체크아웃한다. 
+그리고 브랜치를 git rm 명령어를 이용해 모두 삭제, add, commit 하고 origin 에 푸쉬 후, master 브랜치로 체크아웃한다. 
 
 ```
 $ git clone https://github.com/<username>/blog.git
 $ cd blog
 $ git checkout -b --orphan gh-pages
-$ rm -rf $(git ls-files)
+$ git rm -rf .
 $ git add .
 $ git commit -am "initial commit"
 $ git push origin gh-pages
