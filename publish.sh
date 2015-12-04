@@ -6,5 +6,5 @@ git push
 if [[ -d "dist" ]]; then
     rm -rf dist
 fi
-#hugo -d dist
-#./deploy.sh
+hugo -d dist
+./deploy.sh

@@ -7,7 +7,8 @@ title = "개발지식저장소"
 languageCode="ko-KR"
 paginate = 10
 paginatePath = "page"
-theme = "redlounge"  
+theme = "redlounge"
+disqusShortname = "brannpark"
 
 [params]
     sidebartitle = "D三veloper"
