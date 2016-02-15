@@ -6,20 +6,8 @@
     <description>Recent content in Development on 개발지식저장소</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Mon, 15 Feb 2016 16:13:20 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 04 Dec 2015 14:46:07 +0900</lastBuildDate>
     <atom:link href="http://brannpark.github.io/blog/categories/development/index.xml" rel="self" type="application/rss+xml" />
-    
-    <item>
-      <title>test</title>
-      <link>http://brannpark.github.io/blog/posts/test/</link>
-      <pubDate>Mon, 15 Feb 2016 16:13:20 +0900</pubDate>
-      
-      <guid>http://brannpark.github.io/blog/posts/test/</guid>
-      <description>
-
-&lt;h1 id=&#34;test-test-test:b128b7694e4de962e0088bcb1bcb254f&#34;&gt;Test test test&lt;/h1&gt;
-</description>
-    </item>
     
     <item>
       <title>안드로이드 앱 개발 시 주의사항</title>
