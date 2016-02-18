@@ -11,7 +11,7 @@ theme = "redlounge"
 disqusShortname = "brannpark"
 
 [params]
-    sidebartitle = "D三veloper"
+    sidebartitle = "D-veloper"
     sidebartagline = "Thoughts on development and life"
     sidebarphoto = "/blog/img/profile.png"
 [[menu.main]]
