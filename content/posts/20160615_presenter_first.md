@@ -1,9 +1,9 @@
 +++
 Categories = ["Development"]
-Description = ""
-Tags = []
+Description = "Presenter First 글에 대한 번역"
+Tags = ["mvp", "design-pattern", "tdd", "unit-test"]
 date = "2016-06-15T19:20:21+09:00"
-title = "20160615_presenter_first"
+title = "Presenter First"
 
 +++
 
