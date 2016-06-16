@@ -21,12 +21,13 @@
 
 &lt;p&gt;Michael Marsiglia, Brian Harleton, Carl Erickson&lt;/p&gt;
 
-&lt;p&gt;번역: Brann Park
-원문: &lt;a href=&#34;https://atomicobject.com/uploadedImages/archive/files/PF_March2005.pdf&#34;&gt;https://atomicobject.com/uploadedImages/archive/files/PF_March2005.pdf&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;번역: Brann Park&lt;/p&gt;
+
+&lt;p&gt;원문: &lt;a href=&#34;https://atomicobject.com/uploadedImages/archive/files/PF_March2005.pdf&#34;&gt;https://atomicobject.com/uploadedImages/archive/files/PF_March2005.pdf&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;motivation:3945feba508775401f06cd3bcd843e68&#34;&gt;Motivation&lt;/h2&gt;
 
-&lt;p&gt;그래픽 사용자 인터페이스는 고통스럽다! 우리 모두가 다 겪어보았다. 그것은 처음 언뜻 보기에는 매우 단순해 보였다. 우리는 도대체 이런 엉망진창인 것들을 어떻게 빠른 속도로 만들어왔는가? 우리의 디자인에 작은 변화를 가하는 것이 왜 그리도 고통스러운가? 어떤 기능에 대해 가장 모르는 순간에, 어떻게 우리는 이렇게 거대하고 시간이 많이 소요되는 코드 조각들을 끊임없이 만드어내는 함정속으로 빠지게 되었는가? 어떻게 우리는 기능 중심 개발이라는 목표에서 어긋나게 되었는가? 우리의 스트레스와 고통스러움을 확실히 경감시켜줄 수 있는 유닛 테스트들을 작성하는것이 어째서 어려운가? 커스텀 다이얼로그 내부의 작은 변화에 한 주의 시간이 소요될 것이라는 것을 어떻게 고객에게 말 할 것인가?&lt;/p&gt;
+&lt;p&gt;그래픽 사용자 인터페이스는 괴롭다! 우리 모두 다 알고 있다. 처음에는 매우 단순했다. 우리는 도대체 어떻게 이런 엉망진창인 것들을 이리도 빨리 만들어 왔는가? 우리의 디자인에 작은 변화를 가하는 것이 왜 그리도 괴로운가? 어떤 기능에 대해 가장 모르는 순간에, 어떻게 우리는 이렇게 거대하고 시간이 많이 소요되는 코드 조각들을 끊임없이 만드어내는 함정속으로 빠지게 되었는가? 어떻게 우리는 기능 중심 개발이라는 목표에서 어긋나게 되었는가? 우리의 스트레스와 고통스러움을 확실히 경감시켜줄 수 있는 유닛 테스트들을 작성하는것이 어째서 어려운가? 커스텀 다이얼로그 내부의 작은 변화에 한 주의 시간이 소요될 것이라는 것을 어떻게 고객에게 말 할 것인가?&lt;/p&gt;
 
 &lt;p&gt;그 첫 단계는 비지니스 로직과 인터페이스를 분리하는 것이다. Model-View-Presenter 패턴이란 용어를 사용하기 위해, Model은 Presenter와 View로부터 격리되었다. 이런 테크닉을 이용하여 우리는 비지니스 로직(model)을 유닛 테스트할 수 있고, TDD 원칙을 따를 수 있게 된다. 그러나 이러한 접근은 코드화된 어플리케이션의 흐름이나, 기능들을 GUI 내부에 남겨두었기 때문에 충분하지 않다. GUI기능을 테스트 하는 것은 시스템 자동화 수준의 테스트 프레임워크를 이용하면 가능하다. 그러나 우리의 경험상, 이러한 테스트 묶음들을 만들고 유지보수 하는데에는 많은 비용이 든다.&lt;/p&gt;
 
@@ -52,7 +53,7 @@
 
 &lt;p&gt;Presenter First에서 사용되는 MVP의 변형은 MVP 각각의 요소들 내에서의 커뮤니케이션 패턴들에 영향을 미친다. 본래의 MVP 패턴은 Model이 직접적으로 View 와 커뮤니케이션하는 것을 허용한다. 그러나 Presenter First는 모든 커뮤니케이션이 Presenter를 통해서 이뤄지는 것을 요구한다. 이런 제약은 Model과 View가 서로 격리되는 것을 보장한다. 그리고 MVP 각각의 요소들에 대한 테스트성을 크게 증대시킨다. [그림 1]은 MVP와 Presenter First에서의 커뮤니케이션 패턴을 대조하여 보여준다.&lt;/p&gt;
 
-&lt;p&gt;[그림 1]&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://brannpark.github.io/blog/blog/img/present_first/figure1.png&#34; alt=&#34;Figure 1&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Presenter First의 프로세스 측면은 시간의 흐름에 따라 개발이 어떻게 이뤄지는지, 그리고 개발과정에서 어플리케이션이 어떻게 테스트되는가라는 질문을 다룬다. 모든 어플리케이션 개발 노고에서 직면하는 첫번째 궁금증은 어디에서부터 시작할지이다. MVP에 기반한 어플리케이션에서는 다음과 같은 세가지 답변이 가능하다.&lt;/p&gt;
 
@@ -66,7 +67,7 @@
 
 &lt;p&gt;이는 MVP의 하나의 구현 옵션이지만, Model과 View 모두의 인터페이스를 필요로 한다. Presenter와의 커뮤니케이션은 Model과 View 모두 Presenter로 부터 decoupling 된 채 이벤트 서브시스템을 통해서 이뤄진다. [그림2]는 Presenter First에서의 클래스들의 관계를 보여준다.&lt;/p&gt;
 
-&lt;p&gt;[그림 2]&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://brannpark.github.io/blog/blog/img/present_first/figure2.png&#34; alt=&#34;Figure 2&#34; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;how-it-works:3945feba508775401f06cd3bcd843e68&#34;&gt;How it works&lt;/h3&gt;
 
@@ -121,11 +122,112 @@
 
 &lt;p&gt;[Figure 3]은 회원등록 예제를 테스트들과 함께 이에 대한 관계들을 설명하는 클래스 다이어그램을 보여준다. Presenter First를 이용하여 회원등록 기능을 만들어내는 것을 입증하는 샘플코드는 [Appendix 2]에서 보여준다. RegPresenter라는 Presenter의 구현체는 보이지 않는것에 주목해라. 두가지 테스트(test_registration_Fail과 test_Registration_Pass)는 사용자가 어플레이케이션에 등록할 때 RegPresenter가 발생시키는 같은 이벤트들이 RegPresenter의 구현체를 테스트하기 위해 어떻게 사용되는지를 보여준다. Presenter내에서 회원등록 로직들이 적절하게 wire 되었는지를 확인하기 위해 Mock View와 Mock Model에서 Assertion들이 작성된다.&lt;/p&gt;
 
-&lt;p&gt;[Figure 3]&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://brannpark.github.io/blog/blog/img/present_first/figure3.png&#34; alt=&#34;Figure 3&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Presenter First를 상룡함으로써 고객의 추가 요청이나 변화는 개발자에게 더이상 두통거리로 남겨지지 않는다. 예를들면, 고객이 그저 엔터키를 누르는 대신 그래픽의 푸쉬 버튼을 클릭하여 회원등록을 전송하기로 결정했다면, 그 변화는 Presenter 혹은 Model 어디에도 영향을 끼치지 않은 채 View를 변경하는 것만으로 처리될 수 있을 것이다. 만약 고객이 회원등록 코드에 대한 검증을 데이터베이스 검색에서 웹서비스를 통한 검증으로 변경하기로 했다면, 그 결과는 Presenter나 View 가 아닌 Model에서의 변화로 나타날 것이다.&lt;/p&gt;
 
 &lt;h2 id=&#34;benefits-of-presenter-first:3945feba508775401f06cd3bcd843e68&#34;&gt;Benefits of Presenter First&lt;/h2&gt;
+
+&lt;p&gt;Presenter First는 기능에 초점을 유지시키고 사용자 우선순위의 기능을 전달하는데 도움을 준다. 개발자들은 특징들(Model과 View)의 디테일들에 집중하는데에 더 적은 시간을 쓰게되며, 기능성(Presenter)에 더 많은 시간을 쓰게 될 것이다. 개발자는 초기 개발단계에서 디테일들로 인해 너무 빠르게 산만해지는 대신, 높은 수준의 추상화 단계에서 작업을 할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;기능성은 Presenter FIrst로 쉽게 테스트 될 수 있다. Model과 View의 인터페이스들은 쉽게 Mock 될 수 있기에 Presenter 클래스 안의 기능 레벨에서 테스트들의 초점을 둔다. Mock된 View와 Model 컴포넌트들은 개발자들에게 View와 Model의 모든 측면에 대한 완전한 제어를 주고, Presenter 클래스 내의 모든 기능 케이스들에 대해 쉽게 테스트할 수 있는 자유를 준다.&lt;/p&gt;
+
+&lt;p&gt;사용자 인터페이스의 모든 기능성의 유닛테스트를 만들어내는 능력을 향상시키는 것 뿐 아니라, View와 Model을 나타내는 Mock 클래스들을 만들어내는것은 추가적인 이득 또한 제공한다. Model 인터페이스를 Mock 함으로써, 개발자는 라이브 데이터베이스에 연결하는 것, 커뮤니케이션 디바이스들을 사용하게끔 하는것, 파일을 다루게 하는것과 같은 문제를 피한다. 그러한 타입의 기능들을 테스트 하는 책임은 실제 Model의 다른 클래스들에 놓여진다. Presenter First는 이런 기능들이 실제로 어떻게 구현되었는가 하는 디테일이 아닌, 단지 사용자 인터페이스를 통한 기능 접근을 테스트하는것을 중시한다.&lt;/p&gt;
+
+&lt;p&gt;View를 Mock 하는것 또한 장점을 가진다. 실제의 사용자 인터페이스 컨트롤들과 폼을은 인스턴스화 되어질 필요가 없기 때문에 유닛 테스트 패키지는 이러한 비싼 연산들로 인해 성능이 저하되지 않는다. 유닛 테스트들이 실행하기에 느려서 고통스럽다면, 개발자들은 테스트를 덜 실행하고자 할 것이고, 따라서 개발팀에게서 그것의 가치는 덜 중요하게 될 것이다.&lt;/p&gt;
+
+&lt;p&gt;사용자 인터페이스를 관리하는것은 Presenter First를 사용함으로써 매우 향상된다. Presenter 클래스들에 대한 유닛 테스트들은 사용자 인터페이스에 대한 살아있는 명세서가 될 것이다. Presenter 클래스의 유닛 테스트들을 설명하는 것으로 개발자들은 쉽사리 사용자 인터페이스의 행동과 룰들을 알아낼 수 있다.&lt;/p&gt;
+
+&lt;p&gt;기능성은 Presenter 클래스의 유닛 테스트들에 의해 쉽게 관리될 수 있다. 기능이 추가 또는 삭제가 될 때, Presenter 클래스의 유닛 테스트는 모든게 정상적으로 동작한다는 자신감을 제공해준다. 테스트 주도 개발은 높은 수준의 시스템 기능성까지 포함하도록 발전되어왔다.&lt;/p&gt;
+
+&lt;p&gt;비지니스 로직으로부터 사용자 인터페이스를 디커플링 시키는 것이 따라야할 중요한 실행이라는 것에 대한 이해를 충분히 했을지라도, 거의 모든 개발자들은 한번 또는 여러번 부적절하게 커플링 된 코드를 작성하도록 유도되는 자신을 발견한다. Presenter First는 비지니스 로직과 사용자 인터페이스의 디커플링을 강제한다. 철저하게 디커플링 하는 것은 개발자 코드의 유연성을 증대시키고 그들이 변화에 훨씬 고통을 적게 받도록 한다.&lt;/p&gt;
+
+&lt;p&gt;많은 고객들이 특정한 룩앤필을 요청한다면, 이는 단순히 그래픽 요소들을 변경하여 처리할 수 있다. 또는 마케팅이 제품이 Palm Pilot을 반드시 지원해야 한다고 결정할지도 모른다. 사용자 인터페이스 관점에서 이제 이런 변화는 쉽게 처리된다. 단순히 그래픽 컴포넌트들을 같은 View 인터페이스를 구현하는 Palm Pilot의 컴포넌트들로 교체하면 사용자 인터페이스의 변경이 완료된다. 단순히 다른 패키지를 인스톨하는 것으로 지원하는 플랫폼이나 룩앤필을 완전히 변경하는 용이함과 강력함을 상상해보라. 이러한 변경들은, 그래픽 컴포넌트들을 변경하는것이 기능적인 어떠한것도 변화시키지 않고 따라서 다른 어떤 코드도 없다라는 자신감을 가지고 해낼 수 있다.&lt;/p&gt;
+
+&lt;p&gt;Presenter First의 컴포넌트들의 디커플링을 강제함으로써, MVP 중 한 컴포넌트를 교체하는일은 사소한 일이 되고, 다른 컴포넌트들에 영향을 끼치지 않게 된다. View 컴포넌트가 View 인터페이스를 구현하는 한, 사용할 사용자 그래픽 인터페이스를 변경하는 것은 괴롭지 않다. 다른 사용자 그래픽 인터페이스들은 쉽게 교환되어질 수 있다. 이제는 실제로, 사용자 그래픽 인터페이스가 인스톨 또는 실행 시점에 결정될 수 있다. 같은 점에서 Model 컴포넌트도 Presenter나 View에 영향을 끼치지 않고 수정되거나 완전히 교체될 수 있다. 파일로 부터 정보를 액세스하는 오늘의 사용자 인터페이스는, Presenter나 View에 영향없이 데이터베이스를 통해 엑세스 하는 내일의 인터페이스로 쉽게 만들어질 수 있다. 우리는 심지어 어떤 케이스에서는 같은 View에 다른 Presenter를 사용했다. 사용자 그래픽 View는 같다. 그러나 행동(Presenter)가 다르다.&lt;/p&gt;
+
+&lt;p&gt;Presenter First는 Scalable 하다. MVP 패턴으로 복잡한 어플리케이션들은 효율적으로 수많은 작은 어플리케이션들이 묶인 구성이 된다. 각각의 미니 어플레이케이션들은 그 자체로 MVP 트라이어드 하다. 이런 미니 어플리케이션들은 관리가 용이하고, 전적으로 다른 어플레이케이션들에 decoupled 하다. 구조적으로, 각 부분들이 독립적으로 만들어질 수 있고, 의존성에 대한 두려움없이 나중에 합쳐 질 수 있기에, 이는 프로젝트의 관리성을 증가시킨다. MVP 트라이어드를 구성하고 만들어내는 패턴들은 중첩된 트라이어드들의 테스트성을 유지하는데 도움을 준다.&lt;/p&gt;
+
+&lt;p&gt;Presenter First는 팀에 있어서 비용 효율적이고 실용적이다. 개발은 streamlined이고 관리가능하다. Presenter의 부분은 View와 Model이 시작되게 할 필요 없이 홀로 완료되게 둠으로써 온전히 테스트 되고 끝마쳐질 수 있다. 그들이 그들의 계약(Model, View 인테퍼이스)의 끝을 지키는 한, 각 팀들은 서로에 독립적으로 독립적인 속도와 타임라인으로 코드를 만들어 낼 수 있게 된다.&lt;/p&gt;
+
+&lt;p&gt;Presenter First를 사용함으로써, 그래픽 View는 적절한 툴과 그래픽 디자이너들 또는 그래픽 View를 만들어 내도록 훈련될 수 있는 사용성 전문가들과 함께 매우 단순해지고 얇아지게된다. 개발자들은 더이상 사용자 그래픽 인터페이스를 구현하기 위해 많은 시간을 낭비하지 않아도 된다. 개발자들은 일반적으로 그래픽 사용자 인터페이스를 구현해내는데 있어 충분한 역량을 가지지 않기에 엉성한 결과물을 만드는게 많은 시간을 쏟게 된다. Presenter First는 개발자들이 가장 잘할 수 있는 프로그램 같은것을 하게 해주고, 사용가능한 인터페이스를 만드는 것과 같은 훈련되지 않은 것들에 대해 시간을 소비하는것을 피하게 해준다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://brannpark.github.io/blog/blog/img/present_first/appendix1.png&#34; alt=&#34;Appendix 1&#34; /&gt;&lt;/p&gt;
+
+&lt;h5 id=&#34;appendix-2-sample-code-showing-model-and-view-interfaces-mock-test-classes-and-test-methods:3945feba508775401f06cd3bcd843e68&#34;&gt;Appendix 2. Sample code showing model and view interfaces, mock test classes, and test methods.&lt;/h5&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public delegate void RegSubmitted();
+public interface IregView {
+	void AddRegSubmittedEvent(RegSubmitted ev);
+	string GetSubmittedData();
+	void SetRegistrationStatus(bool bSuccess);
+}
+
+public interface IregModel {
+	bool Register(string strRegistration);
+}
+
+public class RegViewMock : IregView {
+	private RegSubmitted regSubmittedEvent;
+	public void FireRegSubmittedEvent() {
+		RegSubmitted evtCopy = regSubmittedEvent;
+		if (evtCopy != null) {
+			evtCopy();
+		}
+	}
+
+	public void AddRegSubmittedEvent(RegSubmitted ev) {
+		regSubmittedEvent += ev;
+	}
+
+	public string GetSubmittedData() {
+		return &amp;quot;ThisIsMyRegistration&amp;quot;;
+	}
+
+	public bool bRegistrationStatus;
+	public void SetRegistrationStatus(bool bSuccess) {
+		bRegistrationStatus = bSuccess;
+	}
+}
+
+public class RegModelMock : IregModel {
+	public bool regSuccess;
+	public string regInput;
+	public bool Register(string strRegistration) {
+		regInput = strRegistration;
+		return regSuccess;
+	}
+}
+
+public void test_Registration_Pass() {
+	/* force the registration to succeed */
+	modelMock.regSuccess = true;
+	/* Simulates the user submits event by firing an event
+	 * that the presenter should handle.
+	 */
+	viewMock.FireRegSubmittedEvent();
+	/* Now just verify that what the user entered as the
+	 * registration code is what the model actually uses
+     * as input.
+     */
+	Assert.AreEqual(&amp;quot;ThisIsMyRegistration&amp;quot;, modelMock.regInput);
+    /* Verify that the view has been updated to reflect
+     * a successful registration.
+     */
+    Assert.IsTrue(viewMock.bRegistrationStatus);
+}
+
+public void test_Registration_Fail() {
+    /* force registration process to fail */
+    modelMock.regSuccess = false;
+    viewMock.FireRegSubmittedEvent();
+    Assert.AreEqual(&amp;quot;ThisIsMyRegistration&amp;quot;, modelMock.regInput);
+    /* verifies that the view was updated to reflect
+     * an unsuccessful registration.
+     */
+    Assert.IsFalse(viewMock.bRegistrationStatus);
+}
+&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
