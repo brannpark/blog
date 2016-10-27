@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
   <title>
-    Design Pattern // 개발지식저장소
+    Xcode // 개발지식저장소
   </title>
 
   <link href="http://gmpg.org/xfn/11" rel="profile">
@@ -16,11 +16,11 @@
 <meta name="author" content="">
 <meta name="generator" content="Hugo 0.15" />
 
-  <meta property="og:title" content="Design Pattern" />
+  <meta property="og:title" content="Xcode" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="en_US" />
-<meta property="og:url" content="http://brannpark.github.io/blog/tags/design-pattern/" />
+<meta property="og:url" content="http://brannpark.github.io/blog/tags/xcode/" />
 
 
   
@@ -42,7 +42,7 @@
   <link rel="shortcut icon" href="/favicon.png">
 
   
-  <link href="http://brannpark.github.io/blog/tags/design-pattern/index.xml" rel="alternate" type="application/rss+xml" title="개발지식저장소" />
+  <link href="http://brannpark.github.io/blog/tags/xcode/index.xml" rel="alternate" type="application/rss+xml" title="개발지식저장소" />
 
     
   
@@ -98,20 +98,20 @@
             <header class="post-header">
             
             <h1 class="post-title">
-              <a href="/blog/posts/20160615_presenter_first/">Presenter First</a>
+              <a href="/blog/posts/20161011_xcode_emacs_keybinding/">20161011_xcode_emacs_keybinding</a>
             </h1>
             </header>
             <p class="post-meta">
             	
 		          <span class="post-date">
-		            <span class="post-date-day"><sup>15</sup></span><span class="post-date-separator">/</span><span class="post-date-month">Jun</span> <span class="post-date-year">2016</span>
+		            <span class="post-date-day"><sup>11</sup></span><span class="post-date-separator">/</span><span class="post-date-month">Oct</span> <span class="post-date-year">2016</span>
 		          </span>
       				
       				
       					
       				
               
-                <span class="post-reading-time"><i class="fa fa-clock-o"></i> <em>13 min. read</em></span>
+                <span class="post-reading-time"><i class="fa fa-clock-o"></i> <em>3 min. read</em></span>
               
       				
       					<div class="post-categories">
@@ -123,10 +123,10 @@
       				
             </p>
             <article class="post-summary">
-            	Presenter First: TDD for Large, Complex Applications with Graphical User Interfaces Michael Marsiglia, Brian Harleton, Carl Erickson 번역: Brann Park 원문: https://atomicobject.com/uploadedImages/archive/files/PF_March2005.pdf Motivation GUI를 다루는것은 힘들다. 처음에는 매우 단순했던 것들이 어떻게 이리도 빠르게 거대해지고 복잡해지는걸까? 디자인에 작은 변화를 가하는 것이 왜 어려운걸까? 우리는 어쩌다가 구현할 기능도 확정되지 않은 순간에 개발공수가 큰 코드를 계속해서 작성하는 함정에 빠지게 된 걸까? 어쩌다가 기능 중심의 개발이라는 애초의 목표에서 어긋나게 된걸까? 스트레스와 고통을 덜어줄 유닛 테스트들을 만드는것이 어째서 어려운걸까?
+            	=== Xcode 에 Emacs keybinding 적용기 Xcode 는 기본적으로 Emacs 키바인딩을 지원하지 않는다. Option 메타키를 사용하는것을 쉽사리 허용하지 않는데.. 이리저리 찾아보고 하다가 최종 적용한 방법이 있어 정리해본다. 맥에서 실행되는 모든 Cocoa 어플리케이션들의 키바인딩을 오버라이딩 하는 개념으로 이해하면 된다. 따라서 Xcode 뿐 아니라 맥의 모든 프로그램(Notes, TextEdit 같은 편집기도 마찬가지!) 에서도 설정된 키바인딩으로 사용 가능하다. 다만 기존의 Option 키를 이용한 특수기호를 입력하는게 불가능해진다는 단점이 있다&hellip; (그런기능이었는지도 몰랐&hellip;) DefaultKeyBinding.dict $ cd ~/Library $ ls | grep KeyBindings (디렉토리가 없다면 생성) $ cd KeyBindings $ touch DefaultKeyBinding.dict (파일이 없다면 생성) DefaultKeyBinding.dict 파일에 다음과 같이 작성.
             </article>
 			<div class="read-more-link">
-				<a href="/blog/posts/20160615_presenter_first/"><span class="read-more-slashes">//</span>Read More...</a>
+				<a href="/blog/posts/20161011_xcode_emacs_keybinding/"><span class="read-more-slashes">//</span>Read More...</a>
 			</div>
           </section>
         
