@@ -3,9 +3,7 @@ Categories = ["Development"]
 Description = "Mac osx 에서 Emacs 의 버퍼와 pbcopy pbpaste 가 연동되도록 설정하는 방법"
 Tags = ["emacs", "mac-osx"]
 date = "2017-07-19T14:45:52+09:00"
-menu = "main"
 title = "Emacs, Mac osx 클립보드 공유"
-
 +++
 
 ===
