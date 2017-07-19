@@ -3,12 +3,12 @@ Categories = ["Development"]
 Description = "Xcode emacs keybinding"
 Tags = ["xcode", "emacs", "keybinding"]
 date = "2016-10-11T14:52:05+09:00"
-title = "20161011_xcode_emacs_keybinding"
+title = "Emacs Keybinding for Mac osx"
 
 +++
 ===
 
-# Xcode 에 Emacs keybinding 적용기
+# 시작은.. Xcode 에 Emacs keybinding 적용해보기!
 
 Xcode 는 기본적으로 Emacs 키바인딩을 지원하지 않는다. Option 메타키를 사용하는것을 쉽사리 허용하지 않는데..
 
@@ -18,7 +18,16 @@ Xcode 는 기본적으로 Emacs 키바인딩을 지원하지 않는다. Option �
 
 맥의 모든 프로그램(Notes, TextEdit 같은 편집기도 마찬가지!) 에서도 설정된 키바인딩으로 사용 가능하다.
 
-다만 기존의 Option 키를 이용한 특수기호를 입력하는게 불가능해진다는 단점이 있다... (그런기능이었는지도 몰랐...)
+다만 아래 바인딩 된 단축키셋은 기존 설정이 오버라이드 되어버리므로,
+
+기존 Option 키를 이용한 특수기호를 입력하는게 불가능해진다는 단점이 있다... (그런기능이었는지도 몰랐...)
+
+```
+BEWARE:
+This file uses the Option key as a meta key.  This has the side-effect
+of overriding Mac OS keybindings for the option key, which generally
+make common symbols and non-english letters.
+```
 
 
 ## DefaultKeyBinding.dict
