@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
   <title>
-    20161011_xcode_emacs_keybinding // 개발지식저장소
+    Emacs Keybinding for Mac osx // 개발지식저장소
   </title>
 
   <link href="http://gmpg.org/xfn/11" rel="profile">
@@ -16,7 +16,7 @@
 <meta name="author" content="">
 <meta name="generator" content="Hugo 0.15" />
 
-  <meta property="og:title" content="20161011_xcode_emacs_keybinding" />
+  <meta property="og:title" content="Emacs Keybinding for Mac osx" />
 <meta property="og:description" content="Xcode emacs keybinding" />
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="en_US" />
@@ -104,7 +104,7 @@
 				<small class="toc-label">Contents</small>
 		   	 	<nav id="TableOfContents">
 <ul>
-<li><a href="#xcode-에-emacs-keybinding-적용기:8a540c2b464be451bcbed35bd1843bfb">Xcode 에 Emacs keybinding 적용기</a>
+<li><a href="#시작은-xcode-에-emacs-keybinding-적용해보기:8a540c2b464be451bcbed35bd1843bfb">시작은.. Xcode 에 Emacs keybinding 적용해보기!</a>
 <ul>
 <li><a href="#defaultkeybinding-dict:8a540c2b464be451bcbed35bd1843bfb">DefaultKeyBinding.dict</a></li>
 </ul></li>
@@ -115,7 +115,7 @@
 	    
   		<section class="post">
             <h1 class="post-title">
-              <a href="/blog/posts/20161011_xcode_emacs_keybinding/">20161011_xcode_emacs_keybinding</a>
+              <a href="/blog/posts/20161011_xcode_emacs_keybinding/">Emacs Keybinding for Mac osx</a>
             </h1>
             <h3 class="post-subtitle">
             	
@@ -146,7 +146,7 @@
 
 <p>===</p>
 
-<h1 id="xcode-에-emacs-keybinding-적용기:8a540c2b464be451bcbed35bd1843bfb">Xcode 에 Emacs keybinding 적용기</h1>
+<h1 id="시작은-xcode-에-emacs-keybinding-적용해보기:8a540c2b464be451bcbed35bd1843bfb">시작은.. Xcode 에 Emacs keybinding 적용해보기!</h1>
 
 <p>Xcode 는 기본적으로 Emacs 키바인딩을 지원하지 않는다. Option 메타키를 사용하는것을 쉽사리 허용하지 않는데..</p>
 
@@ -156,7 +156,15 @@
 
 <p>맥의 모든 프로그램(Notes, TextEdit 같은 편집기도 마찬가지!) 에서도 설정된 키바인딩으로 사용 가능하다.</p>
 
-<p>다만 기존의 Option 키를 이용한 특수기호를 입력하는게 불가능해진다는 단점이 있다&hellip; (그런기능이었는지도 몰랐&hellip;)</p>
+<p>다만 아래 바인딩 된 단축키셋은 기존 설정이 오버라이드 되어버리므로,</p>
+
+<p>기존 Option 키를 이용한 특수기호를 입력하는게 불가능해진다는 단점이 있다&hellip; (그런기능이었는지도 몰랐&hellip;)</p>
+
+<pre><code>BEWARE:
+This file uses the Option key as a meta key.  This has the side-effect
+of overriding Mac OS keybindings for the option key, which generally
+make common symbols and non-english letters.
+</code></pre>
 
 <h2 id="defaultkeybinding-dict:8a540c2b464be451bcbed35bd1843bfb">DefaultKeyBinding.dict</h2>
 
@@ -268,7 +276,7 @@ $ touch DefaultKeyBinding.dict (파일이 없다면 생성)
 <script type="text/javascript">
     var disqus_shortname = 'brannpark';
     var disqus_identifier = 'http:\/\/brannpark.github.io\/blog\/posts\/20161011_xcode_emacs_keybinding\/';
-    var disqus_title = '20161011_xcode_emacs_keybinding';
+    var disqus_title = 'Emacs Keybinding for Mac osx';
     var disqus_url = 'http:\/\/brannpark.github.io\/blog\/posts\/20161011_xcode_emacs_keybinding\/';
 
     (function() {

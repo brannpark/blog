@@ -136,7 +136,7 @@
             <header class="post-header">
             
             <h1 class="post-title">
-              <a href="/blog/posts/20161011_xcode_emacs_keybinding/">20161011_xcode_emacs_keybinding</a>
+              <a href="/blog/posts/20161011_xcode_emacs_keybinding/">Emacs Keybinding for Mac osx</a>
             </h1>
             </header>
             <p class="post-meta">
@@ -161,7 +161,7 @@
       				
             </p>
             <article class="post-summary">
-            	=== Xcode 에 Emacs keybinding 적용기 Xcode 는 기본적으로 Emacs 키바인딩을 지원하지 않는다. Option 메타키를 사용하는것을 쉽사리 허용하지 않는데.. 이리저리 찾아보고 하다가 최종 적용한 방법이 있어 정리해본다. 맥에서 실행되는 모든 Cocoa 어플리케이션들의 키바인딩을 오버라이딩 하는 개념으로 이해하면 된다. 따라서 Xcode 뿐 아니라 맥의 모든 프로그램(Notes, TextEdit 같은 편집기도 마찬가지!) 에서도 설정된 키바인딩으로 사용 가능하다. 다만 기존의 Option 키를 이용한 특수기호를 입력하는게 불가능해진다는 단점이 있다&hellip; (그런기능이었는지도 몰랐&hellip;) DefaultKeyBinding.dict $ cd ~/Library $ ls | grep KeyBindings (디렉토리가 없다면 생성) $ cd KeyBindings $ touch DefaultKeyBinding.dict (파일이 없다면 생성) DefaultKeyBinding.dict 파일에 다음과 같이 작성.
+            	=== 시작은.. Xcode 에 Emacs keybinding 적용해보기! Xcode 는 기본적으로 Emacs 키바인딩을 지원하지 않는다. Option 메타키를 사용하는것을 쉽사리 허용하지 않는데.. 이리저리 찾아보고 하다가 최종 적용한 방법이 있어 정리해본다. 맥에서 실행되는 모든 Cocoa 어플리케이션들의 키바인딩을 오버라이딩 하는 개념으로 이해하면 된다. 따라서 Xcode 뿐 아니라 맥의 모든 프로그램(Notes, TextEdit 같은 편집기도 마찬가지!) 에서도 설정된 키바인딩으로 사용 가능하다. 다만 아래 바인딩 된 단축키셋은 기존 설정이 오버라이드 되어버리므로, 기존 Option 키를 이용한 특수기호를 입력하는게 불가능해진다는 단점이 있다&hellip; (그런기능이었는지도 몰랐&hellip;) BEWARE: This file uses the Option key as a meta key.
             </article>
 			<div class="read-more-link">
 				<a href="/blog/posts/20161011_xcode_emacs_keybinding/"><span class="read-more-slashes">//</span>Read More...</a>

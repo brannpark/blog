@@ -10,7 +10,7 @@
     <atom:link href="http://brannpark.github.io/blog/tags/xcode/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>20161011_xcode_emacs_keybinding</title>
+      <title>Emacs Keybinding for Mac osx</title>
       <link>http://brannpark.github.io/blog/posts/20161011_xcode_emacs_keybinding/</link>
       <pubDate>Tue, 11 Oct 2016 14:52:05 +0900</pubDate>
       
@@ -19,7 +19,7 @@
 
 &lt;p&gt;===&lt;/p&gt;
 
-&lt;h1 id=&#34;xcode-에-emacs-keybinding-적용기:8a540c2b464be451bcbed35bd1843bfb&#34;&gt;Xcode 에 Emacs keybinding 적용기&lt;/h1&gt;
+&lt;h1 id=&#34;시작은-xcode-에-emacs-keybinding-적용해보기:8a540c2b464be451bcbed35bd1843bfb&#34;&gt;시작은.. Xcode 에 Emacs keybinding 적용해보기!&lt;/h1&gt;
 
 &lt;p&gt;Xcode 는 기본적으로 Emacs 키바인딩을 지원하지 않는다. Option 메타키를 사용하는것을 쉽사리 허용하지 않는데..&lt;/p&gt;
 
@@ -29,7 +29,15 @@
 
 &lt;p&gt;맥의 모든 프로그램(Notes, TextEdit 같은 편집기도 마찬가지!) 에서도 설정된 키바인딩으로 사용 가능하다.&lt;/p&gt;
 
-&lt;p&gt;다만 기존의 Option 키를 이용한 특수기호를 입력하는게 불가능해진다는 단점이 있다&amp;hellip; (그런기능이었는지도 몰랐&amp;hellip;)&lt;/p&gt;
+&lt;p&gt;다만 아래 바인딩 된 단축키셋은 기존 설정이 오버라이드 되어버리므로,&lt;/p&gt;
+
+&lt;p&gt;기존 Option 키를 이용한 특수기호를 입력하는게 불가능해진다는 단점이 있다&amp;hellip; (그런기능이었는지도 몰랐&amp;hellip;)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;BEWARE:
+This file uses the Option key as a meta key.  This has the side-effect
+of overriding Mac OS keybindings for the option key, which generally
+make common symbols and non-english letters.
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;defaultkeybinding-dict:8a540c2b464be451bcbed35bd1843bfb&#34;&gt;DefaultKeyBinding.dict&lt;/h2&gt;
 
