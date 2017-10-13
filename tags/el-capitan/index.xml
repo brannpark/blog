@@ -5,22 +5,20 @@
     <link>http://brannpark.github.io/blog/tags/el-capitan/</link>
     <description>Recent content in El Capitan on 개발지식저장소</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>ko-KR</language>
+    <language>en</language>
+    <copyright>Copyright(c) by Brann Park. All right reserved.</copyright>
     <lastBuildDate>Wed, 02 Dec 2015 18:46:37 +0900</lastBuildDate>
-    <atom:link href="http://brannpark.github.io/blog/tags/el-capitan/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="http://brannpark.github.io/blog/tags/el-capitan/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>OSX El Capitan 개발환경 세팅</title>
-      <link>http://brannpark.github.io/blog/posts/20151202_elcapitan_setup/</link>
+      <link>http://brannpark.github.io/blog/post/20151202_elcapitan_setup/</link>
       <pubDate>Wed, 02 Dec 2015 18:46:37 +0900</pubDate>
       
-      <guid>http://brannpark.github.io/blog/posts/20151202_elcapitan_setup/</guid>
-      <description>&lt;p&gt;===&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://herblover.github.io/&#34;&gt;Kenny&lt;/a&gt;님이 작성하신 OSX El Capitan 개발환경 세팅 포스트 공유합니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://herblover.github.io/environments/mac/El-Capitan-Setup/&#34;&gt;http://herblover.github.io/environments/mac/El-Capitan-Setup&lt;/a&gt;&lt;/p&gt;
-</description>
+      <guid>http://brannpark.github.io/blog/post/20151202_elcapitan_setup/</guid>
+      <description>=== Kenny님이 작성하신 OSX El Capitan 개발환경 세팅 포스트 공유합니다. http://herblover.github.io/environments/mac/El-Capitan-Setup</description>
     </item>
     
   </channel>

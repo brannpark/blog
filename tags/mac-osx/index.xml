@@ -5,52 +5,20 @@
     <link>http://brannpark.github.io/blog/tags/mac-osx/</link>
     <description>Recent content in Mac Osx on 개발지식저장소</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>ko-KR</language>
+    <language>en</language>
+    <copyright>Copyright(c) by Brann Park. All right reserved.</copyright>
     <lastBuildDate>Wed, 19 Jul 2017 14:45:52 +0900</lastBuildDate>
-    <atom:link href="http://brannpark.github.io/blog/tags/mac-osx/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="http://brannpark.github.io/blog/tags/mac-osx/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Emacs, Mac osx 클립보드 공유</title>
-      <link>http://brannpark.github.io/blog/posts/20170719_share_clipboard_buffer_share_with_macosx_and_emacs/</link>
+      <link>http://brannpark.github.io/blog/post/20170719_share_clipboard_buffer_share_with_macosx_and_emacs/</link>
       <pubDate>Wed, 19 Jul 2017 14:45:52 +0900</pubDate>
       
-      <guid>http://brannpark.github.io/blog/posts/20170719_share_clipboard_buffer_share_with_macosx_and_emacs/</guid>
-      <description>
-
-&lt;p&gt;===&lt;/p&gt;
-
-&lt;p&gt;가끔 Mac 에서 Emacs 를 쓸 때, OS 의 clipboard 가 Emacs 의 clipboard(?) 가 별도의 공간이어서 불편함을 느꼈던 적이 많았다.&lt;/p&gt;
-
-&lt;p&gt;붙여넣기야&amp;hellip; Cmd + V 를 이용하면 된다지만, Emacs 상의 텍스트 블록을 복사해서 다른 Mac 어플리케이션에 붙여넣기를 하려면 마우스를 이용해서 드래깅하여 영역을 지정하고 Cmd + C 키를 이용하여 복사하여야만 했고, Emacs 의 창이 분할이 되어있는 경우라면(가로분할), 먼저 해당 창을 닫지 않으면 마우스로 여러줄을 복사해야 할때, 다른창의 글자까지 복사가 되어버린다. (실제 OS 의 &amp;lsquo;창&amp;rsquo; 이 아니기 때문)&lt;/p&gt;
-
-&lt;p&gt;이럴때는 다음과 같은 설정을 통해 OS 와 Emacs 의 Clipboard 가 공유되게(실제로는 공유 되는 것 &amp;ldquo;처럼&amp;rdquo;) 만들 수 있다.&lt;/p&gt;
-
-&lt;h3 id=&#34;guide:8a61f9a567c039ce9cc615c16b9ca216&#34;&gt;Guide&lt;/h3&gt;
-
-&lt;p&gt;먼저 본인의 이맥스 설정파일을 연다. (이 파일이 없다면, 새로 생성하면 된다.)&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ emacs ~/.emacs
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;그리고는 아래와 같이 적당한 위치에 다음의 코드를 삽입한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://brannpark.github.io/blog/blog/img/emacs_clipboard_with_osx/emacs_pbpaste.png&#34; alt=&#34;.Emacs 설정파일&#34; /&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-lisp&#34;&gt;;; pbcopy for OSX
-(defun copy-from-osx ()
-  (shell-command-to-string &amp;quot;pbpaste&amp;quot;))
-(defun paste-to-osx (text &amp;amp;optional push)
-  (let ((process-connection-type nil))
-    (let ((proc (start-process &amp;quot;pbcopy&amp;quot; &amp;quot;*Messages*&amp;quot; &amp;quot;pbcopy&amp;quot;)))
-      (process-send-string proc text)
-      (process-send-eof proc))))
-
-(setq interprogram-cut-function &#39;paste-to-osx)
-(setq interprogram-paste-function &#39;copy-from-osx)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;그리고 Emacs 를 리스타트 하면 설정 끝!&lt;/p&gt;
-</description>
+      <guid>http://brannpark.github.io/blog/post/20170719_share_clipboard_buffer_share_with_macosx_and_emacs/</guid>
+      <description>=== 가끔 Mac 에서 Emacs 를 쓸 때, OS 의 clipboard 가 Emacs 의 clipboard(?) 가 별도의 공간이어서 불편함을 느꼈던 적이 많았다. 붙여넣기야&amp;hellip; Cmd + V 를 이용하면 된다지만, Emacs 상의 텍</description>
     </item>
     
   </channel>

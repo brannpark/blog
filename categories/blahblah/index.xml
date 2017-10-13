@@ -5,28 +5,20 @@
     <link>http://brannpark.github.io/blog/categories/blahblah/</link>
     <description>Recent content in Blahblah on 개발지식저장소</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>ko-KR</language>
+    <language>en</language>
+    <copyright>Copyright(c) by Brann Park. All right reserved.</copyright>
     <lastBuildDate>Tue, 01 Dec 2015 11:47:56 +0900</lastBuildDate>
-    <atom:link href="http://brannpark.github.io/blog/categories/blahblah/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="http://brannpark.github.io/blog/categories/blahblah/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>블로그를 시작합니다</title>
-      <link>http://brannpark.github.io/blog/posts/new/</link>
+      <link>http://brannpark.github.io/blog/post/new/</link>
       <pubDate>Tue, 01 Dec 2015 11:47:56 +0900</pubDate>
       
-      <guid>http://brannpark.github.io/blog/posts/new/</guid>
-      <description>&lt;hr /&gt;
-
-&lt;p&gt;뭐.. 평소에도 계속 프로그래밍 관련 글들을 기록해놓는 블로그를 해볼까 했었습니다만,&lt;/p&gt;
-
-&lt;p&gt;생각보다 시작이 쉽지가 않더군요 ㅎㅎ..&lt;/p&gt;
-
-&lt;p&gt;Github Pages 를 이용한 static website 개설에 흥미가 생겨서 한번 이를 이용한 블로깅을 시작해 볼까 합니다!&lt;/p&gt;
-
-&lt;p&gt;아마도 첫번째 주제는 사이트 개설기 정도가 되겠네요 ㅎㅎ&lt;/p&gt;
-
-&lt;p&gt;글이 마무리되면 포스팅 하도록 하겠습니다!&lt;/p&gt;
-</description>
+      <guid>http://brannpark.github.io/blog/post/new/</guid>
+      <description>뭐.. 평소에도 계속 프로그래밍 관련 글들을 기록해놓는 블로그를 해볼까 했었습니다만, 생각보다 시작이 쉽지가 않더군요 ㅎㅎ.. Github Pages 를 이용한 static website 개설에 흥미가</description>
     </item>
     
   </channel>

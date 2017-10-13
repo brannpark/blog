@@ -5,110 +5,20 @@
     <link>http://brannpark.github.io/blog/tags/xcode/</link>
     <description>Recent content in Xcode on 개발지식저장소</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>ko-KR</language>
+    <language>en</language>
+    <copyright>Copyright(c) by Brann Park. All right reserved.</copyright>
     <lastBuildDate>Tue, 11 Oct 2016 14:52:05 +0900</lastBuildDate>
-    <atom:link href="http://brannpark.github.io/blog/tags/xcode/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="http://brannpark.github.io/blog/tags/xcode/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Emacs Keybinding for Mac osx</title>
-      <link>http://brannpark.github.io/blog/posts/20161011_xcode_emacs_keybinding/</link>
+      <link>http://brannpark.github.io/blog/post/20161011_xcode_emacs_keybinding/</link>
       <pubDate>Tue, 11 Oct 2016 14:52:05 +0900</pubDate>
       
-      <guid>http://brannpark.github.io/blog/posts/20161011_xcode_emacs_keybinding/</guid>
-      <description>
-
-&lt;p&gt;===&lt;/p&gt;
-
-&lt;h1 id=&#34;시작은-xcode-에-emacs-keybinding-적용해보기:8a540c2b464be451bcbed35bd1843bfb&#34;&gt;시작은.. Xcode 에 Emacs keybinding 적용해보기!&lt;/h1&gt;
-
-&lt;p&gt;Xcode 는 기본적으로 Emacs 키바인딩을 지원하지 않는다. Option 메타키를 사용하는것을 쉽사리 허용하지 않는데..&lt;/p&gt;
-
-&lt;p&gt;이리저리 찾아보고 하다가 최종 적용한 방법이 있어 정리해본다.&lt;/p&gt;
-
-&lt;p&gt;맥에서 실행되는 모든 Cocoa 어플리케이션들의 키바인딩을 오버라이딩 하는 개념으로 이해하면 된다. 따라서 Xcode 뿐 아니라&lt;/p&gt;
-
-&lt;p&gt;맥의 모든 프로그램(Notes, TextEdit 같은 편집기도 마찬가지!) 에서도 설정된 키바인딩으로 사용 가능하다.&lt;/p&gt;
-
-&lt;p&gt;다만 아래 바인딩 된 단축키셋은 기존 설정이 오버라이드 되어버리므로,&lt;/p&gt;
-
-&lt;p&gt;기존 Option 키를 이용한 특수기호를 입력하는게 불가능해진다는 단점이 있다&amp;hellip; (그런기능이었는지도 몰랐&amp;hellip;)&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;BEWARE:
-This file uses the Option key as a meta key.  This has the side-effect
-of overriding Mac OS keybindings for the option key, which generally
-make common symbols and non-english letters.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;defaultkeybinding-dict:8a540c2b464be451bcbed35bd1843bfb&#34;&gt;DefaultKeyBinding.dict&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ cd ~/Library
-$ ls | grep KeyBindings (디렉토리가 없다면 생성)
-$ cd KeyBindings
-$ touch DefaultKeyBinding.dict (파일이 없다면 생성)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;DefaultKeyBinding.dict 파일에 다음과 같이 작성.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;{
-/* Keybindings for emacs emulation.  Compiled by Jacob Rus.
- *
- * To use: copy this file to ~/Library/KeyBindings/
- * after that any Cocoa applications you launch will inherit these bindings
- *
- * This is a pretty good set, especially considering that many emacs bindings
- * such as C-o, C-a, C-e, C-k, C-y, C-v, C-f, C-b, C-p, C-n, C-t, and
- * perhaps a few more, are already built into the system.
- *
- * BEWARE:
- * This file uses the Option key as a meta key.  This has the side-effect
- * of overriding Mac OS keybindings for the option key, which generally
- * make common symbols and non-english letters.
- */
-
-/* Ctrl shortcuts */
-    &amp;quot;^l&amp;quot;        = &amp;quot;centerSelectionInVisibleArea:&amp;quot;;  /* C-l          Recenter */
-    &amp;quot;^/&amp;quot;        = &amp;quot;undo:&amp;quot;;                          /* C-/          Undo */
-    &amp;quot;^_&amp;quot;        = &amp;quot;undo:&amp;quot;;                          /* C-_          Undo */
-    &amp;quot;^ &amp;quot;        = &amp;quot;setMark:&amp;quot;;                       /* C-Spc        Set mark */
-    &amp;quot;^\@&amp;quot;       = &amp;quot;setMark:&amp;quot;;                       /* C-@          Set mark */
-    &amp;quot;^w&amp;quot;        = &amp;quot;deleteToMark:&amp;quot;;                  /* C-w          Delete to mark */
-    &amp;quot;^y&amp;quot;	= &amp;quot;yank:&amp;quot;;               /* C-y          Cycle through kill ring */
-
-    /* Meta shortcuts */
-    &amp;quot;~f&amp;quot;        = &amp;quot;moveWordForward:&amp;quot;;               /* M-f          Move forward word */
-    &amp;quot;~b&amp;quot;        = &amp;quot;moveWordBackward:&amp;quot;;              /* M-b          Move backward word */
-    &amp;quot;~&amp;lt;&amp;quot;        = &amp;quot;moveToBeginningOfDocument:&amp;quot;;     /* M-&amp;lt;          Move to beginning of document */
-    &amp;quot;~&amp;gt;&amp;quot;        = &amp;quot;moveToEndOfDocument:&amp;quot;;           /* M-&amp;gt;          Move to end of document */
-    &amp;quot;~v&amp;quot;        = &amp;quot;pageUp:&amp;quot;;                        /* M-v          Page Up */
-    &amp;quot;~/&amp;quot;        = &amp;quot;complete:&amp;quot;;                      /* M-/          Complete */
-    &amp;quot;~c&amp;quot;        = ( &amp;quot;capitalizeWord:&amp;quot;,              /* M-c          Capitalize */
-                    &amp;quot;moveForward:&amp;quot;,
-                    &amp;quot;moveForward:&amp;quot;);                                
-    &amp;quot;~u&amp;quot;        = ( &amp;quot;uppercaseWord:&amp;quot;,               /* M-u          Uppercase */
-                    &amp;quot;moveForward:&amp;quot;,
-                    &amp;quot;moveForward:&amp;quot;);
-    &amp;quot;~l&amp;quot;        = ( &amp;quot;lowercaseWord:&amp;quot;,               /* M-l          Lowercase */
-                    &amp;quot;moveForward:&amp;quot;,
-                    &amp;quot;moveForward:&amp;quot;);
-    &amp;quot;~d&amp;quot;        = &amp;quot;deleteWordForward:&amp;quot;;             /* M-d          Delete word forward */
-    &amp;quot;^~h&amp;quot;       = &amp;quot;deleteWordBackward:&amp;quot;;            /* M-C-h        Delete word backward */
-    &amp;quot;~\U007F&amp;quot;   = &amp;quot;deleteWordBackward:&amp;quot;;            /* M-Bksp       Delete word backward */
-    &amp;quot;~t&amp;quot;        = &amp;quot;transposeWords:&amp;quot;;                /* M-t          Transpose words */
-    &amp;quot;~\@&amp;quot;       = ( &amp;quot;setMark:&amp;quot;,                     /* M-@          Mark word */
-                    &amp;quot;moveWordForward:&amp;quot;,
-                    &amp;quot;swapWithMark&amp;quot;);
-    &amp;quot;~h&amp;quot;        = ( &amp;quot;setMark:&amp;quot;,                     /* M-h          Mark paragraph */
-                    &amp;quot;moveToEndOfParagraph:&amp;quot;,
-                    &amp;quot;swapWithMark:&amp;quot;);
-    &amp;quot;~w&amp;quot;        = ( &amp;quot;deleteToMark:&amp;quot;,
-		    &amp;quot;yankAndSelect:&amp;quot;,
-		    &amp;quot;moveDown:&amp;quot;,
-		    &amp;quot;moveUp:&amp;quot;);
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;이렇게 하면 기본적으로 TextEdit 과 같은 프로그램들에서 위에 정의된 키바인딩들이 가능해진다. 다만 순차 조합 키바인딩, 예를 들어 ^x^f(파일열기) 혹은 ^x^s(파일저장) 과 같은 키바인딩은 동작하지 않는다. (이리저리 해보았지만 결국 실패..!!)&lt;/p&gt;
-</description>
+      <guid>http://brannpark.github.io/blog/post/20161011_xcode_emacs_keybinding/</guid>
+      <description>=== 시작은.. Xcode 에 Emacs keybinding 적용해보기! Xcode 는 기본적으로 Emacs 키바인딩을 지원하지 않는다. Option 메타키를 사용하는것을 쉽사리 허용하지 않는데.. 이리저리 찾아보고 하다</description>
     </item>
     
   </channel>

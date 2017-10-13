@@ -5,154 +5,29 @@
     <link>http://brannpark.github.io/blog/tags/emacs/</link>
     <description>Recent content in Emacs on 개발지식저장소</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>ko-KR</language>
+    <language>en</language>
+    <copyright>Copyright(c) by Brann Park. All right reserved.</copyright>
     <lastBuildDate>Wed, 19 Jul 2017 14:45:52 +0900</lastBuildDate>
-    <atom:link href="http://brannpark.github.io/blog/tags/emacs/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="http://brannpark.github.io/blog/tags/emacs/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Emacs, Mac osx 클립보드 공유</title>
-      <link>http://brannpark.github.io/blog/posts/20170719_share_clipboard_buffer_share_with_macosx_and_emacs/</link>
+      <link>http://brannpark.github.io/blog/post/20170719_share_clipboard_buffer_share_with_macosx_and_emacs/</link>
       <pubDate>Wed, 19 Jul 2017 14:45:52 +0900</pubDate>
       
-      <guid>http://brannpark.github.io/blog/posts/20170719_share_clipboard_buffer_share_with_macosx_and_emacs/</guid>
-      <description>
-
-&lt;p&gt;===&lt;/p&gt;
-
-&lt;p&gt;가끔 Mac 에서 Emacs 를 쓸 때, OS 의 clipboard 가 Emacs 의 clipboard(?) 가 별도의 공간이어서 불편함을 느꼈던 적이 많았다.&lt;/p&gt;
-
-&lt;p&gt;붙여넣기야&amp;hellip; Cmd + V 를 이용하면 된다지만, Emacs 상의 텍스트 블록을 복사해서 다른 Mac 어플리케이션에 붙여넣기를 하려면 마우스를 이용해서 드래깅하여 영역을 지정하고 Cmd + C 키를 이용하여 복사하여야만 했고, Emacs 의 창이 분할이 되어있는 경우라면(가로분할), 먼저 해당 창을 닫지 않으면 마우스로 여러줄을 복사해야 할때, 다른창의 글자까지 복사가 되어버린다. (실제 OS 의 &amp;lsquo;창&amp;rsquo; 이 아니기 때문)&lt;/p&gt;
-
-&lt;p&gt;이럴때는 다음과 같은 설정을 통해 OS 와 Emacs 의 Clipboard 가 공유되게(실제로는 공유 되는 것 &amp;ldquo;처럼&amp;rdquo;) 만들 수 있다.&lt;/p&gt;
-
-&lt;h3 id=&#34;guide:8a61f9a567c039ce9cc615c16b9ca216&#34;&gt;Guide&lt;/h3&gt;
-
-&lt;p&gt;먼저 본인의 이맥스 설정파일을 연다. (이 파일이 없다면, 새로 생성하면 된다.)&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ emacs ~/.emacs
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;그리고는 아래와 같이 적당한 위치에 다음의 코드를 삽입한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://brannpark.github.io/blog/blog/img/emacs_clipboard_with_osx/emacs_pbpaste.png&#34; alt=&#34;.Emacs 설정파일&#34; /&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-lisp&#34;&gt;;; pbcopy for OSX
-(defun copy-from-osx ()
-  (shell-command-to-string &amp;quot;pbpaste&amp;quot;))
-(defun paste-to-osx (text &amp;amp;optional push)
-  (let ((process-connection-type nil))
-    (let ((proc (start-process &amp;quot;pbcopy&amp;quot; &amp;quot;*Messages*&amp;quot; &amp;quot;pbcopy&amp;quot;)))
-      (process-send-string proc text)
-      (process-send-eof proc))))
-
-(setq interprogram-cut-function &#39;paste-to-osx)
-(setq interprogram-paste-function &#39;copy-from-osx)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;그리고 Emacs 를 리스타트 하면 설정 끝!&lt;/p&gt;
-</description>
+      <guid>http://brannpark.github.io/blog/post/20170719_share_clipboard_buffer_share_with_macosx_and_emacs/</guid>
+      <description>=== 가끔 Mac 에서 Emacs 를 쓸 때, OS 의 clipboard 가 Emacs 의 clipboard(?) 가 별도의 공간이어서 불편함을 느꼈던 적이 많았다. 붙여넣기야&amp;hellip; Cmd + V 를 이용하면 된다지만, Emacs 상의 텍</description>
     </item>
     
     <item>
       <title>Emacs Keybinding for Mac osx</title>
-      <link>http://brannpark.github.io/blog/posts/20161011_xcode_emacs_keybinding/</link>
+      <link>http://brannpark.github.io/blog/post/20161011_xcode_emacs_keybinding/</link>
       <pubDate>Tue, 11 Oct 2016 14:52:05 +0900</pubDate>
       
-      <guid>http://brannpark.github.io/blog/posts/20161011_xcode_emacs_keybinding/</guid>
-      <description>
-
-&lt;p&gt;===&lt;/p&gt;
-
-&lt;h1 id=&#34;시작은-xcode-에-emacs-keybinding-적용해보기:8a540c2b464be451bcbed35bd1843bfb&#34;&gt;시작은.. Xcode 에 Emacs keybinding 적용해보기!&lt;/h1&gt;
-
-&lt;p&gt;Xcode 는 기본적으로 Emacs 키바인딩을 지원하지 않는다. Option 메타키를 사용하는것을 쉽사리 허용하지 않는데..&lt;/p&gt;
-
-&lt;p&gt;이리저리 찾아보고 하다가 최종 적용한 방법이 있어 정리해본다.&lt;/p&gt;
-
-&lt;p&gt;맥에서 실행되는 모든 Cocoa 어플리케이션들의 키바인딩을 오버라이딩 하는 개념으로 이해하면 된다. 따라서 Xcode 뿐 아니라&lt;/p&gt;
-
-&lt;p&gt;맥의 모든 프로그램(Notes, TextEdit 같은 편집기도 마찬가지!) 에서도 설정된 키바인딩으로 사용 가능하다.&lt;/p&gt;
-
-&lt;p&gt;다만 아래 바인딩 된 단축키셋은 기존 설정이 오버라이드 되어버리므로,&lt;/p&gt;
-
-&lt;p&gt;기존 Option 키를 이용한 특수기호를 입력하는게 불가능해진다는 단점이 있다&amp;hellip; (그런기능이었는지도 몰랐&amp;hellip;)&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;BEWARE:
-This file uses the Option key as a meta key.  This has the side-effect
-of overriding Mac OS keybindings for the option key, which generally
-make common symbols and non-english letters.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;defaultkeybinding-dict:8a540c2b464be451bcbed35bd1843bfb&#34;&gt;DefaultKeyBinding.dict&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ cd ~/Library
-$ ls | grep KeyBindings (디렉토리가 없다면 생성)
-$ cd KeyBindings
-$ touch DefaultKeyBinding.dict (파일이 없다면 생성)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;DefaultKeyBinding.dict 파일에 다음과 같이 작성.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;{
-/* Keybindings for emacs emulation.  Compiled by Jacob Rus.
- *
- * To use: copy this file to ~/Library/KeyBindings/
- * after that any Cocoa applications you launch will inherit these bindings
- *
- * This is a pretty good set, especially considering that many emacs bindings
- * such as C-o, C-a, C-e, C-k, C-y, C-v, C-f, C-b, C-p, C-n, C-t, and
- * perhaps a few more, are already built into the system.
- *
- * BEWARE:
- * This file uses the Option key as a meta key.  This has the side-effect
- * of overriding Mac OS keybindings for the option key, which generally
- * make common symbols and non-english letters.
- */
-
-/* Ctrl shortcuts */
-    &amp;quot;^l&amp;quot;        = &amp;quot;centerSelectionInVisibleArea:&amp;quot;;  /* C-l          Recenter */
-    &amp;quot;^/&amp;quot;        = &amp;quot;undo:&amp;quot;;                          /* C-/          Undo */
-    &amp;quot;^_&amp;quot;        = &amp;quot;undo:&amp;quot;;                          /* C-_          Undo */
-    &amp;quot;^ &amp;quot;        = &amp;quot;setMark:&amp;quot;;                       /* C-Spc        Set mark */
-    &amp;quot;^\@&amp;quot;       = &amp;quot;setMark:&amp;quot;;                       /* C-@          Set mark */
-    &amp;quot;^w&amp;quot;        = &amp;quot;deleteToMark:&amp;quot;;                  /* C-w          Delete to mark */
-    &amp;quot;^y&amp;quot;	= &amp;quot;yank:&amp;quot;;               /* C-y          Cycle through kill ring */
-
-    /* Meta shortcuts */
-    &amp;quot;~f&amp;quot;        = &amp;quot;moveWordForward:&amp;quot;;               /* M-f          Move forward word */
-    &amp;quot;~b&amp;quot;        = &amp;quot;moveWordBackward:&amp;quot;;              /* M-b          Move backward word */
-    &amp;quot;~&amp;lt;&amp;quot;        = &amp;quot;moveToBeginningOfDocument:&amp;quot;;     /* M-&amp;lt;          Move to beginning of document */
-    &amp;quot;~&amp;gt;&amp;quot;        = &amp;quot;moveToEndOfDocument:&amp;quot;;           /* M-&amp;gt;          Move to end of document */
-    &amp;quot;~v&amp;quot;        = &amp;quot;pageUp:&amp;quot;;                        /* M-v          Page Up */
-    &amp;quot;~/&amp;quot;        = &amp;quot;complete:&amp;quot;;                      /* M-/          Complete */
-    &amp;quot;~c&amp;quot;        = ( &amp;quot;capitalizeWord:&amp;quot;,              /* M-c          Capitalize */
-                    &amp;quot;moveForward:&amp;quot;,
-                    &amp;quot;moveForward:&amp;quot;);                                
-    &amp;quot;~u&amp;quot;        = ( &amp;quot;uppercaseWord:&amp;quot;,               /* M-u          Uppercase */
-                    &amp;quot;moveForward:&amp;quot;,
-                    &amp;quot;moveForward:&amp;quot;);
-    &amp;quot;~l&amp;quot;        = ( &amp;quot;lowercaseWord:&amp;quot;,               /* M-l          Lowercase */
-                    &amp;quot;moveForward:&amp;quot;,
-                    &amp;quot;moveForward:&amp;quot;);
-    &amp;quot;~d&amp;quot;        = &amp;quot;deleteWordForward:&amp;quot;;             /* M-d          Delete word forward */
-    &amp;quot;^~h&amp;quot;       = &amp;quot;deleteWordBackward:&amp;quot;;            /* M-C-h        Delete word backward */
-    &amp;quot;~\U007F&amp;quot;   = &amp;quot;deleteWordBackward:&amp;quot;;            /* M-Bksp       Delete word backward */
-    &amp;quot;~t&amp;quot;        = &amp;quot;transposeWords:&amp;quot;;                /* M-t          Transpose words */
-    &amp;quot;~\@&amp;quot;       = ( &amp;quot;setMark:&amp;quot;,                     /* M-@          Mark word */
-                    &amp;quot;moveWordForward:&amp;quot;,
-                    &amp;quot;swapWithMark&amp;quot;);
-    &amp;quot;~h&amp;quot;        = ( &amp;quot;setMark:&amp;quot;,                     /* M-h          Mark paragraph */
-                    &amp;quot;moveToEndOfParagraph:&amp;quot;,
-                    &amp;quot;swapWithMark:&amp;quot;);
-    &amp;quot;~w&amp;quot;        = ( &amp;quot;deleteToMark:&amp;quot;,
-		    &amp;quot;yankAndSelect:&amp;quot;,
-		    &amp;quot;moveDown:&amp;quot;,
-		    &amp;quot;moveUp:&amp;quot;);
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;이렇게 하면 기본적으로 TextEdit 과 같은 프로그램들에서 위에 정의된 키바인딩들이 가능해진다. 다만 순차 조합 키바인딩, 예를 들어 ^x^f(파일열기) 혹은 ^x^s(파일저장) 과 같은 키바인딩은 동작하지 않는다. (이리저리 해보았지만 결국 실패..!!)&lt;/p&gt;
-</description>
+      <guid>http://brannpark.github.io/blog/post/20161011_xcode_emacs_keybinding/</guid>
+      <description>=== 시작은.. Xcode 에 Emacs keybinding 적용해보기! Xcode 는 기본적으로 Emacs 키바인딩을 지원하지 않는다. Option 메타키를 사용하는것을 쉽사리 허용하지 않는데.. 이리저리 찾아보고 하다</description>
     </item>
     
   </channel>
