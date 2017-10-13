@@ -5,7 +5,6 @@ Tags = ["hugo", "redlounge", "static-website-engine", "github-pages"]
 date = "2015-12-01T15:36:31+09:00"
 title = "Made by HUGO and GitHub Pages"
 +++
-___
 
 
 일반적인 웹사이트의 경우, 여러 웹 컨텐츠들을 동적으로 생성하여 이용자에게 전달한다.
