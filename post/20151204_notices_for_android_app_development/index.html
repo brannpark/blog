@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>안드로이드 앱 개발 시 주의사항 - 개발지식저장소</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Brann Park" />
+  <meta name="description" content="이 포스팅은 앞으로 쓰게 될 안드로이드 앱 개발 관련 주의사항 포스트들에 대한 게이트웨이 정도가 되겠다. 보통.. 이렇게 하면 좋다, 저렇게 하면 좋다라는 글들은 많고" />
+
+  <meta name="keywords" content="software, developer, life" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.29" />
+
+
+<link rel="canonical" href="http://brannpark.github.io/blog/post/20151204_notices_for_android_app_development/" />
+
+<link rel="apple-touch-icon" sizes="180x180" href="/blog/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/blog/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/blog/favicon-16x16.png">
+<link rel="icon" href="/blog/favicon.ico" />
+<link rel="manifest" href="/blog/manifest.json">
+<link rel="mask-icon" href="/blog/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/blog/dist/even.min.css?v=2.6.3" rel="stylesheet">
+<link href="/blog/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+<meta property="og:title" content="안드로이드 앱 개발 시 주의사항" />
+<meta property="og:description" content="이 포스팅은 앞으로 쓰게 될 안드로이드 앱 개발 관련 주의사항 포스트들에 대한 게이트웨이 정도가 되겠다. 보통.. 이렇게 하면 좋다, 저렇게 하면 좋다라는 글들은 많고" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://brannpark.github.io/blog/post/20151204_notices_for_android_app_development/" />
+
+
+
+<meta property="article:published_time" content="2015-12-04T14:46:07&#43;09:00"/>
+<meta property="article:modified_time" content="2015-12-04T14:46:07&#43;09:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="안드로이드 앱 개발 시 주의사항">
+<meta itemprop="description" content="이 포스팅은 앞으로 쓰게 될 안드로이드 앱 개발 관련 주의사항 포스트들에 대한 게이트웨이 정도가 되겠다. 보통.. 이렇게 하면 좋다, 저렇게 하면 좋다라는 글들은 많고">
+
+
+<meta itemprop="dateModified" content="2015-12-04T14:46:07&#43;09:00" />
+<meta itemprop="wordCount" content="1044">
+
+
+
+<meta itemprop="keywords" content="android," />
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="안드로이드 앱 개발 시 주의사항"/>
+<meta name="twitter:description" content="이 포스팅은 앞으로 쓰게 될 안드로이드 앱 개발 관련 주의사항 포스트들에 대한 게이트웨이 정도가 되겠다. 보통.. 이렇게 하면 좋다, 저렇게 하면 좋다라는 글들은 많고"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+<style>
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+html, body, .post-title, .post-link, .post-content, .post-toc, .post-toc-content, .post-footer .post-nav .next, .post-footer .post-nav .prev,
+.post-content h1, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6
+{
+  font-family: "Nanum Gothic", sans-serif !important; 
+}
+
+.post .post-header .post-link {
+  font-weight: bold;
+}
+</style>
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/blog/" class="logo">D-veloper</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/blog/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/blog/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/blog/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/blog/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/blog/" class="logo">D-veloper</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/blog/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/blog/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/blog/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/blog/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">안드로이드 앱 개발 시 주의사항</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2015-12-04 </span>
+        <div class="post-category">
+            <a href="/blog/categories/development/">Development</a>
+          </div>
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content">
+      <nav id="TableOfContents">
+<ul>
+<li><a href="#안드로이드-앱-개발간-주의할-점들">안드로이드 앱 개발간 주의할 점들!</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      
+
+<p>이 포스팅은 앞으로 쓰게 될 안드로이드 앱 개발 관련 주의사항 포스트들에 대한 게이트웨이 정도가 되겠다.
+보통.. 이렇게 하면 좋다, 저렇게 하면 좋다라는 글들은 많고, 의견도 분분하고.. 하면 좋다 이지 안하면 안된다는것도 아니고.
+그런데 이렇게 제발 쫌 하지 말라는 흘려버리기엔 너무 치명적이지 않을까? 왜 하지말라는지 꼭 알아봐야 한다고 생각한다. 그렇다고 누군가의 이야기를 그냥 맹신하는것은 위험! 과거엔 맞는 이야기가 현재에는 맞지 않을 수도 있으니&hellip;</p>
+
+<p>간략하게 주제별로 리스팅을 하고, 원문 링크과 간략한 설명으로 작성해 나갈예정이다.</p>
+
+<h1 id="안드로이드-앱-개발간-주의할-점들">안드로이드 앱 개발간 주의할 점들!</h1>
+
+<ol>
+<li><a href="http://www.developerphil.com/dont-store-data-in-the-application-object/">Don&rsquo;t Store Data in the Application Object</a></li>
+</ol>
+
+<p>Application 객체는 앱이 백그라운드에 진입해 있는 동안 시스템에 의해 recreate 될 수 있다. 그러므로 Application 의 적절한 라이프사이클(onCreate 같은)이 아닌 개별 액티비티의 라이프 사이클 내에서 Application 객체의 상태를 지정하는 코드는 위험하다. 사실 Application 객체 뿐 아니라, 모든 Activity 객체들에도 해당하는 말이다.</p>
+
+<pre><code class="language-java">class MyApplication extends Application {
+    private String mName;
+
+    public void setName(String name) {
+        this.mName = name;
+    }
+
+    public String getName() {
+        return mName;
+    }
+}
+
+
+class FirstActivity extends Activity {
+
+    void onCreate(Bundle bundle) {
+        MyApplication app = (MyApplication)getApplication;
+		app.setName(&quot;AppName&quot;);
+	}
+}
+
+
+class SecondActivity extends Activity {
+    void onCreate(Bundle bundle) {
+	    MyApplication app = (MyApplication)getApplication;
+		Toast.makeText(this, app.getName() + &quot; is Application Name&quot;, Toast.LENGTH_SHORT).show();  //  &lt;-- app.getName() 은 상황에 따라서 Null 이 리턴될 수 있다. 따라서 이 코드는 NullPointerException 이 발생할 수 있는 잘못된 코드이다.
+	}
+}
+
+
+</code></pre>
+
+<p>static 변수들 또한 Device low memory 시점에 OS에 의해서 앱이 kill 되며 GC 될 수 있다. 따라서 singletone 패턴으로 사용되지 않는 static 객체 사용에 유의해야 한다. static 에 객체를 유지하고자 한다면 값이 assign 되는 시점이 액티비티의 적절한 라이프 사이클 내에 위치 시키거나 class load 타임 또는 객체 initialize 타임에 assign 될 수 있도록 해야한다.</p>
+
+<pre><code class="language-java">public class MainActivity extends AppCompatActivity {
+    public static String name = &quot;MainActivity&quot;; // class initialize 시점에 값을 할당
+    public static String name2;
+    public static String name3;
+	public static String name4;
+
+    static { // class initialize 시점에 값을 할당
+        name2 = &quot;MainActivity2&quot;;
+	}
+
+    { // object initialize 시점에 값을 할당
+	    name4 = &quot;MainActivity4&quot;;
+    }
+
+
+    public static String getName() {
+        return name;
+    }
+    public static String getName2() {
+        return name2;
+    }
+    public static String getName3() {
+        return name3;
+	}
+    public static String getName4() {		
+	    return name4;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        name3 = &quot;MainActivity3&quot;;
+    }
+}
+
+
+public class SecondActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_second);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, &quot;Replace with your own action&quot;, Snackbar.LENGTH_LONG)
+                        .setAction(&quot;Action&quot;, null).show();
+            }
+        });
+
+        Toast.makeText(this, MainActivity.getName(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, MainActivity.getName2(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, MainActivity.getName3(), Toast.LENGTH_SHORT).show(); // LowMemory 시점에 OS에 의해 앱이 kill 된 후 recreate 되는 경우 getName3() 의 리턴값은 NULL 이다.
+		Toast.makeText(this, MainActivity.getName4(), Toast.LENGTH_SHORT).show(); // getName3() 과 마찬가지로 recreate 시점에서 NULL 값을 리턴한다.
+    }
+    
+}
+
+</code></pre>
+
+<p>위의 예제코드를 검증해보기 위해서는, 먼저 에뮬레이터를 띄워 앱을 실행 후 메인액티비티 화면에서 FAB 을 터치하여 SecondActivity 로 화면을 전환한 다음,
+홈(HOME)버튼을 터치하여 앱을 백그라운드로 보낸다.
+그리고 DDMS 를 이용하여 나의 앱 프로세스를 stop 버튼을 이용해 강제 종료시킨다.
+그리고 다시 에뮬레이터에서 앱 히스토리 목록을 열고 앱으로 돌아가게 되면, 마지막 세번째 토스트의 경우 빈 문자열로 토스트 메시지가 뜨는 것을 확인 할 수 있다.</p>
+
+    </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Brann Park</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">2015-12-04</span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+    
+    
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          
+          <a href="/blog/tags/android/">android</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+          <a class="prev" href="/blog/post/20160615_presenter_first/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Presenter First</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        
+          <a class="next" href="/blog/post/20151202_elcapitan_setup/">
+            <span class="next-text nav-default">OSX El Capitan 개발환경 세팅</span>
+            <span class="prev-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+        
+        
+        if (window.location.hostname === 'localhost') return;
+
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        var disqus_shortname = 'brannpark';
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com/" class="dsq-brlink" target="_blank">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+  
+      </div>  
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:brandnew0823@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://facebook.com/dalong10" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="https://www.linkedin.com/in/ji-hoon-park-b39b61102" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://github.com/brannpark" class="iconfont icon-github" title="github"></a>
+  <a href="http://brannpark.github.io/blog/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy; 
+    
+      2016 - 
+    2017
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Copyright(c) by Brann Park. All right reserved.</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+<script src="/blog/lib/highlight/highlight.pack.js?v=20171001"></script>
+<script type="text/javascript" src="/blog/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/blog/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/blog/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/blog/dist/even.min.js?v=2.6.3"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+
+
+
+
+</body>
+</html>

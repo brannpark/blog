@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Osx on 개발지식저장소</title>
+    <link>http://brannpark.github.io/blog/tags/osx/</link>
+    <description>Recent content in Osx on 개발지식저장소</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>Copyright(c) by Brann Park. All right reserved.</copyright>
+    <lastBuildDate>Wed, 02 Dec 2015 18:46:37 +0900</lastBuildDate>
+    
+	<atom:link href="http://brannpark.github.io/blog/tags/osx/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>OSX El Capitan 개발환경 세팅</title>
+      <link>http://brannpark.github.io/blog/post/20151202_elcapitan_setup/</link>
+      <pubDate>Wed, 02 Dec 2015 18:46:37 +0900</pubDate>
+      
+      <guid>http://brannpark.github.io/blog/post/20151202_elcapitan_setup/</guid>
+      <description>Kenny님이 작성하신 OSX El Capitan 개발환경 세팅 포스트 공유합니다. http://herblover.github.io/environments/mac/El-Capitan-Setup</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blahblah on 개발지식저장소</title>
+    <link>http://brannpark.github.io/blog/categories/blahblah/</link>
+    <description>Recent content in Blahblah on 개발지식저장소</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>Copyright(c) by Brann Park. All right reserved.</copyright>
+    <lastBuildDate>Tue, 01 Dec 2015 11:47:56 +0900</lastBuildDate>
+    
+	<atom:link href="http://brannpark.github.io/blog/categories/blahblah/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>블로그를 시작합니다</title>
+      <link>http://brannpark.github.io/blog/post/new/</link>
+      <pubDate>Tue, 01 Dec 2015 11:47:56 +0900</pubDate>
+      
+      <guid>http://brannpark.github.io/blog/post/new/</guid>
+      <description>뭐.. 평소에도 계속 프로그래밍 관련 글들을 기록해놓는 블로그를 해볼까 했었습니다만, 생각보다 시작이 쉽지가 않더군요 ㅎㅎ.. Github Pages 를 이용한 static website 개설에 흥미가</description>
+    </item>
+    
+  </channel>
+</rss>
