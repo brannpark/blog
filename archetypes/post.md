@@ -1,4 +1,4 @@
----
++++
 title: "{{ replace .TranslationBaseName "-" " " | title }}"
 date: {{ .Date }}
 lastmod: {{ .Date }}
@@ -13,7 +13,4 @@ toc: false
 contentCopyright: false
 reward: false
 mathjax: false
----
-
-<!--more-->
-
++++

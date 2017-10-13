@@ -1,5 +1,5 @@
----
-title: "20171031_android_launch_process"
++++
+title: "안드로이드 앱 실행속도 최적화"
 date: 2017-10-13T16:25:46+09:00
 lastmod: 2017-10-13T16:25:46+09:00
 draft: true
@@ -13,7 +13,7 @@ toc: false
 contentCopyright: false
 reward: false
 mathjax: false
----
++++
 
 
 # 안드로이드앱 실행속도 최적화하기
