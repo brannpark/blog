@@ -1,0 +1,19 @@
+contentdir = "content"
+layoutdir = "layouts"
+staticdir = "static"
+publishdir = "dist"
+baseurl = "http://brannpark.github.io/blog"
+title = "개발지식저장소"
+languageCode="ko-KR"
+paginate = 10
+paginatePath = "page"
+theme = "redlounge"
+disqusShortname = "brannpark"
+
+[params]
+    sidebartitle = "D-veloper"
+    sidebartagline = "Thoughts on development and life"
+    sidebarphoto = "/blog/img/profile.png"
+[[menu.main]]
+    name = "Post"
+    url = "/posts"
