@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Copyright(c) by Brann Park. All right reserved.</copyright>
-    <lastBuildDate>Wed, 19 Jul 2017 14:45:52 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 13 Oct 2017 16:25:46 +0900</lastBuildDate>
     
 	<atom:link href="http://brannpark.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>안드로이드 앱 실행속도 최적화</title>
+      <link>http://brannpark.github.io/blog/post/20171031_android_launch_process/</link>
+      <pubDate>Fri, 13 Oct 2017 16:25:46 +0900</pubDate>
+      
+      <guid>http://brannpark.github.io/blog/post/20171031_android_launch_process/</guid>
+      <description>안드로이드앱 실행속도 최적화하기 안드로이드 앱이 실행이 될때, 세가지의 다른 실행 상태가 존재한다. Cold start (차가운 시작) Warm start (따듯한 시작) Lukewarm Start (미지근한 시</description>
+    </item>
     
     <item>
       <title>Emacs, Mac osx 클립보드 공유</title>
