@@ -2,7 +2,7 @@
 title = "안드로이드 앱 실행속도 최적화"
 date = 2017-10-13T16:25:46+09:00
 lastmod = 2017-10-13T16:25:46+09:00
-draft = true
+draft = false
 keywords = []
 description = ""
 tags = ["android", "launchspeed"]
