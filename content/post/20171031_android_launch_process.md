@@ -5,7 +5,7 @@ lastmod = 2017-10-13T16:25:46+09:00
 draft = true
 keywords = []
 description = ""
-tags = []
+tags = ["android", "launchspeed"]
 categories = ["Development"]
 author = "Brann Park"
 comment = true
@@ -16,7 +16,7 @@ mathjax = false
 +++
 
 
-## 안드로이드앱 실행속도 최적화하기
+# 안드로이드앱 실행속도 최적화하기
 
 안드로이드 앱이 실행이 될때, 세가지의 다른 실행 상태가 존재한다. 
 
@@ -27,7 +27,7 @@ mathjax = false
 앱 실행 성능을 개선하기 위해서는 각각의 시작 실행 상태들이 의미하는게 무엇인지 이해하는게 중요하다.
 그리고 항상 Cold start 상태의 성능 최적화를 고려해야만 한다! 이유는 아래 글을 읽다보면 자연스레 알게 될 것이다.
 
-### Cold start
+## Cold start
 
 Cold start 는 안드로이드 시스템 프로세스가 아직 앱 프로세스를 만들지 않은 상태에서 앱을 실행하는 것을 말한다. 
 기기가 부팅 된 이후 최초로 앱을 실행할 때나, 완전 종료하여 앱 프로세스를 Kill 시켰을 경우 등이 해당된다. 
@@ -49,12 +49,12 @@ Cold start 는 안드로이드 시스템 프로세스가 아직 앱 프로세스
 5. 화면(screen)에 뷰를 배치.
 6. 초기 draw 를 수행.
 
-### Warm start
+## Warm start
 
 Warm start 는 훨씬 더 단순하고 Cold start 보다 오버헤드가 더 적은 실행 상태이다. 시스템은 단순히 앱의 액티비티를 background 에서 foreground 로 가져오는 일을 할 뿐이다.
 Warm start 또한 Cold start 와 마찬가지의 On-Screen 과정을 수행한다. (앱이 액태비티를 렌더링 하기 전까지 blank window 를 화면에 보인다.)
 
-### Lukewarm start
+## Lukewarm start
 
 Lukewarm start 는 Cold start 에서 처리하는 Task 를 일부 처리하는 실행 상태이다. Lukewarm start 대표적인 케이스는, 
 
