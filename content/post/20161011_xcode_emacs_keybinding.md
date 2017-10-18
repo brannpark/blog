@@ -6,7 +6,6 @@ date = "2016-10-11T14:52:05+09:00"
 title = "Emacs Keybinding for Mac osx"
 
 +++
-===
 
 # 시작은.. Xcode 에 Emacs keybinding 적용해보기!
 
