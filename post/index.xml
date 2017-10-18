@@ -18,7 +18,7 @@
       <pubDate>Wed, 19 Jul 2017 14:45:52 +0900</pubDate>
       
       <guid>http://brannpark.github.io/blog/post/20170719_share_clipboard_buffer_share_with_macosx_and_emacs/</guid>
-      <description>=== 가끔 Mac 에서 Emacs 를 쓸 때, OS 의 clipboard 가 Emacs 의 clipboard(?) 가 별도의 공간이어서 불편함을 느꼈던 적이 많았다. 붙여넣기야&amp;hellip; Cmd + V 를 이용하면 된다지만, Emacs 상의 텍</description>
+      <description>가끔 Mac 에서 Emacs 를 쓸 때, OS 의 clipboard 가 Emacs 의 clipboard(?) 가 별도의 공간이어서 불편함을 느꼈던 적이 많았다. 붙여넣기야&amp;hellip; Cmd + V 를 이용하면 된다지만, Emacs 상의 텍스</description>
     </item>
     
     <item>
@@ -27,7 +27,7 @@
       <pubDate>Tue, 11 Oct 2016 14:52:05 +0900</pubDate>
       
       <guid>http://brannpark.github.io/blog/post/20161011_xcode_emacs_keybinding/</guid>
-      <description>=== 시작은.. Xcode 에 Emacs keybinding 적용해보기! Xcode 는 기본적으로 Emacs 키바인딩을 지원하지 않는다. Option 메타키를 사용하는것을 쉽사리 허용하지 않는데.. 이리저리 찾아보고 하다</description>
+      <description>시작은.. Xcode 에 Emacs keybinding 적용해보기! Xcode 는 기본적으로 Emacs 키바인딩을 지원하지 않는다. Option 메타키를 사용하는것을 쉽사리 허용하지 않는데.. 이리저리 찾아보고 하다가</description>
     </item>
     
     <item>
