@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Code Live Editor</title>
+        <meta name="viewport" content="width=device-width, user-scalable=no"/>
+        <link rel="stylesheet" type="text/css" href="diff2html/diff2html.css"/>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="  crossorigin="anonymous"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
+        <script src="diff2html/diff2html.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.3.1/ace.js" integrity="sha256-m7pa1Wh06liKoIDP19avGEdTGo+LoDNxeiHhVkq2hVQ=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.3.1/ext-emmet.js" integrity="sha256-SJNO3sMw3GocUzXO4rvdqM2MkRQE3YqHdziULnXStCs=" crossorigin="anonymous"></script>
+<!--        <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.3.1/keybinding-emacs.js" integrity="sha256-Ya5mzlxcAKO/SSmM91WjQXCncjsr9MHmewL1C8svcCY=" crossorigin="anonymous"></script>-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.3.1/mode-css.js" integrity="sha256-HL1KcfdGXI3rPcuI7ex1c3uCl/yydmWQv5IWZSsMXLQ=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.3.1/mode-javascript.js" integrity="sha256-lldKrMj2UjI0+xbAq2S7vIJKN+no+Bt9dlIHncuNbOg=" crossorigin="anonymous"></script>
+
+        <style>
+         body {
+             padding: 0;
+             margin: 0;
+         }
+         #editor {
+             position: absolute;
+             top: 0;
+             right: 200px;
+             bottom: 0;
+             left: 0;
+         }
+         #files {
+             position: absolute;
+             top: 0;
+             right: 0;
+             bottom: 0;
+             width: 199px;
+             border-left: 1px solid #333;
+             background-color: #666;
+         }
+         #files h3 {
+             padding-left: 10px;
+             color: #34b989;
+         }
+         #files ul {
+             list-style: none;
+             margin: 0;
+             padding: 0;
+         }
+         #files ul li {
+             margin: 0;
+             padding: 0;
+             display: block;
+             text-align: left;
+             padding: 5px 10px;
+             cursor: pointer;
+             color: #dedede;
+         }
+         #files ul li.selected {
+             background: #34b989;
+             color: #333;
+             font-weight: bold;
+         }
+
+         #create-file-btn {
+             margin: 10px;
+             border: 1px solid #333;
+             background-color: #ff4422;
+             padding: 6px 10px;
+             text-align: center;
+             color: white;
+             font-weight: bold;
+             cursor: pointer;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="editor"></div>
+        <aside id="files">
+            <div id="create-file-btn">
+                Create new file
+            </div>
+            <h3>Open files...</h3>
+            <ul class="list"></ul>
+        </aside>
+
+        <script>
+         (function() {
+             // Initialize Firebase
+             firebase.initializeApp({
+                 apiKey: "AIzaSyCuNTm2wkQz6LT5xg8VlznTOI8Clg4CGDI",
+                 authDomain: "livecodeeditor-381f5.firebaseapp.com",
+                 databaseURL: "https://livecodeeditor-381f5.firebaseio.com",
+                 projectId: "livecodeeditor-381f5"
+             });
+
+             window.app = {
+                 db: null,
+                 editor: null,
+                 filesRef: null,
+                 contentsRef: null,
+                 openedContentRef: null,
+
+                 openFiles: [],
+//                 selectedFileKey: null,
+
+                 init: function() {
+                     // Initialize Editor
+                     this.editor = ace.edit("editor");
+                     this.editor.setTheme("ace/theme/monokai");
+                     this.editor.session.setMode("ace/mode/javascript");
+
+                     // Initialize DB
+                     this.db = firebase.database();
+                     this.filesRef = this.db.ref('files');
+                     this.contentsRef = this.db.ref('contents');
+
+                     this.registerEventListeners();
+                     this.getOpenFiles();
+                 },
+                 registerEventListeners: function() {
+                     var that = this;
+                     $('#create-file-btn').on('click', function() {
+                         that.newFile();
+                     });
+
+                     $('#files .list').on('click', 'li', function() {
+                         var index = $(this).index();
+                         var fileData = that.openFiles[index];
+                         that.openFile(fileData.key);
+                         $(this).parent().find('li').each(function() {
+                             $(this).removeClass('selected');
+                         });
+                         $(this).addClass('selected');
+                     });
+
+                     $('textarea.ace_text-input').on('keyup', function() {
+                         setTimeout(function(){
+                             if (that.openedContentRef == null) {
+                                 return;
+                             }
+
+                             var content = that.editor.getValue();
+                             if (that.prevContent === content) {
+                                 return;
+                             }
+                             console.log('db set changed data');
+                             that.prevContent = content;
+                             that.isSkipContentChangeEvent = true;
+                             console.log('skip true');
+                             that.openedContentRef.set({
+                                 cursor: that.editor.getCursorPosition(),
+                                 content: content
+                             }).then(function() {
+                                 that.isSkipContentChangeEvent = false;
+                                 console.log('skip false');
+                             });
+                         }, 10);
+                     });
+                 },
+                 getOpenedContentRef: function(key) {
+                     return this.db.ref('contents/' + key);
+                 },
+                 openFile: function(key) {
+                     var that = this;
+                     this.openedFileKey = key;
+
+                     // 이미 열린파일이 있다면 닫기
+                     this.closeFile();
+                     this.registerListenerOnChangeContent(key);
+                     console.log('openFile() invoked');
+                 },
+                 registerListenerOnChangeContent: function(key) {
+                     var that = this;
+                     this.openedContentRef = this.getOpenedContentRef(key);
+                     this.openedContentRef.on('value', function(snapshot) {
+                         console.log('db change callback', that.isSkipContentChangeEvent === true ? "skip true" : "skip false");
+                         if (that.isSkipContentChangeEvent) {
+                             return;
+                         }
+
+                         var data = snapshot.val();
+
+                         that.editor.setValue(data.content);
+                         that.editor.moveCursorTo(data.cursor.row, data.cursor.column);
+                         that.editor.clearSelection();
+                     });
+                 },
+                 closeFile: function(key) {
+                     if (this.openedContentRef) {
+                         this.openedContentRef.off();
+                         this.openedContentRef = null;
+                     }
+//                     this.selectedFileKey = null;
+                 },
+                 newFile: function() {
+                     var that = this;
+                     var title = prompt('제목을 입력해 주세요.');
+                     if (title == null) {
+                         return;
+                     }
+                     title = title.trim();
+                     if (title.length > 0) {
+                         var newKey = this.filesRef.push().key;
+                         var data = {};
+                         data['/' + newKey] = title;
+                         this.filesRef.update(data);
+
+                         data = {};
+                         data['/' + newKey] = {
+                             cursor: {column: 0, row: 0},
+                             content: ''
+                         };
+                         this.contentsRef.update(data).then(function(){
+                             that.getOpenFiles();
+                         });
+                     } else {
+                         alert('파일을 생성할 수 없습니다.');
+                     }
+                 },
+                 getOpenFiles: function() {
+                     var that = this;
+                     this.filesRef.once('value', function(snapshot) {
+                         snapshot.forEach(function(childSnapshot) {
+                             var key = childSnapshot.key;
+                             var title = childSnapshot.val();
+                             that.openFiles.push({key: key, title: title})
+                         });
+                         that.drawOpenFiles();
+                     });
+                 },
+                 drawOpenFiles: function() {
+                     var $ul = $('#files ul.list');
+                     var elems = [];
+                     for (var i = 0; i < this.openFiles.length; i++) {
+                         elems.push($('<li/>').text(this.openFiles[i].title));
+                     }
+                     $ul.append(elems);
+                 }
+
+             }
+             $(function() {
+                 window.app.init();
+             });
+         })();
+        </script>
+    </body>
+</html>
+
