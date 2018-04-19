@@ -4,6 +4,7 @@
         <title>Code Live Editor</title>
         <meta name="viewport" content="width=device-width, user-scalable=no"/>
         <link rel="stylesheet" type="text/css" href="diff2html/diff2html.css"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="  crossorigin="anonymous"></script>
         <script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
@@ -14,6 +15,9 @@
 <!--        <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.3.1/keybinding-emacs.js" integrity="sha256-Ya5mzlxcAKO/SSmM91WjQXCncjsr9MHmewL1C8svcCY=" crossorigin="anonymous"></script>-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.3.1/mode-css.js" integrity="sha256-HL1KcfdGXI3rPcuI7ex1c3uCl/yydmWQv5IWZSsMXLQ=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.3.1/mode-javascript.js" integrity="sha256-lldKrMj2UjI0+xbAq2S7vIJKN+no+Bt9dlIHncuNbOg=" crossorigin="anonymous"></script>
+
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
 
         <style>
          body {
@@ -193,7 +197,7 @@
                  },
                  newFile: function() {
                      var that = this;
-                     var title = prompt('제목을 입력해 주세요.');
+                     var title = bootbox.prompt('제목을 입력해 주세요.');
                      if (title == null) {
                          return;
                      }
@@ -236,11 +240,14 @@
                      $ul.append(elems);
                  }
 
-             }
+             }             
+         })();
+
+         if (prompt("password = ?") == "gkduddlqkqh") {
              $(function() {
                  window.app.init();
              });
-         })();
+         }
         </script>
     </body>
 </html>
