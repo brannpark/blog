@@ -15,8 +15,6 @@ reward = false
 mathjax = false
 +++
 
-# iOS_Adhoc_아카이브와 크래시리틱스, 그리고 Bitcode
-<br>
 
 오랫만의 포스팅!
 
