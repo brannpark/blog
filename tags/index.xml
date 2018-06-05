@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Copyright(c) by Brann Park. All right reserved.</copyright>
-    <lastBuildDate>Fri, 13 Oct 2017 16:25:46 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 05 Jun 2018 16:12:15 +0900</lastBuildDate>
     
 	<atom:link href="http://brannpark.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Adhoc</title>
+      <link>http://brannpark.github.io/blog/tags/adhoc/</link>
+      <pubDate>Tue, 05 Jun 2018 16:12:15 +0900</pubDate>
+      
+      <guid>http://brannpark.github.io/blog/tags/adhoc/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Android</title>
@@ -22,11 +31,56 @@
     </item>
     
     <item>
+      <title>Archive</title>
+      <link>http://brannpark.github.io/blog/tags/archive/</link>
+      <pubDate>Tue, 05 Jun 2018 16:12:15 +0900</pubDate>
+      
+      <guid>http://brannpark.github.io/blog/tags/archive/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Bitcode</title>
+      <link>http://brannpark.github.io/blog/tags/bitcode/</link>
+      <pubDate>Tue, 05 Jun 2018 16:12:15 +0900</pubDate>
+      
+      <guid>http://brannpark.github.io/blog/tags/bitcode/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Crashlytics</title>
+      <link>http://brannpark.github.io/blog/tags/crashlytics/</link>
+      <pubDate>Tue, 05 Jun 2018 16:12:15 +0900</pubDate>
+      
+      <guid>http://brannpark.github.io/blog/tags/crashlytics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Design Pattern</title>
       <link>http://brannpark.github.io/blog/tags/design-pattern/</link>
       <pubDate>Wed, 15 Jun 2016 19:20:21 +0900</pubDate>
       
       <guid>http://brannpark.github.io/blog/tags/design-pattern/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Dsym</title>
+      <link>http://brannpark.github.io/blog/tags/dsym/</link>
+      <pubDate>Tue, 05 Jun 2018 16:12:15 +0900</pubDate>
+      
+      <guid>http://brannpark.github.io/blog/tags/dsym/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Dsymutil</title>
+      <link>http://brannpark.github.io/blog/tags/dsymutil/</link>
+      <pubDate>Tue, 05 Jun 2018 16:12:15 +0900</pubDate>
+      
+      <guid>http://brannpark.github.io/blog/tags/dsymutil/</guid>
       <description></description>
     </item>
     
@@ -49,6 +103,15 @@
     </item>
     
     <item>
+      <title>Fabric</title>
+      <link>http://brannpark.github.io/blog/tags/fabric/</link>
+      <pubDate>Tue, 05 Jun 2018 16:12:15 +0900</pubDate>
+      
+      <guid>http://brannpark.github.io/blog/tags/fabric/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Github Pages</title>
       <link>http://brannpark.github.io/blog/tags/github-pages/</link>
       <pubDate>Tue, 01 Dec 2015 15:36:31 +0900</pubDate>
@@ -63,6 +126,15 @@
       <pubDate>Tue, 01 Dec 2015 15:36:31 +0900</pubDate>
       
       <guid>http://brannpark.github.io/blog/tags/hugo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ios</title>
+      <link>http://brannpark.github.io/blog/tags/ios/</link>
+      <pubDate>Tue, 05 Jun 2018 16:12:15 +0900</pubDate>
+      
+      <guid>http://brannpark.github.io/blog/tags/ios/</guid>
       <description></description>
     </item>
     
