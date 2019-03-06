@@ -1,5 +1,5 @@
 +++
-title = "20190306_rxswift_retain_self"
+title = "RxSwift retain self"
 date = 2019-03-06T13:35:23+09:00
 lastmod = 2019-03-06T13:35:23+09:00
 draft = false
