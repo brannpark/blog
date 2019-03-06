@@ -52,7 +52,7 @@
 <meta property="og:description" content="Knowledge and thoughts on development." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://brannpark.github.io/blog/" />
-<meta property="og:updated_time" content="2018-06-15T15:10:28&#43;09:00"/>
+<meta property="og:updated_time" content="2019-03-06T13:35:23&#43;09:00"/>
 
 <meta itemprop="name" content="개발지식저장소">
 <meta itemprop="description" content="Knowledge and thoughts on development.">
@@ -126,6 +126,31 @@
     
       <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/blog/post/20190306_rxswift_retain_self/">20190306_rxswift_retain_self</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-03-06 </span>
+      <div class="post-category">
+          
+            <a href="/blog/categories/development/"> Development </a>
+          
+        </div>
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      RxSwift 를 사용하면서 self retain 에 대해 몇가지 정리해보고자 한다. RxSwift 다음과 같은 코드를 살펴보자. class TestViewController : UIViewController { private let disposeBag = DisposeBag() func viewDidLoad() { super.viewDidLoad() Observable.just(0) .delay(5, scheduler: MainScheduler.asyncInstance) .subscribe(onNext: { value in self.test(value) }, onDisposed: { self.test() }) .disposed(by: disposeBag) } func
+    </div>
+    <div class="read-more">
+      <a href="/blog/post/20190306_rxswift_retain_self/" class="read-more-link">Read more..</a>
+    </div>
+  </div>
+</article>
+
+    
+      <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/blog/post/20180615_ios10plus_notification/">iOS10&#43; 노티피케이션 정리</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2018-06-15 </span>
@@ -190,7 +215,7 @@
   
   <div class="post-content">
     <div class="post-summary">
-      안드로이드 앱이 실행이 될때, 세가지의 다른 실행 상태가 존재한다. Cold start (차가운 시작) Warm start (따듯한 시작) Lukewarm Start (미지근한 시작) 앱 실행 성능을 개선하기 위해서
+      안드로이드 앱이 실행이 될때, 세가지의 다른 실행 상태가 존재한다. Cold start (차가운 시작) Hot start (따듯한 시작) Warm Start (미지근한 시작) 앱 실행 성능을 개선하기 위해서
     </div>
     <div class="read-more">
       <a href="/blog/post/20171031_android_launch_process/" class="read-more-link">Read more..</a>
@@ -219,31 +244,6 @@
     </div>
     <div class="read-more">
       <a href="/blog/post/20170719_share_clipboard_buffer_share_with_macosx_and_emacs/" class="read-more-link">Read more..</a>
-    </div>
-  </div>
-</article>
-
-    
-      <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/blog/post/20161011_xcode_emacs_keybinding/">Emacs Keybinding for Mac osx</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2016-10-11 </span>
-      <div class="post-category">
-          
-            <a href="/blog/categories/development/"> Development </a>
-          
-        </div>
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      시작은.. Xcode 에 Emacs keybinding 적용해보기! Xcode 는 기본적으로 Emacs 키바인딩을 지원하지 않는다. Option 메타키를 사용하는것을 쉽사리 허용하지 않는데.. 이리저리 찾아보고 하다가
-    </div>
-    <div class="read-more">
-      <a href="/blog/post/20161011_xcode_emacs_keybinding/" class="read-more-link">Read more..</a>
     </div>
   </div>
 </article>
@@ -289,7 +289,7 @@
     &copy; 
     
       2016 - 
-    2018
+    2019
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

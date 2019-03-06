@@ -18,7 +18,7 @@
       <pubDate>Fri, 13 Oct 2017 16:25:46 +0900</pubDate>
       
       <guid>http://brannpark.github.io/blog/post/20171031_android_launch_process/</guid>
-      <description>안드로이드 앱이 실행이 될때, 세가지의 다른 실행 상태가 존재한다. Cold start (차가운 시작) Warm start (따듯한 시작) Lukewarm Start (미지근한 시작) 앱 실행 성능을 개선하기 위해서</description>
+      <description>안드로이드 앱이 실행이 될때, 세가지의 다른 실행 상태가 존재한다. Cold start (차가운 시작) Hot start (따듯한 시작) Warm Start (미지근한 시작) 앱 실행 성능을 개선하기 위해서</description>
     </item>
     
   </channel>

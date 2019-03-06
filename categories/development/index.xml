@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Copyright(c) by Brann Park. All right reserved.</copyright>
-    <lastBuildDate>Fri, 15 Jun 2018 15:10:28 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 06 Mar 2019 13:35:23 +0900</lastBuildDate>
     
 	<atom:link href="http://brannpark.github.io/blog/categories/development/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>20190306_rxswift_retain_self</title>
+      <link>http://brannpark.github.io/blog/post/20190306_rxswift_retain_self/</link>
+      <pubDate>Wed, 06 Mar 2019 13:35:23 +0900</pubDate>
+      
+      <guid>http://brannpark.github.io/blog/post/20190306_rxswift_retain_self/</guid>
+      <description>RxSwift 를 사용하면서 self retain 에 대해 몇가지 정리해보고자 한다. RxSwift 다음과 같은 코드를 살펴보자. class TestViewController : UIViewController { private let disposeBag = DisposeBag() func viewDidLoad() { super.viewDidLoad() Observable.just(0) .delay(5, scheduler: MainScheduler.asyncInstance) .subscribe(onNext: { value in self.test(value) }, onDisposed: { self.test() }) .disposed(by: disposeBag) } func</description>
+    </item>
     
     <item>
       <title>iOS10&#43; 노티피케이션 정리</title>
@@ -36,7 +45,7 @@
       <pubDate>Fri, 13 Oct 2017 16:25:46 +0900</pubDate>
       
       <guid>http://brannpark.github.io/blog/post/20171031_android_launch_process/</guid>
-      <description>안드로이드 앱이 실행이 될때, 세가지의 다른 실행 상태가 존재한다. Cold start (차가운 시작) Warm start (따듯한 시작) Lukewarm Start (미지근한 시작) 앱 실행 성능을 개선하기 위해서</description>
+      <description>안드로이드 앱이 실행이 될때, 세가지의 다른 실행 상태가 존재한다. Cold start (차가운 시작) Hot start (따듯한 시작) Warm Start (미지근한 시작) 앱 실행 성능을 개선하기 위해서</description>
     </item>
     
     <item>
