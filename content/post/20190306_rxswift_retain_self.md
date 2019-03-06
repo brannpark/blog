@@ -15,7 +15,7 @@ reward = false
 mathjax = false
 +++
 
-RxSwift 를 사용하면서 self retain 에 대해 몇가지 정리해보고자 한다.
+RxSwift 의 클로저에서의 self retain 에 대해 정리해보고자 한다.
 
 # RxSwift
 
