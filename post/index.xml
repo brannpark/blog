@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Copyright(c) by Brann Park. All right reserved.</copyright>
-    <lastBuildDate>Wed, 06 Mar 2019 13:35:23 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 22 Mar 2019 10:31:57 +0900</lastBuildDate>
     
 	<atom:link href="http://brannpark.github.io/blog/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>20190322_swift_ios_interview_qna</title>
+      <link>http://brannpark.github.io/blog/post/20190322_swift_ios_interview_qna/</link>
+      <pubDate>Fri, 22 Mar 2019 10:31:57 +0900</pubDate>
+      
+      <guid>http://brannpark.github.io/blog/post/20190322_swift_ios_interview_qna/</guid>
+      <description>Swift &amp;amp; iOS Interview QnA ARC(Automatic Reference Counting)는 어느 시점에 작동하나요? 컴파일 시점에 동작. 코드를 빌드(컴파일) 할때 특정 객체의 레퍼런스 카운트를 추적하여 0 가 되는</description>
+    </item>
     
     <item>
       <title>RxSwift retain self</title>

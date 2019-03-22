@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>20190322_swift_ios_interview_qna - 개발지식저장소</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Brann Park" />
+  <meta name="description" content="Swift &amp;amp; iOS Interview QnA ARC(Automatic Reference Counting)는 어느 시점에 작동하나요? 컴파일 시점에 동작. 코드를 빌드(컴파일) 할때 특정 객체의 레퍼런스 카운트를 추적하여 0 가 되는" />
+
+  <meta name="keywords" content="software, developer, life" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.49.2" />
+
+
+<link rel="canonical" href="http://brannpark.github.io/blog/post/20190322_swift_ios_interview_qna/" />
+
+<link rel="apple-touch-icon" sizes="180x180" href="/blog/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/blog/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/blog/favicon-16x16.png">
+<link rel="icon" href="/blog/favicon.ico" />
+<link rel="manifest" href="/blog/manifest.json">
+<link rel="mask-icon" href="/blog/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+<link href="/blog/dist/even.min.css?v=2.7.2" rel="stylesheet">
+<link href="/blog/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+<meta property="og:title" content="20190322_swift_ios_interview_qna" />
+<meta property="og:description" content="Swift &amp; iOS Interview QnA ARC(Automatic Reference Counting)는 어느 시점에 작동하나요? 컴파일 시점에 동작. 코드를 빌드(컴파일) 할때 특정 객체의 레퍼런스 카운트를 추적하여 0 가 되는" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://brannpark.github.io/blog/post/20190322_swift_ios_interview_qna/" /><meta property="article:published_time" content="2019-03-22T10:31:57&#43;09:00"/>
+<meta property="article:modified_time" content="2019-03-22T10:31:57&#43;09:00"/>
+
+<meta itemprop="name" content="20190322_swift_ios_interview_qna">
+<meta itemprop="description" content="Swift &amp; iOS Interview QnA ARC(Automatic Reference Counting)는 어느 시점에 작동하나요? 컴파일 시점에 동작. 코드를 빌드(컴파일) 할때 특정 객체의 레퍼런스 카운트를 추적하여 0 가 되는">
+
+
+<meta itemprop="datePublished" content="2019-03-22T10:31:57&#43;09:00" />
+<meta itemprop="dateModified" content="2019-03-22T10:31:57&#43;09:00" />
+<meta itemprop="wordCount" content="3689">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="20190322_swift_ios_interview_qna"/>
+<meta name="twitter:description" content="Swift &amp; iOS Interview QnA ARC(Automatic Reference Counting)는 어느 시점에 작동하나요? 컴파일 시점에 동작. 코드를 빌드(컴파일) 할때 특정 객체의 레퍼런스 카운트를 추적하여 0 가 되는"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/blog/" class="logo">D-veloper</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/blog/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/blog/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/blog/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/blog/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/blog/" class="logo">D-veloper</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/blog/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/blog/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/blog/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/blog/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">20190322_swift_ios_interview_qna</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-03-22 </span>
+        <div class="post-category">
+            
+              <a href="/blog/categories/development/"> Development </a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    
+    <div class="post-content">
+      
+
+<h1 id="swift-ios-interview-qna">Swift &amp; iOS Interview QnA</h1>
+
+<h2 id="arc-automatic-reference-counting-는-어느-시점에-작동하나요">ARC(Automatic Reference Counting)는 어느 시점에 작동하나요?</h2>
+
+<p>컴파일 시점에 동작. 코드를 빌드(컴파일) 할때 특정 객체의 레퍼런스 카운트를 추적하여 0 가 되는 시점에 자동으로 release 코드를 넣어주는것을 말한다.</p>
+
+<h2 id="strong-weak-unowned-키워드를-어떤-상황에서-사용하고-차이는-무엇인가요">strong, weak, unowned 키워드를 어떤 상황에서 사용하고, 차이는 무엇인가요?</h2>
+
+<p><em>strong</em>
+이 키워드로 선언된 (정확히는 weak 이나 unowned 로 선언되지 않은) 레퍼런스 객체는 할당되는 순간 해당 객체의 레퍼런스 카운트를 증가시킨다.</p>
+
+<p>레퍼런스 카운트를 증가시켜 ARC 로 인한 메모리해제를 피하고 객체를 안전하게 사용하고자 할 때 쓰인다.</p>
+
+<p>예를 들자면, 어떤 A 라는 메서드에서 a 라는 레퍼런스 객체를 생성하고, 이를 비동기 실행 클로저에  파라미터로 전달한다면,</p>
+
+<p>라는 메서드의 호출이 끝나는 순간, 해당 레퍼런스 객체의 레퍼런스 카운트는 1 감소하게 되는데, 클로저에 strong 타입으로 전달된 경우는 레퍼런스 카운트가 +2 이기 때문에 최종 +1 상태가 되어 메모리 해제되지 않는다.</p>
+
+<p>따라서 해당 클로저에서 안전하게 해당 객체에 엑세스하여 커뮤니케이션이 가능하게 된다.</p>
+
+<p>또는 다른 Class 나 Struct 의 프로퍼티에 어떤 레퍼런스 객체가 할당 될 때, strong 타입으로 지정하게 되면, 레퍼런스 카운트가 +2 가 되며,</p>
+
+<p>따 라서 본래 생성되었던 곳에서 레퍼런스 카운트가 1 감소하더라도, 전달받은 곳에서는 안전하게 사용이 가능하다.</p>
+
+<pre><code class="language-swift">class A : CustomStringConvertible {
+	var description: String {
+		return &quot;Class A&quot;
+	}	
+
+}
+
+func someMethod() {
+	let a = A()
+	DispatchQueue.main.async {
+		print(a) // &lt;- referenced by strongly
+	}
+}
+</code></pre>
+
+<p><em>weak</em></p>
+
+<p>객체가 할당될 때 레퍼런스 카운트를 증가시키지 않는다. 이 키워드는 Optional 타입에만 적용이 된다. 객체가 ARC 에 의해 메모리해제되면 nil 값이 할당된다.</p>
+
+<p>대표적으로 retain cycle 에 의해 메모리가 누수되는 문제를 막기 위해 사용되며, iOS 프레임워크에서 이의 대표적인 예로는 Delegate 패턴이 있다.</p>
+
+<p><em>unowned</em></p>
+
+<p>마찬가지로 객체가 할당될 때 레퍼런스 카운트를 증가시키지 않는다.</p>
+
+<p>그러나 Non-Optional 타입으로 선언되어야 하며, 객체가 ARC 에 의해 메모리해제되더라도,</p>
+
+<p>해당 객체 값을 존재하는 것으로 인지하며, 해당객체에 액세스 할 경우 런타임 오류를 발생시킨다.</p>
+
+<p>객체의 라이프사이클이 명확하고 개발자에 의해 제어가 가능이 명확한 경우, weak Optional 타입 대신 사용하여 좀더 간결한 코딩이 가능하다.</p>
+
+<h2 id="객체-간-순환참조를-발견하는-방법과-해결-방법은">객체 간 순환참조를 발견하는 방법과 해결 방법은?</h2>
+
+<ul>
+<li>Xcode Memory Graph 이용해서 Live Object 들을 확인하고, Leak 된 Object 를 체크.</li>
+<li>Instrument 의 Leak 도구를 이용하여 체크.</li>
+<li>deinit 을 활용하여 로깅코드를 통해 체크.
+<br /></li>
+</ul>
+
+<h2 id="escaping-closure의-개념이-무엇인가요">Escaping Closure의 개념이 무엇인가요?</h2>
+
+<p>메서드 파라미터로 전달받은 closure 를 메서드의 라이프사이클 내에서 실행하여 끝내지 않고, 메서드 scope 의 외부에 전달하려 할 때는 해당 closure 를 escaping 해야한다.</p>
+
+<p>해당 메서드의 호출이 끝난 이후에도 closure 는 메모리 어딘가에 저장되어야 하며, 이는 closure 안에서 사용된 outer object (<code>self</code> 와 같은) 에 weak 와 같은 레퍼런스타입을 사용해야할 수 있음을 주의하도록 한다.</p>
+
+<p>escaping 이 명시되어있지 않으면 기본적으로 non-escaping 이며, 이는 메서드의 실행이 끝나기 전에 closure 의 사용이 모두 완료됨을 보장하며,</p>
+
+<p>따라서 closure 내에서 weak 을 굳이 사용하지 않아도 안전할 수 있음을 의미하기도 한다.</p>
+
+<h2 id="타입-캐스팅을-할-때-사용하는-키워드인-as-as-as-이-셋의-차이는-무엇인가요">타입 캐스팅을 할 때 사용하는 키워드인 as, as?, as! 이 셋의 차이는 무엇인가요?</h2>
+
+<p><em>as</em></p>
+
+<p>컴파일러가 타입 변환의 성공을 보장. 컴파일타임에 가능/불가능 여부를 알 수 있음</p>
+
+<p><em>as?</em></p>
+
+<p>타입변환에 실패하는 경우 nil 을 리턴. 컴파일타임에 가능/불가능 여부를 알 수 없음</p>
+
+<p><em>as!</em></p>
+
+<p>타입변환에 실패하는 경우 실행시간(Runtime) 오류를 발생시킴. 컴파일타임에 가능/불가능 여부를 알 수 없음</p>
+
+<blockquote>
+<p>p.s - Xcode 와 같은 IDE 에서는 코드 정적검사를 통해 as, as?, as! 모두에 대해 warning 을 준다.</p>
+</blockquote>
+
+<h2 id="swift에서-class와-struct의-차이는-무엇인가요">Swift에서 Class와 Struct의 차이는 무엇인가요?</h2>
+
+<p><em>Class</em> - Reference type</p>
+
+<ul>
+<li>객체화 시 힙 메모리영역에 저장되며 ARC 로 객체의 메모리해제가 관리된다.</li>
+<li>대입 연산 시 레퍼런스가 복사되어 할당됨. (공유 가능)</li>
+<li>멀티스레딩 시 적절한 Lock 활용이 필요.</li>
+<li>상속 가능.
+<br /></li>
+</ul>
+
+<p><em>Struct</em> - Value type</p>
+
+<ul>
+<li>대입 연산 시 값 자체가 복제되어 할당됨(공유가 불가능).</li>
+<li>불변성(Immutable) 구현에 유리.</li>
+<li>멀티스레딩에 안전함.</li>
+<li>상속이 불가능. (protocol 은 사용 가능)
+<br /></li>
+</ul>
+
+<h2 id="frame-과-bounds-의-차이는-무엇인가요">Frame 과 Bounds 의 차이는 무엇인가요?</h2>
+
+<p><em>Frame</em></p>
+
+<p>SuperView(상위뷰) 좌표시스템 내에서의 view 의  위치(origin) 과 크기(size)</p>
+
+<p><em>Bounds</em></p>
+
+<p>view 자기 자신의 좌표시스템에서의 위치와 크기. 부모부와의 위치관계와는 아무런 관계가 없다.</p>
+
+<p>자기 자신의 좌표시스템을 가리키기 때문에 기본적으로 origin 은 x:0, y:0 을 가리킨다.</p>
+
+<p>bounds 의 origin 을 변경한다는 것은 곧, subview 들이 화면상에서 drawing 되는 위치가 변경됨을 의미한다</p>
+
+<p>이게 subview 들의 frame 값을 변화시키는게 아니다. 부모뷰 좌표축이 변하면서 subview 가 그려져야하는 위치가 달라졌기 떄문이다.</p>
+
+<p>ScrollView/TabeView 등을 스크롤 할때, scrollView.bounds 가 변하고, 그리하여 subview 들의 그려지는 위치가 달라지는 것이 대표적인 예 이다. (subview 들의 frame 이 달라지는게 아님!)</p>
+
+<h2 id="uiviewcontroller클래스내-프로퍼티인toplayoutguide와-bottomlayoutguide가-ios11에서-deprecate된-이유와-이를-대체하기위해-어떤것이-생겼을까요">UIViewController클래스내 프로퍼티인TopLayoutGuide와 BottomLayoutGuide가 iOS11에서 deprecate된 이유와 이를 대체하기위해 어떤것이 생겼을까요?</h2>
+
+<p><em>SafeAreaLayoutGuide</em></p>
+
+<p>기존 Top, Bottom 레이아웃 가이드와는 다르게, 안전한 컨텐츠 영역의 개념으로 등장했다.</p>
+
+<p>기존이 상단, 하단, 두개의 사각 영역으로 되어있는 가이드영역이었다면,</p>
+
+<p>SafeAreaLayoutGuide 의 영역은 하나의 사각 영역으로 되어있다.</p>
+
+<h2 id="uistackview의-장점은-무엇이라고-생각하시나요">UIStackView의 장점은 무엇이라고 생각하시나요?</h2>
+
+<p>여러 뷰를 가로방향 또는 세로방향으로 배치할 때, 복잡한 컨스트레인트 설정 없이, 또는 컨스트레인트 만으로 설정하기 어려운 뷰의 배치등을 구현할 때 쓰일 수 있는 뷰.</p>
+
+<p>aggangedSubview 로 하위뷰들이 관리되며, 이 하위뷰들에 Axis(가로 세로 방향), Alignment(세로방향 정렬), Distribution(가로방향 정렬), Spacing(하위뷰들간의 간격) 의 규칙을 적용할 수 있다.</p>
+
+<h2 id="autolayout-constraint의-priority의-개념이-무엇이고-어떤상황에-사용하나요">Autolayout Constraint의 Priority의 개념이 무엇이고, 어떤상황에 사용하나요?</h2>
+
+<p>말그대로 제약들간의 우선순위를 말한다.</p>
+
+<p>다수의 뷰들에 여러제약이 걸려있을 때, 보통은 제약간의 충돌이 일어나지 않게끔 제약들을 설계하는게 일반적이지만,</p>
+
+<p>상황에 따라서는 뷰들의 크기가 유동적으로 변하는 경우가 있는데, 이럴때 어떤 제약들이 서로간에 충돌이 일어나는 경우가 있을 수 있다.</p>
+
+<p>이럴때에는 어떤 제약의 우선순위를 더 우위에 둘것이냐를 결정함으로써 이러한 충돌을 해결할 수 있다.</p>
+
+<h2 id="content-hugging-priority의-개념이-무엇이고-어떤상황에-사용하나요">Content Hugging Priority의 개념이 무엇이고, 어떤상황에 사용하나요?</h2>
+
+<p>UI Framework 에서 제공되는 일부 뷰에는 컨테츠 고유의 사이즈(Contrisic content size)라는 개념이 있다.</p>
+
+<p>예를 들자면, UILabel, UIButton 들과 같이 뷰의 속성(텍스트 / 이미지) 에 따라 크기가 결정되는 (특정한 너비/높이 사이즈의 제약을 걸지 않은 한) 뷰들이 있겠다.</p>
+
+<p>이러한 뷰들은 다른 뷰들간에 걸린 제약에 의해, 본래의 컨텐츠 고유 사이즈보다 더 늘어나거나 줄어들게 될 수 있다.</p>
+
+<p>이때 더 늘어나게 되는 것에 대해 저항하는 제약을 Content Hugging 이라 하고,</p>
+
+<p>더 줄어들게 되는 것에 대해 저항하는 제약을 Content Compression Resistance 라고 한다.</p>
+
+<p>이 고유 컨텐츠 사이즈의 변경에 대한 제약에도 우선순위(Priority) 가 있는데, 이는 Autolayout constraint priority 보다는 우선순위가 낮다.</p>
+
+<p>다시 말해서, 우선순위가 서로 같은 값을 가진다고 하면, 오토레이아웃 제약의 우선순위가 적용이 된다는 얘기다.</p>
+
+<p>이 중, Content Hugging 에 대해 간략히 설명해 보자면, 예를 들어, 부모뷰의 너비/높이가 100x100 이라고 하고,</p>
+
+<p>그 안에 UILabel 을 하나 두되, 이 레이블에는 너비 높이 제약을 주지 않고, 다만 leading, tailing, top, bottom 의 제약을 주어, 각각의 제약들에 10의 값을 지정한다고 하자.</p>
+
+<p>그렇다면 해당 레이블의 크기는 80x80 이 되도록 제약에 의해 결정되어진다고 볼 수 있다.</p>
+
+<p>그러나 이는 항상 맞는 얘기가 아니다.</p>
+
+<p>예를 들어,  레이블의 leading, tailing, top, bottom 제약의 우선순위를 250 으로 주고, ContentHugging priority 를 750 으로 준다면,</p>
+
+<p>우선순위에 따라 레이블의 크기는 레이블 컨텐츠 고유의 크기로 결정이 되고, 따라서 네 방향의 제약은 모두 충돌이 나게 된다.</p>
+
+<p>실제로 사용될 수 있는 예를 하나 들어보자면,</p>
+
+<p>높이 제약이 설정되어있지 않은 어떤 뷰의 하위에, 세로방향으로 2개의 레이블을 배치하고, 서브뷰 끼리의 vertical spacing 제약, 각각의 뷰들과 부모뷰와의 top, bottom 제약을 걸어 chaining 형태의 제약을 걸었다고 생각해보자.</p>
+
+<p>그러면, 부모뷰의 높이는 자식뷰(두개의 레이블)의 높이(intrinsic content size) 와 뷰들 간의 간격, 부모뷰와의 간격값의 합으로 결정이 된다.(AutoLayout)</p>
+
+<p>이러한 경우, 부모뷰의 높이값을 어떤 특정한 값으로 지정해 더 커지도록 하게 되면, 자식뷰(레이블)들의 높이또한 변경되어야 하는데, (상하 간격 제약을 위반하지 않기 위해서)</p>
+
+<p>이때 상단의 레이블의 크기는 고정시키고, 하단의 레이블의 높이만을 변경되게 하고 싶다면,</p>
+
+<p>해당 레이블의 ContentHugging priority 값을 다른 레이블의 priority 보다 낮게 지정함으로써 원하는 레이아웃을 이룰 수 있게 된다.</p>
+
+<p>물론 이때, 모든 레이블의 ContentHugging priority 는 자식 뷰와(그리고 자식 뷰들 사이의 간격) 부모 뷰 사이에 설정된 상하 간격 제약들의 priority 보다 같거나 작아야 한다.</p>
+
+<h2 id="uicollectionviewlayout클래스에-prepare-메소드는-어떤-역할을-하나요">UICollectionViewLayout클래스에 prepare 메소드는 어떤 역할을 하나요?</h2>
+
+<p>레이아웃관련 연산이 일어날 때마다 가장 먼저 호출된다. 이 메소드에서 셀의 위치/크기 등을 계산하기 위한 사전처리를 할 수 있다.</p>
+
+<p>UICollectionViewLayout 를 상속받아 Custom 한 CollectionView Layout 을 구성하고자 할때, 데이터소스를 참조하여 셀의 위치 및 크기를 미리 계산하여 캐싱해두고,</p>
+
+<p>CollectionView 로부터 셀의 위치 및 크기 요청이 들어올때, 미리 계산하여 캐싱해둔 데이터를 전달해주는 방식으로 커스텀 레이아웃을 구성하는 방식이 있겠다.</p>
+
+<h2 id="uitableview를-구성할때-셀의-컨텐츠에-따라-높이를-설정하고싶다면-어떻게-해야하나요">UITableView를 구성할때 셀의 컨텐츠에 따라 높이를 설정하고싶다면 어떻게 해야하나요?</h2>
+
+<p>델리게이트 메서드 rowHeight 에서는 UITableView.automaticDimension 값을 리턴하고 ,estimatedRowHeight 에서는  셀의 예측 높이값을 리턴한다.</p>
+
+<p>이렇게 하면 오토레이아웃 테이블뷰 셀 구현이 가능하다.</p>
+
+<p>마찬가지로 테이블뷰 셀은, 고정 높이가 아닌, 셀 안의 서브뷰들의 제약 구성으로 셀의 크기가 결정될 수 있도록 해야한다.</p>
+
+    </div>
+
+    
+    
+
+    
+    
+
+    <footer class="post-footer">
+      
+
+      
+      <nav class="post-nav">
+        
+        
+          <a class="next" href="/blog/post/20190306_rxswift_retain_self/">
+            <span class="next-text nav-default">RxSwift retain self</span>
+            <span class="prev-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'brannpark';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:brandnew0823@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://facebook.com/dalong10" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="https://www.linkedin.com/in/ji-hoon-park-b39b61102" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://github.com/brannpark" class="iconfont icon-github" title="github"></a>
+  <a href="http://brannpark.github.io/blog/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    
+      2016 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Copyright(c) by Brann Park. All right reserved.</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+<script src="/blog/lib/highlight/highlight.pack.js?v=20171001"></script>
+<script type="text/javascript" src="/blog/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/blog/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/blog/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/blog/dist/even.min.js?v=2.7.2"></script>
+
+
+
+
+</body>
+</html>
