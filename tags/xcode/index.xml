@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Xcode on 개발지식저장소</title>
+    <title>xcode on 개발지식저장소</title>
     <link>http://brannpark.github.io/blog/tags/xcode/</link>
-    <description>Recent content in Xcode on 개발지식저장소</description>
+    <description>Recent content in xcode on 개발지식저장소</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>Copyright(c) by Brann Park. All right reserved.</copyright>
     <lastBuildDate>Tue, 11 Oct 2016 14:52:05 +0900</lastBuildDate>
     
 	<atom:link href="http://brannpark.github.io/blog/tags/xcode/index.xml" rel="self" type="application/rss+xml" />

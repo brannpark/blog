@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Archive on 개발지식저장소</title>
+    <title>archive on 개발지식저장소</title>
     <link>http://brannpark.github.io/blog/tags/archive/</link>
-    <description>Recent content in Archive on 개발지식저장소</description>
+    <description>Recent content in archive on 개발지식저장소</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>Copyright(c) by Brann Park. All right reserved.</copyright>
     <lastBuildDate>Tue, 05 Jun 2018 16:12:15 +0900</lastBuildDate>
     
 	<atom:link href="http://brannpark.github.io/blog/tags/archive/index.xml" rel="self" type="application/rss+xml" />

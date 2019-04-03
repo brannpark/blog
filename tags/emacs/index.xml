@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Emacs on 개발지식저장소</title>
+    <title>emacs on 개발지식저장소</title>
     <link>http://brannpark.github.io/blog/tags/emacs/</link>
-    <description>Recent content in Emacs on 개발지식저장소</description>
+    <description>Recent content in emacs on 개발지식저장소</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>Copyright(c) by Brann Park. All right reserved.</copyright>
     <lastBuildDate>Wed, 19 Jul 2017 14:45:52 +0900</lastBuildDate>
     
 	<atom:link href="http://brannpark.github.io/blog/tags/emacs/index.xml" rel="self" type="application/rss+xml" />

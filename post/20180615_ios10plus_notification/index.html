@@ -16,41 +16,34 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Brann Park" />
-  <meta name="description" content="UserNotifications Framework iOS10 부터는 UserNotifications 라는 새로운 사용자 노티피케이션 프레임워크가 제공된다. 사용자 노티피케이션.. 그렇다면 우리가 컴포넌트간 메시지를 보낼 때 쓰는 NotificationCenter 는 시스템 노" />
-<meta name="keywords" content="ios, notification, swift4" />
+<meta name="author" content="Brann Park" /><meta name="description" content="UserNotifications Framework iOS10 부터는 UserNotifications 라는 새로운 사용자 노티피케이션 프레임워크가 제공된다. 사용자 노티피케이션.. 그렇다면 우리가 컴포넌트간 메시지를 보낼 때 쓰는 NotificationCenter 는 시스템 노" /><meta name="keywords" content="ios, notification, swift4" />
 
 
 
 
 
 
-
-<meta name="generator" content="Hugo 0.49.2" />
+<meta name="generator" content="Hugo 0.54.0 with even 4.0.0" />
 
 
 <link rel="canonical" href="http://brannpark.github.io/blog/post/20180615_ios10plus_notification/" />
-
 <link rel="apple-touch-icon" sizes="180x180" href="/blog/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/blog/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/blog/favicon-16x16.png">
-<link rel="icon" href="/blog/favicon.ico" />
 <link rel="manifest" href="/blog/manifest.json">
 <link rel="mask-icon" href="/blog/safari-pinned-tab.svg" color="#5bbad5">
 
 
+<link href="/blog/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/blog/css/custom.css">
 
-
-
-
-
-<link href="/blog/dist/even.min.css?v=2.7.2" rel="stylesheet">
-<link href="/blog/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 <meta property="og:title" content="iOS10&#43; 노티피케이션 정리" />
 <meta property="og:description" content="UserNotifications Framework iOS10 부터는 UserNotifications 라는 새로운 사용자 노티피케이션 프레임워크가 제공된다. 사용자 노티피케이션.. 그렇다면 우리가 컴포넌트간 메시지를 보낼 때 쓰는 NotificationCenter 는 시스템 노" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://brannpark.github.io/blog/post/20180615_ios10plus_notification/" /><meta property="article:published_time" content="2018-06-15T15:10:28&#43;09:00"/>
+<meta property="og:url" content="http://brannpark.github.io/blog/post/20180615_ios10plus_notification/" />
+<meta property="article:published_time" content="2018-06-15T15:10:28&#43;09:00"/>
 <meta property="article:modified_time" content="2018-06-15T15:10:28&#43;09:00"/>
 
 <meta itemprop="name" content="iOS10&#43; 노티피케이션 정리">
@@ -59,7 +52,7 @@
 
 <meta itemprop="datePublished" content="2018-06-15T15:10:28&#43;09:00" />
 <meta itemprop="dateModified" content="2018-06-15T15:10:28&#43;09:00" />
-<meta itemprop="wordCount" content="2114">
+<meta itemprop="wordCount" content="2141">
 
 
 
@@ -81,7 +74,7 @@
 <body>
   <div id="mobile-navbar" class="mobile-navbar">
   <div class="mobile-header-logo">
-    <a href="/blog/" class="logo">D-veloper</a>
+    <a href="/blog/" class="logo">Even</a>
   </div>
   <div class="mobile-navbar-icon">
     <span></span>
@@ -105,7 +98,7 @@
   <div class="container" id="mobile-panel">
     <header id="header" class="header">
         <div class="logo-wrapper">
-  <a href="/blog/" class="logo">D-veloper</a>
+  <a href="/blog/" class="logo">Even</a>
 </div>
 
 <nav class="site-navbar">
@@ -134,17 +127,11 @@
       <div class="post-meta">
         <span class="post-time"> 2018-06-15 </span>
         <div class="post-category">
-            
-              <a href="/blog/categories/development/"> Development </a>
-            
-          </div>
-        
+            <a href="/blog/categories/development/"> Development </a>
+            </div>
         
       </div>
     </header>
-
-    
-    
 
     
     <div class="post-content">
@@ -157,12 +144,18 @@
 <p>사용자 노티피케이션.. 그렇다면 우리가 컴포넌트간 메시지를 보낼 때 쓰는 NotificationCenter 는 시스템 노티피케이션이(사용자에게 보여지는 UI가 없는 알림이니?)라고 하면 될까..? 아무튼..</p>
 
 <p>UNUserNotificationCenterDelegate 프로토콜에는 다음과 같은 메서드들이 제공된다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kr">optional</span> <span class="kd">func</span> <span class="nf">userNotificationCenter</span><span class="p">(</span><span class="kc">_</span> <span class="n">center</span><span class="p">:</span> <span class="n">UNUserNotificationCenter</span><span class="p">,</span> <span class="n">willPresent</span> <span class="n">notification</span><span class="p">:</span> <span class="n">UNNotification</span><span class="p">,</span> <span class="n">withCompletionHandler</span> <span class="n">completionHandler</span><span class="p">:</span> <span class="p">@</span><span class="n">escaping</span> <span class="p">(</span><span class="n">UNNotificationPresentationOptions</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Void</span><span class="p">)</span>
 
-<pre><code class="language-swift">optional func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -&gt; Void)
-
-optional func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -&gt; Void)
-</code></pre>
-
+<span class="kr">optional</span> <span class="kd">func</span> <span class="nf">userNotificationCenter</span><span class="p">(</span><span class="kc">_</span> <span class="n">center</span><span class="p">:</span> <span class="n">UNUserNotificationCenter</span><span class="p">,</span> <span class="n">didReceive</span> <span class="n">response</span><span class="p">:</span> <span class="n">UNNotificationResponse</span><span class="p">,</span> <span class="n">withCompletionHandler</span> <span class="n">completionHandler</span><span class="p">:</span> <span class="p">@</span><span class="n">escaping</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="nb">Void</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
 <p><code>UNUserNotificationCenter.current()</code> 객체의 <code>delegate</code> 프로퍼티를 사용하여 위 프로토콜의 구현체를 지정할 수 있다.</p>
 
 <p>노티피케이션을 받기 위해서는 당연히 우선적으로 노티피케이션을 받을 수 있는 권한을 사용자로부터 받아야 한다.</p>
@@ -186,10 +179,14 @@ optional func userNotificationCenter(_ center: UNUserNotificationCenter, didRece
 <h4 id="a">A.</h4>
 
 <p><strong>1) 앱이 포그라운드 상태에 있다면,</strong></p>
-
-<pre><code class="language-swift">func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -&gt; Void)
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">func</span> <span class="nf">userNotificationCenter</span><span class="p">(</span><span class="kc">_</span> <span class="n">center</span><span class="p">:</span> <span class="n">UNUserNotificationCenter</span><span class="p">,</span> <span class="n">willPresent</span> <span class="n">notification</span><span class="p">:</span> <span class="n">UNNotification</span><span class="p">,</span> <span class="n">withCompletionHandler</span> <span class="n">completionHandler</span><span class="p">:</span> <span class="p">@</span><span class="n">escaping</span> <span class="p">(</span><span class="n">UNNotificationPresentationOptions</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Void</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
 <p>메서드가 호출된다. completionHandler 를 호출하여 노티피케이션이 보이거나 보이지 않게 컨트롤 가능하다.</p>
 
 <p><strong>2) 앱이 백그라운드(프로세스가 생성되어 있지만 백그라운드 상태, 또는 프로세스가 종료된 상태)에 있다면,</strong></p>
@@ -201,10 +198,14 @@ optional func userNotificationCenter(_ center: UNUserNotificationCenter, didRece
 <p>아무런 메서드도 호출되지 않는다.</p>
 
 <p>1,2,3 모두의 경우에 대해, 사용자가 알림센터에서 노티피케이션을 탭하게 되면,</p>
-
-<pre><code class="language-swift">func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -&gt; Void)
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">func</span> <span class="nf">userNotificationCenter</span><span class="p">(</span><span class="kc">_</span> <span class="n">center</span><span class="p">:</span> <span class="n">UNUserNotificationCenter</span><span class="p">,</span> <span class="n">didReceive</span> <span class="n">response</span><span class="p">:</span> <span class="n">UNNotificationResponse</span><span class="p">,</span> <span class="n">withCompletionHandler</span> <span class="n">completionHandler</span><span class="p">:</span> <span class="p">@</span><span class="n">escaping</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="nb">Void</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
 <p>메서드가 호출된다.</p>
 
 <p>####B. content-available == 1</p>
@@ -215,51 +216,85 @@ optional func userNotificationCenter(_ center: UNUserNotificationCenter, didRece
 <li>XCode iOS 프로젝트 타겟에서 Capabilities 항목내의 BackgroundModes 를 ON 으로 활성화. Remote Notifications 항목을 체크.</li>
 <li>APNS 로 푸시 패킷을 만들어 보낼 때 apn 항목 안에 content-available 이라는 키를 1 이라는 값으로 추가해준다.</li>
 </ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+                <span class="nt">&#34;aps&#34;</span><span class="p">:</span> <span class="p">{</span>
+                                <span class="nt">&#34;content-available&#34;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                                <span class="err">...</span>
+                <span class="p">},</span>
+                <span class="err">...</span>
 
-<pre><code class="language-json">{
-                &quot;aps&quot;: {
-                                &quot;content-available&quot;:1,
-                                ...
-                },
-                ...
-
-}
-</code></pre>
-
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 <p><a href="https://medium.com/@m.imadali10/ios-silent-push-notifications-84009d57794c">자세한 설정 참고</a></p>
 
 <p><strong>1) 앱이 포그라운드 상태에 있다면,</strong></p>
-
-<pre><code class="language-swift">func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -&gt; Void)
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">func</span> <span class="nf">userNotificationCenter</span><span class="p">(</span><span class="kc">_</span> <span class="n">center</span><span class="p">:</span> <span class="n">UNUserNotificationCenter</span><span class="p">,</span> <span class="n">willPresent</span> <span class="n">notification</span><span class="p">:</span> <span class="n">UNNotification</span><span class="p">,</span> <span class="n">withCompletionHandler</span> <span class="n">completionHandler</span><span class="p">:</span> <span class="p">@</span><span class="n">escaping</span> <span class="p">(</span><span class="n">UNNotificationPresentationOptions</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Void</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
 <p>위 메서드가 호출된다. completionHandler 를 호출하여 노티피케이션이 보이거나 보이지 않게 컨트롤 가능하다.</p>
 
 <p><strong>2) 앱이 백그라운드(프로세스가 생성되어 있지만 백그라운드 상태, 또는 프로세스가 자동 종료된 상태)에 있다면,</strong></p>
-
-<pre><code class="language-swift">func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -&gt; Void)
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">func</span> <span class="nf">application</span><span class="p">(</span><span class="kc">_</span> <span class="n">application</span><span class="p">:</span> <span class="n">UIApplication</span><span class="p">,</span> <span class="n">didReceiveRemoteNotification</span> <span class="n">userInfo</span><span class="p">:</span> <span class="p">[</span><span class="n">AnyHashable</span> <span class="p">:</span> <span class="nb">Any</span><span class="p">],</span> <span class="n">fetchCompletionHandler</span> <span class="n">completionHandler</span><span class="p">:</span> <span class="p">@</span><span class="n">escaping</span> <span class="p">(</span><span class="n">UIBackgroundFetchResult</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Void</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
 <p>위의 메서드가 실행된다. 메서드 구현 시 무언가 처리를 하고 마지막에 completionHandler 를 적절한 값(UIBackgroundFetchResult)을 인자로 하여 호출해주면 된다.</p>
 
 <p>####C. mutable-content == 1</p>
 
 <p>이 속성은 말 그대로, 푸시알림을 기기가 수신할 때(화면에 보이기 이전에) 푸시노티의 내용을 변경하고, 변경된 내용에 따라 노티피케이션이 화면에 보이도록 하는데에 쓰인다. content-available 과 마찬가지로, APNS 로 보내는 푸시 패킷 내의 &ldquo;aps&rdquo; 항목에 추가하면 되는데</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+                <span class="nt">&#34;aps&#34;</span><span class="p">:</span> <span class="p">{</span>
+                                <span class="nt">&#34;mutable-content&#34;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                                <span class="nt">&#34;alert&#34;</span><span class="p">:</span> <span class="p">{</span>
+                                                <span class="nt">&#34;title&#34;</span><span class="p">:</span> <span class="s2">&#34;Title&#34;</span><span class="p">,</span>
+                                                <span class="nt">&#34;body&#34;</span><span class="p">:</span> <span class="s2">&#34;Body...&#34;</span>
+                                <span class="p">},</span>
+                                <span class="nt">&#34;sound&#34;</span><span class="p">:</span> <span class="s2">&#34;default&#34;</span><span class="p">,</span>
+                <span class="p">},</span>
+                <span class="err">...</span>
 
-<pre><code class="language-json">{
-                &quot;aps&quot;: {
-                                &quot;mutable-content&quot;:1,
-                                &quot;alert&quot;: {
-                                                &quot;title&quot;: &quot;Title&quot;,
-                                                &quot;body&quot;: &quot;Body...&quot;
-                                },
-                                &quot;sound&quot;: &quot;default&quot;,
-                },
-                ...
-
-}
-</code></pre>
-
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 <p>alert 항목이 필수로 있어야 한다. 이 항목이 없다면 시스템이 mutable 하지 않은 알림으로 처리해버린다.</p>
 
 <p>단순히 이렇게 패킷을 구성하기만 해서는 바로 뭐가 되는건 아니다. 프로젝트에 UNNotificationServiceExtension 타겟을 추가하여야 하는데, 이 과정이 꽤나 번거롭다.</p>
@@ -296,27 +331,32 @@ optional func userNotificationCenter(_ center: UNUserNotificationCenter, didRece
 
     </div>
 
-    
-    
-
-    
-    
-
-    <footer class="post-footer">
-      
-
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Brann Park</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2018-06-15
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
       
       <nav class="post-nav">
-        
-          <a class="prev" href="/blog/post/20190306_rxswift_retain_self/">
+        <a class="prev" href="/blog/post/20190306_rxswift_retain_self/">
             <i class="iconfont icon-left"></i>
             <span class="prev-text nav-default">RxSwift retain self</span>
             <span class="prev-text nav-mobile">Prev</span>
           </a>
-        
-          <a class="next" href="/blog/post/20180605_ios_adhoc_distribution_archive_and_crashlytics/">
+        <a class="next" href="/blog/post/20180605_ios_adhoc_distribution_archive_and_crashlytics/">
             <span class="next-text nav-default">iOS_Adhoc_아카이브와 크래시리틱스, 그리고 Bitcode</span>
-            <span class="prev-text nav-mobile">Next</span>
+            <span class="next-text nav-mobile">Next</span>
             <i class="iconfont icon-right"></i>
           </a>
       </nav>
@@ -324,33 +364,13 @@ optional func userNotificationCenter(_ center: UNUserNotificationCenter, didRece
   </article>
         </div>
         
-  <div id="disqus_thread"></div>
-    <script type="text/javascript">
-    (function() {
-      
-      
-      if (window.location.hostname === 'localhost') return;
 
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      var disqus_shortname = 'brannpark';
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
-  
-
-  
       </div>
     </main>
 
     <footer id="footer" class="footer">
       <div class="social-links">
       <a href="mailto:brandnew0823@email.com" class="iconfont icon-email" title="email"></a>
-      <a href="https://facebook.com/dalong10" class="iconfont icon-facebook" title="facebook"></a>
-      <a href="https://www.linkedin.com/in/ji-hoon-park-b39b61102" class="iconfont icon-linkedin" title="linkedin"></a>
-      <a href="https://github.com/brannpark" class="iconfont icon-github" title="github"></a>
   <a href="http://brannpark.github.io/blog/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
@@ -368,13 +388,12 @@ optional func userNotificationCenter(_ center: UNUserNotificationCenter, didRece
 
   <span class="copyright-year">
     &copy; 
-    
-      2016 - 
+    2015 - 
     2019
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
-    <span class="author">Copyright(c) by Brann Park. All right reserved.</span>
+    <span class="author">Brann Park</span>
   </span>
 </div>
     </footer>
@@ -384,11 +403,14 @@ optional func userNotificationCenter(_ center: UNUserNotificationCenter, didRece
     </div>
   </div>
   
-<script src="/blog/lib/highlight/highlight.pack.js?v=20171001"></script>
-<script type="text/javascript" src="/blog/lib/jquery/jquery-3.2.1.min.js"></script>
-  <script type="text/javascript" src="/blog/lib/slideout/slideout-1.0.1.min.js"></script>
-  <script type="text/javascript" src="/blog/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
-<script type="text/javascript" src="/blog/dist/even.min.js?v=2.7.2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/blog/dist/even.26188efa.min.js"></script>
+
+
+
+
 
 
 

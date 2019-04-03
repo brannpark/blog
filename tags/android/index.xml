@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Android on 개발지식저장소</title>
+    <title>android on 개발지식저장소</title>
     <link>http://brannpark.github.io/blog/tags/android/</link>
-    <description>Recent content in Android on 개발지식저장소</description>
+    <description>Recent content in android on 개발지식저장소</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>Copyright(c) by Brann Park. All right reserved.</copyright>
     <lastBuildDate>Fri, 13 Oct 2017 16:25:46 +0900</lastBuildDate>
     
 	<atom:link href="http://brannpark.github.io/blog/tags/android/index.xml" rel="self" type="application/rss+xml" />
