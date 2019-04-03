@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>dsymutil on 개발지식저장소</title>
+    <link>http://brannpark.github.io/blog/tags/dsymutil/</link>
+    <description>Recent content in dsymutil on 개발지식저장소</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 05 Jun 2018 16:12:15 +0900</lastBuildDate>
+    
+	<atom:link href="http://brannpark.github.io/blog/tags/dsymutil/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>iOS_Adhoc_아카이브와 크래시리틱스, 그리고 Bitcode</title>
+      <link>http://brannpark.github.io/blog/post/20180605_ios_adhoc_distribution_archive_and_crashlytics/</link>
+      <pubDate>Tue, 05 Jun 2018 16:12:15 +0900</pubDate>
+      
+      <guid>http://brannpark.github.io/blog/post/20180605_ios_adhoc_distribution_archive_and_crashlytics/</guid>
+      <description>오랫만의 포스팅! 회사를 옮기고 나서 어찌어찌 하다보니 iOS 개발을 맡게 되었다. 현 팀에서는 사내에 별도록 구축된 앱 빌드 &amp;amp; 배포 서비스를 이용하고 있었고, 앱 크래시</description>
+    </item>
+    
+  </channel>
+</rss>

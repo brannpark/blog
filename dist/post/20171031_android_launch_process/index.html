@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>안드로이드 앱 실행속도 최적화 - 개발지식저장소</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Brann Park" /><meta name="description" content="안드로이드 앱이 실행이 될때, 세가지의 다른 실행 상태가 존재한다. Cold start (차가운 시작) Hot start (따듯한 시작) Warm Start (미지근한 시작) 앱 실행 성능을 개선하기 위해서" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.54.0 with even 4.0.0" />
+
+
+<link rel="canonical" href="http://brannpark.github.io/blog/post/20171031_android_launch_process/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/blog/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/blog/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/blog/favicon-16x16.png">
+<link rel="manifest" href="/blog/manifest.json">
+<link rel="mask-icon" href="/blog/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/blog/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/blog/css/custom.css">
+
+
+<meta property="og:title" content="안드로이드 앱 실행속도 최적화" />
+<meta property="og:description" content="안드로이드 앱이 실행이 될때, 세가지의 다른 실행 상태가 존재한다. Cold start (차가운 시작) Hot start (따듯한 시작) Warm Start (미지근한 시작) 앱 실행 성능을 개선하기 위해서" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://brannpark.github.io/blog/post/20171031_android_launch_process/" />
+<meta property="article:published_time" content="2017-10-13T16:25:46&#43;09:00"/>
+<meta property="article:modified_time" content="2017-10-13T16:25:46&#43;09:00"/>
+
+<meta itemprop="name" content="안드로이드 앱 실행속도 최적화">
+<meta itemprop="description" content="안드로이드 앱이 실행이 될때, 세가지의 다른 실행 상태가 존재한다. Cold start (차가운 시작) Hot start (따듯한 시작) Warm Start (미지근한 시작) 앱 실행 성능을 개선하기 위해서">
+
+
+<meta itemprop="datePublished" content="2017-10-13T16:25:46&#43;09:00" />
+<meta itemprop="dateModified" content="2017-10-13T16:25:46&#43;09:00" />
+<meta itemprop="wordCount" content="1126">
+
+
+
+<meta itemprop="keywords" content="android,launchspeed," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="안드로이드 앱 실행속도 최적화"/>
+<meta name="twitter:description" content="안드로이드 앱이 실행이 될때, 세가지의 다른 실행 상태가 존재한다. Cold start (차가운 시작) Hot start (따듯한 시작) Warm Start (미지근한 시작) 앱 실행 성능을 개선하기 위해서"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/blog/" class="logo">Even</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/blog/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/blog/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/blog/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/blog/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/blog/" class="logo">Even</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/blog/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/blog/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/blog/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/blog/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">안드로이드 앱 실행속도 최적화</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2017-10-13 </span>
+        <div class="post-category">
+            <a href="/blog/categories/development/"> Development </a>
+            </div>
+        
+      </div>
+    </header>
+
+    
+    <div class="post-content">
+      
+
+<p>안드로이드 앱이 실행이 될때, 세가지의 다른 실행 상태가 존재한다.</p>
+
+<ol>
+<li>Cold start (차가운 시작)</li>
+<li>Hot start (따듯한 시작)</li>
+<li>Warm Start (미지근한 시작)</li>
+</ol>
+
+<p>앱 실행 성능을 개선하기 위해서는 각각의 시작 실행 상태들이 의미하는게 무엇인지 이해하는게 중요하다.
+그리고 항상 Cold start 상태의 성능 최적화를 고려해야만 한다! 이유는 아래 글을 읽다보면 자연스레 알게 될 것이다.</p>
+
+<h2 id="cold-start">Cold start</h2>
+
+<p>Cold start 는 안드로이드 시스템 프로세스가 아직 앱 프로세스를 만들지 않은 상태에서 앱을 실행하는 것을 말한다.
+기기가 부팅 된 이후 최초로 앱을 실행할 때나, 완전 종료하여 앱 프로세스를 Kill 시켰을 경우 등이 해당된다.
+이 실행 상태는 다른 실행 상태들에 비해 앱을 실행하기 위해 더더욱 많은 작업을 처리해야 하기 때문에 느릴 수 밖에 없다.
+따라서 앱 실행속도의 최적화 관점에서 가장 신경써야하는 상태가 되는 것이다.</p>
+
+<p>이 상태에서의 앱 실행 시, 시스템은 다음의 세가지 Task 를 처리한다.</p>
+
+<ol>
+<li>앱을 로딩하고 실행한다.</li>
+<li>앱 실행 직후, 빈(blank) starting window 를 화면에 보인다. (System process 가 담당)</li>
+<li>앱 프로세스를 생성한다.</li>
+</ol>
+
+<p>앱 프로세스가 생성 된 이후에는,</p>
+
+<ol>
+<li>Application Object 를 생성.</li>
+<li>메인 스레드를 실행.</li>
+<li>액티비티를 생성. (android.intent.action.MAIN action 을 가지는 액티비티)</li>
+<li>뷰를 생성(inflating).</li>
+<li>화면(screen)에 뷰를 배치.</li>
+<li>초기 draw 를 수행.</li>
+</ol>
+
+<h2 id="hot-start">Hot start</h2>
+
+<p>Hot start 는 Cold start 보다 훨씬 더 단순하고 오버헤드가 적은 실행 상태이다. 시스템은 단순히 앱의 액티비티를 background 에서 foreground 로 가져오는 일을 할 뿐이다. (메모리에 상주해있음)
+Warm start 또한 Cold start 와 마찬가지의 On-Screen 과정을 수행한다. (앱이 액태비티를 렌더링 하기 전까지 blank window 를 화면에 보인다.)</p>
+
+<h2 id="warm-start">Warm start</h2>
+
+<p>Warm start 는 Cold start 에서 처리하는 Task 를 일부 처리하는 실행 상태이다. 이 실행 상태의 예로는,</p>
+
+<ol>
+<li>사용자가 백키를 통해 앱을 종료시킴. 그러나 앱 프로세스가 Empty Process (아직 메모리에 상주해 있으나, 우선순위가 가장 낮은 상태의 프로세스이며, 필요에 따라 시스템에 의해 결국은 종료 될 프로세스) 상태 일 때, 사용자가 앱을 다시 실행함. 이러한 경우 프로세스는 다시 생성되지는 않으나, 액티비티는 새로 생성되어야 함.</li>
+<li>앱 프로세스가 백그라운드 상태일 때, 시스템이 메모리 확보를 위해 앱 프로세스를 종료시킴. 이후 사용자가 앱을 재실행. 이러한 경우, 프로세스와 액티비티는 새로 생성되어야 한다. 그러나 다만, saved instance state 정보를 이용하여 activity 의 oncreate() 가 실행되기에 어느정도의 benefit 을 가질 수 있다고 볼 수 있다.</li>
+</ol>
+
+<p>그런데 약간의 문제(?) 가 있다. 위의 내용은 구글 개발자사이트의 <a href="https://developer.android.com/topic/performance/launch-time.html#lukewarm">내용</a> 을 번역한 것인데,
+위의 2번과 같은 경우는, 앱 프로세스가 시스템에 의해 kill 된 상태다. 이때 다시 앱을 시작하면, 프로세스, 액티비티스택, SavedInstanceState 등이 복원이 되어야 한다. 이는 Cold Start 때 해야하는 일 + 액티비티 복원 까지 진행이 되므로, Cold start 와의 오버헤드 차이라는게 거의 없다거나, 오히려 더 많을 수도 있다. 애초에 Saved instace state 로 부터 이러한 실행작업이 benefit 을 얻는다는게 무슨 말인지 도저히 감이 오질 않는다. (정확히 이해가시는 분이 계시다면 댓글로 부탁드립니다. ㅠㅠ)</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Brann Park</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2017-10-13
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/blog/tags/android/">android</a>
+          <a href="/blog/tags/launchspeed/">launchspeed</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/blog/post/20180605_ios_adhoc_distribution_archive_and_crashlytics/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">iOS_Adhoc_아카이브와 크래시리틱스, 그리고 Bitcode</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/blog/post/20170719_share_clipboard_buffer_share_with_macosx_and_emacs/">
+            <span class="next-text nav-default">Emacs, Mac osx 클립보드 공유</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:brandnew0823@email.com" class="iconfont icon-email" title="email"></a>
+  <a href="http://brannpark.github.io/blog/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2015 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Brann Park</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/blog/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

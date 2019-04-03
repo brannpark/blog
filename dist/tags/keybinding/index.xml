@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>keybinding on 개발지식저장소</title>
+    <link>http://brannpark.github.io/blog/tags/keybinding/</link>
+    <description>Recent content in keybinding on 개발지식저장소</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 11 Oct 2016 14:52:05 +0900</lastBuildDate>
+    
+	<atom:link href="http://brannpark.github.io/blog/tags/keybinding/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Emacs Keybinding for Mac osx</title>
+      <link>http://brannpark.github.io/blog/post/20161011_xcode_emacs_keybinding/</link>
+      <pubDate>Tue, 11 Oct 2016 14:52:05 +0900</pubDate>
+      
+      <guid>http://brannpark.github.io/blog/post/20161011_xcode_emacs_keybinding/</guid>
+      <description>시작은.. Xcode 에 Emacs keybinding 적용해보기! Xcode 는 기본적으로 Emacs 키바인딩을 지원하지 않는다. Option 메타키를 사용하는것을 쉽사리 허용하지 않는데.. 이리저리 찾아보고 하다가</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>iOS10&#43; 노티피케이션 정리 - 개발지식저장소</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Brann Park" /><meta name="description" content="UserNotifications Framework iOS10 부터는 UserNotifications 라는 새로운 사용자 노티피케이션 프레임워크가 제공된다. 사용자 노티피케이션.. 그렇다면 우리가 컴포넌트간 메시지를 보낼 때 쓰는 NotificationCenter 는 시스템 노" /><meta name="keywords" content="ios, notification, swift4" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.54.0 with even 4.0.0" />
+
+
+<link rel="canonical" href="http://brannpark.github.io/blog/post/20180615_ios10plus_notification/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/blog/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/blog/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/blog/favicon-16x16.png">
+<link rel="manifest" href="/blog/manifest.json">
+<link rel="mask-icon" href="/blog/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/blog/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/blog/css/custom.css">
+
+
+<meta property="og:title" content="iOS10&#43; 노티피케이션 정리" />
+<meta property="og:description" content="UserNotifications Framework iOS10 부터는 UserNotifications 라는 새로운 사용자 노티피케이션 프레임워크가 제공된다. 사용자 노티피케이션.. 그렇다면 우리가 컴포넌트간 메시지를 보낼 때 쓰는 NotificationCenter 는 시스템 노" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://brannpark.github.io/blog/post/20180615_ios10plus_notification/" />
+<meta property="article:published_time" content="2018-06-15T15:10:28&#43;09:00"/>
+<meta property="article:modified_time" content="2018-06-15T15:10:28&#43;09:00"/>
+
+<meta itemprop="name" content="iOS10&#43; 노티피케이션 정리">
+<meta itemprop="description" content="UserNotifications Framework iOS10 부터는 UserNotifications 라는 새로운 사용자 노티피케이션 프레임워크가 제공된다. 사용자 노티피케이션.. 그렇다면 우리가 컴포넌트간 메시지를 보낼 때 쓰는 NotificationCenter 는 시스템 노">
+
+
+<meta itemprop="datePublished" content="2018-06-15T15:10:28&#43;09:00" />
+<meta itemprop="dateModified" content="2018-06-15T15:10:28&#43;09:00" />
+<meta itemprop="wordCount" content="2141">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="iOS10&#43; 노티피케이션 정리"/>
+<meta name="twitter:description" content="UserNotifications Framework iOS10 부터는 UserNotifications 라는 새로운 사용자 노티피케이션 프레임워크가 제공된다. 사용자 노티피케이션.. 그렇다면 우리가 컴포넌트간 메시지를 보낼 때 쓰는 NotificationCenter 는 시스템 노"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/blog/" class="logo">Even</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/blog/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/blog/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/blog/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/blog/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/blog/" class="logo">Even</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/blog/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/blog/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/blog/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/blog/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">iOS10&#43; 노티피케이션 정리</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-06-15 </span>
+        <div class="post-category">
+            <a href="/blog/categories/development/"> Development </a>
+            </div>
+        
+      </div>
+    </header>
+
+    
+    <div class="post-content">
+      
+
+<h1 id="usernotifications-framework">UserNotifications Framework</h1>
+
+<p>iOS10 부터는 UserNotifications 라는 새로운 사용자 노티피케이션 프레임워크가 제공된다.</p>
+
+<p>사용자 노티피케이션.. 그렇다면 우리가 컴포넌트간 메시지를 보낼 때 쓰는 NotificationCenter 는 시스템 노티피케이션이(사용자에게 보여지는 UI가 없는 알림이니?)라고 하면 될까..? 아무튼..</p>
+
+<p>UNUserNotificationCenterDelegate 프로토콜에는 다음과 같은 메서드들이 제공된다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kr">optional</span> <span class="kd">func</span> <span class="nf">userNotificationCenter</span><span class="p">(</span><span class="kc">_</span> <span class="n">center</span><span class="p">:</span> <span class="n">UNUserNotificationCenter</span><span class="p">,</span> <span class="n">willPresent</span> <span class="n">notification</span><span class="p">:</span> <span class="n">UNNotification</span><span class="p">,</span> <span class="n">withCompletionHandler</span> <span class="n">completionHandler</span><span class="p">:</span> <span class="p">@</span><span class="n">escaping</span> <span class="p">(</span><span class="n">UNNotificationPresentationOptions</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Void</span><span class="p">)</span>
+
+<span class="kr">optional</span> <span class="kd">func</span> <span class="nf">userNotificationCenter</span><span class="p">(</span><span class="kc">_</span> <span class="n">center</span><span class="p">:</span> <span class="n">UNUserNotificationCenter</span><span class="p">,</span> <span class="n">didReceive</span> <span class="n">response</span><span class="p">:</span> <span class="n">UNNotificationResponse</span><span class="p">,</span> <span class="n">withCompletionHandler</span> <span class="n">completionHandler</span><span class="p">:</span> <span class="p">@</span><span class="n">escaping</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="nb">Void</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><code>UNUserNotificationCenter.current()</code> 객체의 <code>delegate</code> 프로퍼티를 사용하여 위 프로토콜의 구현체를 지정할 수 있다.</p>
+
+<p>노티피케이션을 받기 위해서는 당연히 우선적으로 노티피케이션을 받을 수 있는 권한을 사용자로부터 받아야 한다.</p>
+
+<p><code>UNUserNotificationCenter.requestAuthorization(options:completionHandler:)</code> 메서드를 사용하여 사용자에게 권한을 요청 하고, <code>UIApplication.shared.registerForRemoteNotifications()</code> 를 통해 APNS 등록을 진행하면 된다.</p>
+
+<p>등록하고 토큰 받아내는 거야 뭐.. 자료가 많이 있으니 그다지 어려울 것은 없다.</p>
+
+<h1 id="usernotification-did-received">UserNotification did received!</h1>
+
+<p>자, 그럼 이제 이 글을 작성한 이유인, 앱이 푸시 알림을 받는 상황들에 대해서 알아보자.</p>
+
+<p>APN 페이로드의 내용에 따라 여러 시나리오 생긴다. 다음과 같은 네가지의 경우가 있다.</p>
+
+<ul>
+<li>A. alert, badge 및 sound 만 포함(B, C 의 옵션을 포함하지 않음을 의미)</li>
+<li>B. <code>content-available: 1</code> 포함.</li>
+<li>C. <code>mutable-content: 1</code> 포함.</li>
+</ul>
+
+<h4 id="a">A.</h4>
+
+<p><strong>1) 앱이 포그라운드 상태에 있다면,</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">func</span> <span class="nf">userNotificationCenter</span><span class="p">(</span><span class="kc">_</span> <span class="n">center</span><span class="p">:</span> <span class="n">UNUserNotificationCenter</span><span class="p">,</span> <span class="n">willPresent</span> <span class="n">notification</span><span class="p">:</span> <span class="n">UNNotification</span><span class="p">,</span> <span class="n">withCompletionHandler</span> <span class="n">completionHandler</span><span class="p">:</span> <span class="p">@</span><span class="n">escaping</span> <span class="p">(</span><span class="n">UNNotificationPresentationOptions</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Void</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>메서드가 호출된다. completionHandler 를 호출하여 노티피케이션이 보이거나 보이지 않게 컨트롤 가능하다.</p>
+
+<p><strong>2) 앱이 백그라운드(프로세스가 생성되어 있지만 백그라운드 상태, 또는 프로세스가 종료된 상태)에 있다면,</strong></p>
+
+<p>아무런 메서드도 호출되지 않는다.</p>
+
+<p><strong>3) 사용자에 의해 앱이 강제종료(Force-quit) 되었다면,</strong></p>
+
+<p>아무런 메서드도 호출되지 않는다.</p>
+
+<p>1,2,3 모두의 경우에 대해, 사용자가 알림센터에서 노티피케이션을 탭하게 되면,</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">func</span> <span class="nf">userNotificationCenter</span><span class="p">(</span><span class="kc">_</span> <span class="n">center</span><span class="p">:</span> <span class="n">UNUserNotificationCenter</span><span class="p">,</span> <span class="n">didReceive</span> <span class="n">response</span><span class="p">:</span> <span class="n">UNNotificationResponse</span><span class="p">,</span> <span class="n">withCompletionHandler</span> <span class="n">completionHandler</span><span class="p">:</span> <span class="p">@</span><span class="n">escaping</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="nb">Void</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>메서드가 호출된다.</p>
+
+<p>####B. content-available == 1</p>
+
+<p>Slient Push Notification 의 동작이다. 이때 앱 프로세스는 <strong>사용자에 의한 강제종료 상태</strong>가 아니어야만 하며, 백그라운드 모드에서의 코드 실행시간은 30초 정도로 제한된다. 이 기능이 동작되게 하기 위해선 간단한 작업이 필요하다.</p>
+
+<ol>
+<li>XCode iOS 프로젝트 타겟에서 Capabilities 항목내의 BackgroundModes 를 ON 으로 활성화. Remote Notifications 항목을 체크.</li>
+<li>APNS 로 푸시 패킷을 만들어 보낼 때 apn 항목 안에 content-available 이라는 키를 1 이라는 값으로 추가해준다.</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+                <span class="nt">&#34;aps&#34;</span><span class="p">:</span> <span class="p">{</span>
+                                <span class="nt">&#34;content-available&#34;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                                <span class="err">...</span>
+                <span class="p">},</span>
+                <span class="err">...</span>
+
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><a href="https://medium.com/@m.imadali10/ios-silent-push-notifications-84009d57794c">자세한 설정 참고</a></p>
+
+<p><strong>1) 앱이 포그라운드 상태에 있다면,</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">func</span> <span class="nf">userNotificationCenter</span><span class="p">(</span><span class="kc">_</span> <span class="n">center</span><span class="p">:</span> <span class="n">UNUserNotificationCenter</span><span class="p">,</span> <span class="n">willPresent</span> <span class="n">notification</span><span class="p">:</span> <span class="n">UNNotification</span><span class="p">,</span> <span class="n">withCompletionHandler</span> <span class="n">completionHandler</span><span class="p">:</span> <span class="p">@</span><span class="n">escaping</span> <span class="p">(</span><span class="n">UNNotificationPresentationOptions</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Void</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>위 메서드가 호출된다. completionHandler 를 호출하여 노티피케이션이 보이거나 보이지 않게 컨트롤 가능하다.</p>
+
+<p><strong>2) 앱이 백그라운드(프로세스가 생성되어 있지만 백그라운드 상태, 또는 프로세스가 자동 종료된 상태)에 있다면,</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">func</span> <span class="nf">application</span><span class="p">(</span><span class="kc">_</span> <span class="n">application</span><span class="p">:</span> <span class="n">UIApplication</span><span class="p">,</span> <span class="n">didReceiveRemoteNotification</span> <span class="n">userInfo</span><span class="p">:</span> <span class="p">[</span><span class="n">AnyHashable</span> <span class="p">:</span> <span class="nb">Any</span><span class="p">],</span> <span class="n">fetchCompletionHandler</span> <span class="n">completionHandler</span><span class="p">:</span> <span class="p">@</span><span class="n">escaping</span> <span class="p">(</span><span class="n">UIBackgroundFetchResult</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Void</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>위의 메서드가 실행된다. 메서드 구현 시 무언가 처리를 하고 마지막에 completionHandler 를 적절한 값(UIBackgroundFetchResult)을 인자로 하여 호출해주면 된다.</p>
+
+<p>####C. mutable-content == 1</p>
+
+<p>이 속성은 말 그대로, 푸시알림을 기기가 수신할 때(화면에 보이기 이전에) 푸시노티의 내용을 변경하고, 변경된 내용에 따라 노티피케이션이 화면에 보이도록 하는데에 쓰인다. content-available 과 마찬가지로, APNS 로 보내는 푸시 패킷 내의 &ldquo;aps&rdquo; 항목에 추가하면 되는데</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+                <span class="nt">&#34;aps&#34;</span><span class="p">:</span> <span class="p">{</span>
+                                <span class="nt">&#34;mutable-content&#34;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                                <span class="nt">&#34;alert&#34;</span><span class="p">:</span> <span class="p">{</span>
+                                                <span class="nt">&#34;title&#34;</span><span class="p">:</span> <span class="s2">&#34;Title&#34;</span><span class="p">,</span>
+                                                <span class="nt">&#34;body&#34;</span><span class="p">:</span> <span class="s2">&#34;Body...&#34;</span>
+                                <span class="p">},</span>
+                                <span class="nt">&#34;sound&#34;</span><span class="p">:</span> <span class="s2">&#34;default&#34;</span><span class="p">,</span>
+                <span class="p">},</span>
+                <span class="err">...</span>
+
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>alert 항목이 필수로 있어야 한다. 이 항목이 없다면 시스템이 mutable 하지 않은 알림으로 처리해버린다.</p>
+
+<p>단순히 이렇게 패킷을 구성하기만 해서는 바로 뭐가 되는건 아니다. 프로젝트에 UNNotificationServiceExtension 타겟을 추가하여야 하는데, 이 과정이 꽤나 번거롭다.</p>
+
+<p>단계를 정리하자면..</p>
+
+<ol>
+<li>프로젝트에 Notification Service Extension 타겟을 추가.</li>
+<li><a href="https://developer.apple.com/account/ios/identifier/bundle">Apple Developer console</a> 에서 타겟 생성시 지정한 번들ID 를 가지는 App ID 를 신규 생성.</li>
+<li>기존의 앱과 묶어주기 위해 AppGroup 을 신규 생성.</li>
+<li>기존의 App 과, Notification Service Extension App 의 설정에서 AppGroup 기능을 활성화 시키고 신규 생성한 AppGroup 에 두개의 App 이 속하도록 지정.</li>
+<li>Notification Service Extension App 의 프로비저닝 프로파일을 신규 생성하고 Xcode 의 Notification Service Extension App 타겟에 적용.</li>
+<li>기존 App 의 프로비저닝 프로파일을 다시 생성해서(기존것은 invalid 상태가 됨) Xcode 에 업데이트.</li>
+</ol>
+
+<p>왜 이렇게 번거로운 짓을 하느냐&hellip;
+두가지 목적이 있을거라고 생각하는데&hellip;</p>
+
+<p><strong>하나</strong> 는 iOS10 부터 지원되는 Rich Notification 때문이다.
+이게 뭐냐면.. 알림에 이미지나 동영상을 첨부할 수 있게 하는건데, 푸시를 통해서 이미지나 동영상의 URL 을 보내면
+푸시를 수신했을때(아직 화면에 보인게 아님) 백그라운드에서 이미지와 동영상을 파일로 다운로드하고, 이 다운로드된 파일의 URL을 Notification 에 첨부한 후에, 노티피케이션이 사용자에게 보이도록 하는거다. 노티피케이션의 내용이 변경이 되므로 (첨부파일이 생겨서..) 그래서 mutant-content 라 하는거였다. 이 값이 패킷에 포함되어있다면, 일반 노티가 아닌 NotificationServiceExtension 에서 처리되도록 하라(있다면)는 얘기고, 이는 기존 앱 프로세스가 아닌 이 NotificationServiceExtension 프로세스에서 처리되는 것이다. 그래서 별도 타겟에 별도 AppId 에 별도 프로비져닝 프로파일까지  복잡하게 구성하는 것이었다.</p>
+
+<p><strong>두번쨰</strong> 는 content-available 의 한계점 때문이다.
+푸시 수신 시 Background Mode 로 무언갈 할 수 있는건 좋은데&hellip; 앱이 <strong>사용자에 의한 강제종료 상태</strong>가 아니어야만 한다는 골때리는 제약사항이 있다. 그러나 앱이 강종되었더라도 NotificationServiceExtension 은 실행이 된다. 우와!! 하긴 이르지.. 그러나 이 경우에도 단점은 있다. 사용자에게 푸시 노티를 안보이게 할 수는 없다는것&hellip; 따라서, 알림을 사용자에게 보이면서 무언가를 백그라운드에서 처리하고자 할 때 유용하다고 할 수 있겠다.</p>
+
+<h1 id="notification-service-extension-notification-content-extension">Notification Service Extension? Notification Content Extension?</h1>
+
+<p>위에서 잠깐 설명했지만, Notification Service Extension 은 mutable-content 를 가진 노티피케이션을 사용자에게 보이기 이전에 무언가 코드를 실행하고 이후에 변경된 노티피케이션을 보여주기 위하여 사용된다.</p>
+
+<p>그렇다면 Notification Content Extension 은? 이는, 알림의 UI 를 커스터마이징하기 위해 쓰인다.
+이 내용에 대해선 다음의 링크를 참고하자.</p>
+
+<p><a href="http://rhammer.tistory.com/tag/%ED%91%B8%EC%89%AC">여기</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Brann Park</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2018-06-15
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/blog/post/20190306_rxswift_retain_self/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">RxSwift retain self</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/blog/post/20180605_ios_adhoc_distribution_archive_and_crashlytics/">
+            <span class="next-text nav-default">iOS_Adhoc_아카이브와 크래시리틱스, 그리고 Bitcode</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:brandnew0823@email.com" class="iconfont icon-email" title="email"></a>
+  <a href="http://brannpark.github.io/blog/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2015 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Brann Park</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/blog/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

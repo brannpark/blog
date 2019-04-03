@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>android on 개발지식저장소</title>
+    <link>http://brannpark.github.io/blog/tags/android/</link>
+    <description>Recent content in android on 개발지식저장소</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 13 Oct 2017 16:25:46 +0900</lastBuildDate>
+    
+	<atom:link href="http://brannpark.github.io/blog/tags/android/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>안드로이드 앱 실행속도 최적화</title>
+      <link>http://brannpark.github.io/blog/post/20171031_android_launch_process/</link>
+      <pubDate>Fri, 13 Oct 2017 16:25:46 +0900</pubDate>
+      
+      <guid>http://brannpark.github.io/blog/post/20171031_android_launch_process/</guid>
+      <description>안드로이드 앱이 실행이 될때, 세가지의 다른 실행 상태가 존재한다. Cold start (차가운 시작) Hot start (따듯한 시작) Warm Start (미지근한 시작) 앱 실행 성능을 개선하기 위해서</description>
+    </item>
+    
+    <item>
+      <title>안드로이드 앱 개발 시 주의사항</title>
+      <link>http://brannpark.github.io/blog/post/20151204_notices_for_android_app_development/</link>
+      <pubDate>Fri, 04 Dec 2015 14:46:07 +0900</pubDate>
+      
+      <guid>http://brannpark.github.io/blog/post/20151204_notices_for_android_app_development/</guid>
+      <description>이 포스팅은 앞으로 쓰게 될 안드로이드 앱 개발 관련 주의사항 포스트들에 대한 게이트웨이 정도가 되겠다. 보통.. 이렇게 하면 좋다, 저렇게 하면 좋다라는 글들은 많고</description>
+    </item>
+    
+  </channel>
+</rss>

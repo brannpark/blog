@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>design-pattern on 개발지식저장소</title>
+    <link>http://brannpark.github.io/blog/tags/design-pattern/</link>
+    <description>Recent content in design-pattern on 개발지식저장소</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 15 Jun 2016 19:20:21 +0900</lastBuildDate>
+    
+	<atom:link href="http://brannpark.github.io/blog/tags/design-pattern/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Presenter First</title>
+      <link>http://brannpark.github.io/blog/post/20160615_presenter_first/</link>
+      <pubDate>Wed, 15 Jun 2016 19:20:21 +0900</pubDate>
+      
+      <guid>http://brannpark.github.io/blog/post/20160615_presenter_first/</guid>
+      <description>Presenter First: TDD for Large, Complex Applications with Graphical User Interfaces Michael Marsiglia, Brian Harleton, Carl Erickson 번역: Brann Park 원문: https://atomicobject.com/uploadedImages/archive/files/PF_March2005.pdf Motivation GUI를 다루는것은 힘들다. 처음에는 매우 단순했던 것들이 어떻게 이리도 빠르게 거대해지고 복잡해</description>
+    </item>
+    
+  </channel>
+</rss>
