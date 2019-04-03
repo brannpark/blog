@@ -15,8 +15,6 @@ reward = false
 mathjax = false
 +++
 
-# Swift & iOS Interview QnA
-
 웹서핑을 하다가 우연히, 어떤 회사의 어떤 면접관이 올려놓은 기술 인터뷰 질문 목록을 보았다. 
 
 음.. 아무리 기본에 대한 거라지만 기술면접질문을 공개하다니.. 실제 면접은 아무래도 여기서부터 물고 들어가는 심층 면접이려나? 
@@ -26,14 +24,14 @@ mathjax = false
 기본적이지만, 막상 대답하려면 막히는 부분들이 있을 수도 있으니, 면접 질문들 중에서  GIT, Testing 항목을 제외한 부분들에 대해서 간단히 정리해보았다. 
 
 
-ARC(Automatic Reference Counting)는 어느 시점에 작동하나요?
-------
-	
+## ARC(Automatic Reference Counting)는 어느 시점에 작동하나요?
+
+
 컴파일 시점에 동작. 코드를 빌드(컴파일) 할때 특정 객체의 레퍼런스 카운트를 추적하여 0 가 되는 시점에 자동으로 release 코드를 넣어주는것을 말한다. 
 
 
-### strong, weak, unowned 키워드를 어떤 상황에서 사용하고, 차이는 무엇인가요?
-------
+## strong, weak, unowned 키워드를 어떤 상황에서 사용하고, 차이는 무엇인가요?
+
 	
 *strong*
 이 키워드로 선언된 (정확히는 weak 이나 unowned 로 선언되지 않은) 레퍼런스 객체는 할당되는 순간 해당 객체의 레퍼런스 카운트를 증가시킨다. 
@@ -85,16 +83,16 @@ func someMethod() {
 객체의 라이프사이클이 명확하고 개발자에 의해 제어가 가능이 명확한 경우, weak Optional 타입 대신 사용하여 좀더 간결한 코딩이 가능하다. 	
 
 
-### 객체 간 순환참조를 발견하는 방법과 해결 방법은?
-------
+## 객체 간 순환참조를 발견하는 방법과 해결 방법은?
+
 
 * Xcode Memory Graph 이용해서 Live Object 들을 확인하고, Leak 된 Object 를 체크.
 * Instrument 의 Leak 도구를 이용하여 체크.
 * deinit 을 활용하여 로깅코드를 통해 체크.
 	
 	
-### Escaping Closure의 개념이 무엇인가요?
-------
+## Escaping Closure의 개념이 무엇인가요?
+
 	
 메서드 파라미터로 전달받은 closure 를 메서드의 라이프사이클 내에서 실행하여 끝내지 않고, 메서드 scope 의 외부에 전달하려 할 때는 해당 closure 를 escaping 해야한다. 
 
@@ -105,8 +103,8 @@ escaping 이 명시되어있지 않으면 기본적으로 non-escaping 이며, �
 따라서 closure 내에서 weak 을 굳이 사용하지 않아도 안전할 수 있음을 의미하기도 한다. 
 
 
-### 타입 캐스팅을 할 때 사용하는 키워드인 as, as?, as! 이 셋의 차이는 무엇인가요?
-------
+## 타입 캐스팅을 할 때 사용하는 키워드인 as, as?, as! 이 셋의 차이는 무엇인가요?
+
 	
 *as*
 
@@ -123,8 +121,8 @@ escaping 이 명시되어있지 않으면 기본적으로 non-escaping 이며, �
 > p.s - Xcode 와 같은 IDE 에서는 코드 정적검사를 통해 as, as?, as! 모두에 대해 warning 을 준다. 
 
 
-### Swift에서 Class와 Struct의 차이는 무엇인가요?
-------
+## Swift에서 Class와 Struct의 차이는 무엇인가요?
+
 	
 *Class* - Reference type
 
@@ -141,8 +139,8 @@ escaping 이 명시되어있지 않으면 기본적으로 non-escaping 이며, �
 * 상속이 불가능. (protocol 은 사용 가능)
 	
 
-### Frame 과 Bounds 의 차이는 무엇인가요?
-------
+## Frame 과 Bounds 의 차이는 무엇인가요?
+
 	
 *Frame*
 
@@ -161,8 +159,8 @@ bounds 의 origin 을 변경한다는 것은 곧, subview 들이 화면상에서
 ScrollView/TabeView 등을 스크롤 할때, scrollView.bounds 가 변하고, 그리하여 subview 들의 그려지는 위치가 달라지는 것이 대표적인 예 이다. (subview 들의 frame 이 달라지는게 아님!)
 
 
-### UIViewController클래스내 프로퍼티인TopLayoutGuide와 BottomLayoutGuide가 iOS11에서 deprecate된 이유와 이를 대체하기위해 어떤것이 생겼을까요?
-------
+## UIViewController클래스내 프로퍼티인TopLayoutGuide와 BottomLayoutGuide가 iOS11에서 deprecate된 이유와 이를 대체하기위해 어떤것이 생겼을까요?
+
 	
 *SafeAreaLayoutGuide*
 
@@ -173,16 +171,16 @@ ScrollView/TabeView 등을 스크롤 할때, scrollView.bounds 가 변하고, �
 SafeAreaLayoutGuide 의 영역은 하나의 사각 영역으로 되어있다. 
 
 
-### UIStackView의 장점은 무엇이라고 생각하시나요?
-------
+## UIStackView의 장점은 무엇이라고 생각하시나요?
+
 	
 여러 뷰를 가로방향 또는 세로방향으로 배치할 때, 복잡한 컨스트레인트 설정 없이, 또는 컨스트레인트 만으로 설정하기 어려운 뷰의 배치등을 구현할 때 쓰일 수 있는 뷰. 
 
 aggangedSubview 로 하위뷰들이 관리되며, 이 하위뷰들에 Axis(가로 세로 방향), Alignment(세로방향 정렬), Distribution(가로방향 정렬), Spacing(하위뷰들간의 간격) 의 규칙을 적용할 수 있다. 
 
 
-### Autolayout Constraint의 Priority의 개념이 무엇이고, 어떤상황에 사용하나요?
-------
+## Autolayout Constraint의 Priority의 개념이 무엇이고, 어떤상황에 사용하나요?
+
 
 말그대로 제약들간의 우선순위를 말한다. 
 
@@ -193,8 +191,8 @@ aggangedSubview 로 하위뷰들이 관리되며, 이 하위뷰들에 Axis(가�
 이럴때에는 어떤 제약의 우선순위를 더 우위에 둘것이냐를 결정함으로써 이러한 충돌을 해결할 수 있다. 
 
 
-### Content Hugging Priority의 개념이 무엇이고, 어떤상황에 사용하나요?
-------
+## Content Hugging Priority의 개념이 무엇이고, 어떤상황에 사용하나요?
+
 
 UI Framework 에서 제공되는 일부 뷰에는 컨테츠 고유의 사이즈(Contrisic content size)라는 개념이 있다. 
 
@@ -238,8 +236,8 @@ UI Framework 에서 제공되는 일부 뷰에는 컨테츠 고유의 사이즈(
 물론 이때, 모든 레이블의 ContentHugging priority 는 자식 뷰와(그리고 자식 뷰들 사이의 간격) 부모 뷰 사이에 설정된 상하 간격 제약들의 priority 보다 같거나 작아야 한다. 
 
 
-### UICollectionViewLayout클래스에 prepare 메소드는 어떤 역할을 하나요?
-------
+## UICollectionViewLayout클래스에 prepare 메소드는 어떤 역할을 하나요?
+
 
 레이아웃관련 연산이 일어날 때마다 가장 먼저 호출된다. 이 메소드에서 셀의 위치/크기 등을 계산하기 위한 사전처리를 할 수 있다.
 
@@ -248,8 +246,8 @@ UICollectionViewLayout 를 상속받아 Custom 한 CollectionView Layout 을 구
 CollectionView 로부터 셀의 위치 및 크기 요청이 들어올때, 미리 계산하여 캐싱해둔 데이터를 전달해주는 방식으로 커스텀 레이아웃을 구성하는 방식이 있겠다. 
 
 	
-### UITableView를 구성할때 셀의 컨텐츠에 따라 높이를 설정하고싶다면 어떻게 해야하나요?
-------
+## UITableView를 구성할때 셀의 컨텐츠에 따라 높이를 설정하고싶다면 어떻게 해야하나요?
+
 		
 델리게이트 메서드 rowHeight 에서는 UITableView.automaticDimension 값을 리턴하고 ,estimatedRowHeight 에서는  셀의 예측 높이값을 리턴한다.
 
