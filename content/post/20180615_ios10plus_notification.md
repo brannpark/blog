@@ -72,7 +72,7 @@ func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive respo
 
 메서드가 호출된다. 
 
-####B. content-available == 1 
+#### B. content-available == 1 
 
 Slient Push Notification 의 동작이다. 이때 앱 프로세스는 **사용자에 의한 강제종료 상태**가 아니어야만 하며, 백그라운드 모드에서의 코드 실행시간은 30초 정도로 제한된다. 이 기능이 동작되게 하기 위해선 간단한 작업이 필요하다.
 
