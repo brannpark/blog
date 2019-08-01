@@ -262,7 +262,7 @@
 </div>
 <p>위의 메서드가 실행된다. 메서드 구현 시 무언가 처리를 하고 마지막에 completionHandler 를 적절한 값(UIBackgroundFetchResult)을 인자로 하여 호출해주면 된다.</p>
 
-<p>####C. mutable-content == 1</p>
+<h4 id="c-mutable-content-1">C. mutable-content == 1</h4>
 
 <p>이 속성은 말 그대로, 푸시알림을 기기가 수신할 때(화면에 보이기 이전에) 푸시노티의 내용을 변경하고, 변경된 내용에 따라 노티피케이션이 화면에 보이도록 하는데에 쓰인다. content-available 과 마찬가지로, APNS 로 보내는 푸시 패킷 내의 &ldquo;aps&rdquo; 항목에 추가하면 되는데</p>
 <div class="highlight"><div class="chroma">
