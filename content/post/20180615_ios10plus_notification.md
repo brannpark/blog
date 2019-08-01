@@ -111,7 +111,7 @@ func application(_ application: UIApplication, didReceiveRemoteNotification user
 
 
 
-####C. mutable-content == 1
+#### C. mutable-content == 1
 
 이 속성은 말 그대로, 푸시알림을 기기가 수신할 때(화면에 보이기 이전에) 푸시노티의 내용을 변경하고, 변경된 내용에 따라 노티피케이션이 화면에 보이도록 하는데에 쓰인다. content-available 과 마찬가지로, APNS 로 보내는 푸시 패킷 내의 "aps" 항목에 추가하면 되는데
 
