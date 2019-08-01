@@ -176,9 +176,9 @@
 <li>C. <code>mutable-content: 1</code> 포함.</li>
 </ul>
 
-<h4 id="a">A.</h4>
+<h2 id="a">A.</h2>
 
-<p><strong>1) 앱이 포그라운드 상태에 있다면,</strong></p>
+<h3 id="1-앱이-포그라운드-상태에-있다면">1) 앱이 포그라운드 상태에 있다면,</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
@@ -189,11 +189,11 @@
 </div>
 <p>메서드가 호출된다. completionHandler 를 호출하여 노티피케이션이 보이거나 보이지 않게 컨트롤 가능하다.</p>
 
-<p><strong>2) 앱이 백그라운드(프로세스가 생성되어 있지만 백그라운드 상태, 또는 프로세스가 종료된 상태)에 있다면,</strong></p>
+<h3 id="2-앱이-백그라운드-프로세스가-생성되어-있지만-백그라운드-상태-또는-프로세스가-종료된-상태-에-있다면">2) 앱이 백그라운드(프로세스가 생성되어 있지만 백그라운드 상태, 또는 프로세스가 종료된 상태)에 있다면,</h3>
 
 <p>아무런 메서드도 호출되지 않는다.</p>
 
-<p><strong>3) 사용자에 의해 앱이 강제종료(Force-quit) 되었다면,</strong></p>
+<h3 id="3-사용자에-의해-앱이-강제종료-force-quit-되었다면">3) 사용자에 의해 앱이 강제종료(Force-quit) 되었다면,</h3>
 
 <p>아무런 메서드도 호출되지 않는다.</p>
 
@@ -208,7 +208,7 @@
 </div>
 <p>메서드가 호출된다.</p>
 
-<h4 id="b-content-available-1">B. content-available == 1</h4>
+<h2 id="b-content-available-1">B. content-available == 1</h2>
 
 <p>Slient Push Notification 의 동작이다. 이때 앱 프로세스는 <strong>사용자에 의한 강제종료 상태</strong>가 아니어야만 하며, 백그라운드 모드에서의 코드 실행시간은 30초 정도로 제한된다. 이 기능이 동작되게 하기 위해선 간단한 작업이 필요하다.</p>
 
@@ -240,7 +240,7 @@
 </div>
 <p><a href="https://medium.com/@m.imadali10/ios-silent-push-notifications-84009d57794c">자세한 설정 참고</a></p>
 
-<p><strong>1) 앱이 포그라운드 상태에 있다면,</strong></p>
+<h3 id="1-앱이-포그라운드-상태에-있다면-1">1) 앱이 포그라운드 상태에 있다면,</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
@@ -251,7 +251,7 @@
 </div>
 <p>위 메서드가 호출된다. completionHandler 를 호출하여 노티피케이션이 보이거나 보이지 않게 컨트롤 가능하다.</p>
 
-<p><strong>2) 앱이 백그라운드(프로세스가 생성되어 있지만 백그라운드 상태, 또는 프로세스가 자동 종료된 상태)에 있다면,</strong></p>
+<h3 id="2-앱이-백그라운드-프로세스가-생성되어-있지만-백그라운드-상태-또는-프로세스가-자동-종료된-상태-에-있다면">2) 앱이 백그라운드(프로세스가 생성되어 있지만 백그라운드 상태, 또는 프로세스가 자동 종료된 상태)에 있다면,</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
@@ -262,7 +262,7 @@
 </div>
 <p>위의 메서드가 실행된다. 메서드 구현 시 무언가 처리를 하고 마지막에 completionHandler 를 적절한 값(UIBackgroundFetchResult)을 인자로 하여 호출해주면 된다.</p>
 
-<h4 id="c-mutable-content-1">C. mutable-content == 1</h4>
+<h2 id="c-mutable-content-1">C. mutable-content == 1</h2>
 
 <p>이 속성은 말 그대로, 푸시알림을 기기가 수신할 때(화면에 보이기 이전에) 푸시노티의 내용을 변경하고, 변경된 내용에 따라 노티피케이션이 화면에 보이도록 하는데에 쓰인다. content-available 과 마찬가지로, APNS 로 보내는 푸시 패킷 내의 &ldquo;aps&rdquo; 항목에 추가하면 되는데</p>
 <div class="highlight"><div class="chroma">
