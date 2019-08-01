@@ -48,19 +48,20 @@ APN 페이로드의 내용에 따라 여러 시나리오 생긴다. 다음과 �
 * B. `content-available: 1` 포함.
 * C. `mutable-content: 1` 포함.
 
-#### A.
-**1) 앱이 포그라운드 상태에 있다면,**
+## A.
+
+### 1) 앱이 포그라운드 상태에 있다면,
 
 ```swift
 func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void)
 ```
 메서드가 호출된다. completionHandler 를 호출하여 노티피케이션이 보이거나 보이지 않게 컨트롤 가능하다.
 
-**2) 앱이 백그라운드(프로세스가 생성되어 있지만 백그라운드 상태, 또는 프로세스가 종료된 상태)에 있다면,**
+### 2) 앱이 백그라운드(프로세스가 생성되어 있지만 백그라운드 상태, 또는 프로세스가 종료된 상태)에 있다면,
 
 아무런 메서드도 호출되지 않는다. 
 
-**3) 사용자에 의해 앱이 강제종료(Force-quit) 되었다면,**
+### 3) 사용자에 의해 앱이 강제종료(Force-quit) 되었다면,
 
 아무런 메서드도 호출되지 않는다.
 
@@ -72,7 +73,7 @@ func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive respo
 
 메서드가 호출된다. 
 
-#### B. content-available == 1 
+## B. content-available == 1 
 
 Slient Push Notification 의 동작이다. 이때 앱 프로세스는 **사용자에 의한 강제종료 상태**가 아니어야만 하며, 백그라운드 모드에서의 코드 실행시간은 30초 정도로 제한된다. 이 기능이 동작되게 하기 위해선 간단한 작업이 필요하다.
 
@@ -93,7 +94,7 @@ Slient Push Notification 의 동작이다. 이때 앱 프로세스는 **사용�
 [자세한 설정 참고](https://medium.com/@m.imadali10/ios-silent-push-notifications-84009d57794c)
 
 
-**1) 앱이 포그라운드 상태에 있다면,**
+### 1) 앱이 포그라운드 상태에 있다면,
 
 ```swift
 func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void)
@@ -101,7 +102,7 @@ func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent noti
  
 위 메서드가 호출된다. completionHandler 를 호출하여 노티피케이션이 보이거나 보이지 않게 컨트롤 가능하다.
 
-**2) 앱이 백그라운드(프로세스가 생성되어 있지만 백그라운드 상태, 또는 프로세스가 자동 종료된 상태)에 있다면,**
+### 2) 앱이 백그라운드(프로세스가 생성되어 있지만 백그라운드 상태, 또는 프로세스가 자동 종료된 상태)에 있다면,
 
 ```swift
 func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void)
@@ -111,7 +112,7 @@ func application(_ application: UIApplication, didReceiveRemoteNotification user
 
 
 
-#### C. mutable-content == 1
+## C. mutable-content == 1
 
 이 속성은 말 그대로, 푸시알림을 기기가 수신할 때(화면에 보이기 이전에) 푸시노티의 내용을 변경하고, 변경된 내용에 따라 노티피케이션이 화면에 보이도록 하는데에 쓰인다. content-available 과 마찬가지로, APNS 로 보내는 푸시 패킷 내의 "aps" 항목에 추가하면 되는데
 
