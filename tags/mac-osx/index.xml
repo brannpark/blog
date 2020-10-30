@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>mac-osx on 개발지식저장소</title>
@@ -6,11 +6,7 @@
     <description>Recent content in mac-osx on 개발지식저장소</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 19 Jul 2017 14:45:52 +0900</lastBuildDate>
-    
-	<atom:link href="http://brannpark.github.io/blog/tags/mac-osx/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 19 Jul 2017 14:45:52 +0900</lastBuildDate><atom:link href="http://brannpark.github.io/blog/tags/mac-osx/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Emacs, Mac osx 클립보드 공유</title>
       <link>http://brannpark.github.io/blog/post/20170719_share_clipboard_buffer_share_with_macosx_and_emacs/</link>

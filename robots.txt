@@ -1,2 +1,1 @@
 User-agent: *
-Sitemap: http://brannpark.github.io/blog/sitemap.xml

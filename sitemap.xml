@@ -1,9 +1,37 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<?xml-stylesheet type="text/xsl" href="http://brannpark.github.io/blog/sitemap.xsl"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>http://brannpark.github.io/blog/categories/</loc>
+    <lastmod>2019-03-22T10:31:57+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://brannpark.github.io/blog/categories/development/</loc>
+    <lastmod>2019-03-22T10:31:57+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://brannpark.github.io/blog/post/</loc>
+    <lastmod>2019-03-22T10:31:57+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
   
   <url>
     <loc>http://brannpark.github.io/blog/post/20190322_swift_ios_interview_qna/</loc>
+    <lastmod>2019-03-22T10:31:57+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://brannpark.github.io/blog/</loc>
     <lastmod>2019-03-22T10:31:57+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -24,8 +52,85 @@
   </url>
   
   <url>
+    <loc>http://brannpark.github.io/blog/tags/adhoc/</loc>
+    <lastmod>2018-06-05T16:12:15+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://brannpark.github.io/blog/tags/archive/</loc>
+    <lastmod>2018-06-05T16:12:15+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://brannpark.github.io/blog/tags/bitcode/</loc>
+    <lastmod>2018-06-05T16:12:15+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://brannpark.github.io/blog/tags/crashlytics/</loc>
+    <lastmod>2018-06-05T16:12:15+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://brannpark.github.io/blog/tags/dsym/</loc>
+    <lastmod>2018-06-05T16:12:15+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://brannpark.github.io/blog/tags/dsymutil/</loc>
+    <lastmod>2018-06-05T16:12:15+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://brannpark.github.io/blog/tags/fabric/</loc>
+    <lastmod>2018-06-05T16:12:15+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://brannpark.github.io/blog/tags/ios/</loc>
+    <lastmod>2018-06-05T16:12:15+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://brannpark.github.io/blog/post/20180605_ios_adhoc_distribution_archive_and_crashlytics/</loc>
     <lastmod>2018-06-05T16:12:15+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://brannpark.github.io/blog/tags/</loc>
+    <lastmod>2018-06-05T16:12:15+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://brannpark.github.io/blog/tags/android/</loc>
+    <lastmod>2017-10-13T16:25:46+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://brannpark.github.io/blog/tags/launchspeed/</loc>
+    <lastmod>2017-10-13T16:25:46+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -38,7 +143,21 @@
   </url>
   
   <url>
+    <loc>http://brannpark.github.io/blog/tags/emacs/</loc>
+    <lastmod>2017-07-19T14:45:52+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://brannpark.github.io/blog/post/20170719_share_clipboard_buffer_share_with_macosx_and_emacs/</loc>
+    <lastmod>2017-07-19T14:45:52+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://brannpark.github.io/blog/tags/mac-osx/</loc>
     <lastmod>2017-07-19T14:45:52+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -52,7 +171,49 @@
   </url>
   
   <url>
+    <loc>http://brannpark.github.io/blog/tags/keybinding/</loc>
+    <lastmod>2016-10-11T14:52:05+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://brannpark.github.io/blog/tags/xcode/</loc>
+    <lastmod>2016-10-11T14:52:05+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://brannpark.github.io/blog/tags/design-pattern/</loc>
+    <lastmod>2016-06-15T19:20:21+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://brannpark.github.io/blog/tags/mvp/</loc>
+    <lastmod>2016-06-15T19:20:21+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://brannpark.github.io/blog/post/20160615_presenter_first/</loc>
+    <lastmod>2016-06-15T19:20:21+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://brannpark.github.io/blog/tags/tdd/</loc>
+    <lastmod>2016-06-15T19:20:21+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://brannpark.github.io/blog/tags/unit-test/</loc>
     <lastmod>2016-06-15T19:20:21+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -66,8 +227,36 @@
   </url>
   
   <url>
+    <loc>http://brannpark.github.io/blog/tags/el-capitan/</loc>
+    <lastmod>2015-12-02T18:46:37+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://brannpark.github.io/blog/tags/osx/</loc>
+    <lastmod>2015-12-02T18:46:37+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://brannpark.github.io/blog/post/20151202_elcapitan_setup/</loc>
     <lastmod>2015-12-02T18:46:37+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://brannpark.github.io/blog/tags/github-pages/</loc>
+    <lastmod>2015-12-01T15:36:31+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://brannpark.github.io/blog/tags/hugo/</loc>
+    <lastmod>2015-12-01T15:36:31+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -80,6 +269,27 @@
   </url>
   
   <url>
+    <loc>http://brannpark.github.io/blog/tags/redlounge/</loc>
+    <lastmod>2015-12-01T15:36:31+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://brannpark.github.io/blog/tags/static-website-engine/</loc>
+    <lastmod>2015-12-01T15:36:31+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://brannpark.github.io/blog/categories/blahblah/</loc>
+    <lastmod>2015-12-01T11:47:56+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://brannpark.github.io/blog/post/new/</loc>
     <lastmod>2015-12-01T11:47:56+09:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -87,226 +297,17 @@
   </url>
   
   <url>
-    <loc>http://brannpark.github.io/blog/categories/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://brannpark.github.io/blog/categories/development/</loc>
-    <lastmod>2019-03-22T10:31:57+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://brannpark.github.io/blog/tags/el-capitan/</loc>
-    <lastmod>2015-12-02T18:46:37+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://brannpark.github.io/blog/tags/osx/</loc>
-    <lastmod>2015-12-02T18:46:37+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://brannpark.github.io/blog/post/</loc>
-    <lastmod>2019-03-22T10:31:57+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://brannpark.github.io/blog/tags/</loc>
-    <lastmod>2015-12-02T18:46:37+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://brannpark.github.io/blog/tags/adhoc/</loc>
-    <lastmod>2018-06-05T16:12:15+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://brannpark.github.io/blog/tags/android/</loc>
-    <lastmod>2017-10-13T16:25:46+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://brannpark.github.io/blog/tags/archive/</loc>
-    <lastmod>2018-06-05T16:12:15+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://brannpark.github.io/blog/tags/bitcode/</loc>
-    <lastmod>2018-06-05T16:12:15+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://brannpark.github.io/blog/categories/blahblah/</loc>
-    <lastmod>2015-12-01T11:47:56+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://brannpark.github.io/blog/tags/crashlytics/</loc>
-    <lastmod>2018-06-05T16:12:15+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://brannpark.github.io/blog/tags/design-pattern/</loc>
-    <lastmod>2016-06-15T19:20:21+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://brannpark.github.io/blog/tags/dsym/</loc>
-    <lastmod>2018-06-05T16:12:15+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://brannpark.github.io/blog/tags/dsymutil/</loc>
-    <lastmod>2018-06-05T16:12:15+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://brannpark.github.io/blog/tags/emacs/</loc>
-    <lastmod>2017-07-19T14:45:52+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://brannpark.github.io/blog/tags/fabric/</loc>
-    <lastmod>2018-06-05T16:12:15+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://brannpark.github.io/blog/tags/github-pages/</loc>
-    <lastmod>2015-12-01T15:36:31+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://brannpark.github.io/blog/tags/hugo/</loc>
-    <lastmod>2015-12-01T15:36:31+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://brannpark.github.io/blog/tags/ios/</loc>
-    <lastmod>2018-06-05T16:12:15+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://brannpark.github.io/blog/tags/keybinding/</loc>
-    <lastmod>2016-10-11T14:52:05+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://brannpark.github.io/blog/tags/launchspeed/</loc>
-    <lastmod>2017-10-13T16:25:46+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://brannpark.github.io/blog/tags/mac-osx/</loc>
-    <lastmod>2017-07-19T14:45:52+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://brannpark.github.io/blog/tags/mvp/</loc>
-    <lastmod>2016-06-15T19:20:21+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://brannpark.github.io/blog/tags/redlounge/</loc>
-    <lastmod>2015-12-01T15:36:31+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://brannpark.github.io/blog/tags/static-website-engine/</loc>
-    <lastmod>2015-12-01T15:36:31+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://brannpark.github.io/blog/tags/tdd/</loc>
-    <lastmod>2016-06-15T19:20:21+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://brannpark.github.io/blog/tags/unit-test/</loc>
-    <lastmod>2016-06-15T19:20:21+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://brannpark.github.io/blog/tags/xcode/</loc>
-    <lastmod>2016-10-11T14:52:05+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://brannpark.github.io/blog/</loc>
-    <lastmod>2019-03-22T10:31:57+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>http://brannpark.github.io/blog/tags/%EB%B8%94%EB%A1%9C%EA%B9%85-%EC%8B%9C%EC%9E%91/</loc>
     <lastmod>2015-12-01T11:47:56+09:00</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0</priority>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://brannpark.github.io/blog/tags/%EC%96%B8%EC%A0%9C%EA%B9%8C%EC%A7%80%ED%95%98%EB%82%98-%EB%91%90%EA%B3%A0%EB%B3%B4%EC%9E%90/</loc>
     <lastmod>2015-12-01T11:47:56+09:00</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0</priority>
+    <priority>0.5</priority>
   </url>
   
 </urlset>

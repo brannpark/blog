@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on 개발지식저장소</title>
@@ -6,11 +6,7 @@
     <description>Recent content in Posts on 개발지식저장소</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 22 Mar 2019 10:31:57 +0900</lastBuildDate>
-    
-	<atom:link href="http://brannpark.github.io/blog/post/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 22 Mar 2019 10:31:57 +0900</lastBuildDate><atom:link href="http://brannpark.github.io/blog/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Swift iOS 기본 인터뷰 질문에 대한 정리글</title>
       <link>http://brannpark.github.io/blog/post/20190322_swift_ios_interview_qna/</link>
@@ -48,7 +44,7 @@
     </item>
     
     <item>
-      <title>안드로이드 앱 실행속도 최적화</title>
+      <title>안드로이드 앱 실행 시의 세가지 상태</title>
       <link>http://brannpark.github.io/blog/post/20171031_android_launch_process/</link>
       <pubDate>Fri, 13 Oct 2017 16:25:46 +0900</pubDate>
       

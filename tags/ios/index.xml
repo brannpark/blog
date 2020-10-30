@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ios on 개발지식저장소</title>
@@ -6,11 +6,7 @@
     <description>Recent content in ios on 개발지식저장소</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 05 Jun 2018 16:12:15 +0900</lastBuildDate>
-    
-	<atom:link href="http://brannpark.github.io/blog/tags/ios/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 05 Jun 2018 16:12:15 +0900</lastBuildDate><atom:link href="http://brannpark.github.io/blog/tags/ios/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>iOS_Adhoc_아카이브와 크래시리틱스, 그리고 Bitcode</title>
       <link>http://brannpark.github.io/blog/post/20180605_ios_adhoc_distribution_archive_and_crashlytics/</link>
