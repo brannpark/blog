@@ -1,20 +1,1107 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>github-pages on 개발지식저장소</title>
-    <link>http://brannpark.github.io/blog/tags/github-pages/</link>
-    <description>Recent content in github-pages on 개발지식저장소</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Tue, 01 Dec 2015 15:36:31 +0900</lastBuildDate><atom:link href="http://brannpark.github.io/blog/tags/github-pages/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Made by HUGO and GitHub Pages</title>
-      <link>http://brannpark.github.io/blog/post/20151201_hugo_with_github_pages/</link>
-      <pubDate>Tue, 01 Dec 2015 15:36:31 +0900</pubDate>
-      
-      <guid>http://brannpark.github.io/blog/post/20151201_hugo_with_github_pages/</guid>
-      <description>일반적인 웹사이트의 경우, 여러 웹 컨텐츠들을 동적으로 생성하여 이용자에게 전달한다. 다시 말해서, 웹어플리케이션은 동적 컨텐츠를 정적 컨텐츠로 변환하는 과정</description>
-    </item>
+ <channel>
+   <title>github-pages on 개발지식저장소</title>
+   <link>http://brannpark.github.io/blog/tags/github-pages/</link>
+   <description>Recent content in github-pages on 개발지식저장소</description>
+   <generator>Hugo -- gohugo.io</generator>
+   <language>en</language>
+   <lastBuildDate>Tue, 01 Dec 2015 15:36:31 +0900</lastBuildDate>
+   
+       <atom:link href="http://brannpark.github.io/blog/tags/github-pages/index.xml" rel="self" type="application/rss+xml" />
+   
+   
+     <item>
+       <title>Swift iOS 기본 인터뷰 질문에 대한 정리글</title>
+       <link>http://brannpark.github.io/blog/posts/20190322_swift_ios_interview_qna/</link>
+       <pubDate>Fri, 22 Mar 2019 10:31:57 +0900</pubDate>
+       
+       <guid>http://brannpark.github.io/blog/posts/20190322_swift_ios_interview_qna/</guid>
+       <description>&lt;p&gt;웹서핑을 하다가 우연히, 어떤 회사의 어떤 면접관이 올려놓은 기술 인터뷰 질문 목록을 보았다.&lt;/p&gt;
+&lt;p&gt;음.. 아무리 기본에 대한 거라지만 기술면접질문을 공개하다니.. 실제 면접은 아무래도 여기서부터 물고 들어가는 심층 면접이려나?&lt;/p&gt;
+&lt;p&gt;어떤식으로 하려는지 궁금하긴 하다. ㅎㅎ&lt;/p&gt;
+&lt;p&gt;기본적이지만, 막상 대답하려면 막히는 부분들이 있을 수도 있으니, 면접 질문들 중에서  GIT, Testing 항목을 제외한 부분들에 대해서 간단히 정리해보았다.&lt;/p&gt;
+&lt;h2 id=&#34;arcautomatic-reference-counting는-어느-시점에-작동하나요&#34;&gt;ARC(Automatic Reference Counting)는 어느 시점에 작동하나요?&lt;/h2&gt;
+&lt;p&gt;컴파일 시점에 동작. 코드를 빌드(컴파일) 할때 특정 객체의 레퍼런스 카운트를 추적하여 0 가 되는 시점에 자동으로 release 코드를 넣어주는것을 말한다.&lt;/p&gt;
+&lt;h2 id=&#34;strong-weak-unowned-키워드를-어떤-상황에서-사용하고-차이는-무엇인가요&#34;&gt;strong, weak, unowned 키워드를 어떤 상황에서 사용하고, 차이는 무엇인가요?&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;strong&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;이 키워드로 선언된 (정확히는 weak 이나 unowned 로 명시되지 않은. 다시말해서 strong 은) 레퍼런스 객체는 할당되는 순간 해당 객체의 레퍼런스 카운트를 증가시킨다.&lt;/p&gt;
+&lt;p&gt;레퍼런스 카운트를 증가시켜 ARC 로 인한 메모리해제를 피하고 객체를 안전하게 사용하고자 할 때 쓰인다.&lt;/p&gt;
+&lt;p&gt;예를 들자면, 어떤 A 라는 메서드에서 a 라는 레퍼런스 객체를 생성하고, 이를 비동기 실행 클로저에  파라미터로 전달한다면,&lt;/p&gt;
+&lt;p&gt;A 라는 메서드의 호출이 끝나는 순간, 해당 레퍼런스 객체의 레퍼런스 카운트는 1 감소하게 되는데,&lt;/p&gt;
+&lt;p&gt;클로저에 strong 타입으로 전달된 경우는 레퍼런스 카운트가 +2 이기 때문에 최종 +1 상태가 되어 메모리 해제되지 않는다.&lt;/p&gt;
+&lt;p&gt;따라서 해당 클로저에서 안전하게 해당 객체에 엑세스하여 커뮤니케이션이 가능하게 된다.&lt;/p&gt;
+&lt;p&gt;또는 다른 Class 나 Struct 의 프로퍼티에 어떤 레퍼런스 객체가 할당 될 때, strong 타입으로 지정하게 되면, 레퍼런스 카운트가 +2 가 되며,&lt;/p&gt;
+&lt;p&gt;따라서 본래 생성되었던 곳에서 레퍼런스 카운트가 1 감소하더라도, 전달받은 곳에서는 안전하게 사용이 가능하다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;A&lt;/span&gt; : CustomStringConvertible {
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; description: String {
+		&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Class A&amp;#34;&lt;/span&gt;
+	}	
+
+}
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;someMethod&lt;/span&gt;() {
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; a = A()
+	DispatchQueue.main.async {
+		print(a) &lt;span style=&#34;color:#75715e&#34;&gt;// &amp;lt;- referenced by strongly&lt;/span&gt;
+	}
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;weak&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;객체가 할당될 때 레퍼런스 카운트를 증가시키지 않는다. 이 키워드는 Optional 타입에만 적용이 된다. 객체가 ARC 에 의해 메모리해제되면 nil 값이 할당된다.&lt;/p&gt;
+&lt;p&gt;대표적으로 retain cycle 에 의해 메모리가 누수되는 문제를 막기 위해 사용되며, iOS 프레임워크에서 이의 대표적인 예로는 Delegate 패턴이 있다.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;unowned&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;마찬가지로 객체가 할당될 때 레퍼런스 카운트를 증가시키지 않는다.&lt;/p&gt;
+&lt;p&gt;그러나 Non-Optional 타입으로 선언되어야 하며, 객체가 ARC 에 의해 메모리해제되더라도,&lt;/p&gt;
+&lt;p&gt;해당 객체 값을 존재하는 것으로 인지하며, 해당객체에 액세스 할 경우 런타임 오류를 발생시킨다.&lt;/p&gt;
+&lt;p&gt;객체의 라이프사이클이 명확하고 개발자에 의해 제어가 가능이 명확한 경우, weak Optional 타입 대신 사용하여 좀더 간결한 코딩이 가능하다.&lt;/p&gt;
+&lt;h2 id=&#34;객체-간-순환참조를-발견하는-방법과-해결-방법은&#34;&gt;객체 간 순환참조를 발견하는 방법과 해결 방법은?&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Xcode Memory Graph 이용해서 Live Object 들을 확인하고, Leak 된 Object 를 체크.&lt;/li&gt;
+&lt;li&gt;Instrument 의 Leak 도구를 이용하여 체크.&lt;/li&gt;
+&lt;li&gt;deinit 을 활용하여 로깅코드를 통해 체크.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;escaping-closure의-개념이-무엇인가요&#34;&gt;Escaping Closure의 개념이 무엇인가요?&lt;/h2&gt;
+&lt;p&gt;메서드 파라미터로 전달받은 closure 를 메서드의 라이프사이클 내에서 실행하여 끝내지 않고, 메서드 scope 의 외부에 전달하려 할 때는 해당 closure 를 escaping 해야한다.&lt;/p&gt;
+&lt;p&gt;해당 메서드의 호출이 끝난 이후에도 closure 는 메모리 어딘가에 저장되어야 하며, 이는 closure 안에서 사용된 outer object (&lt;code&gt;self&lt;/code&gt; 와 같은) 에 weak 와 같은 레퍼런스타입을 사용해야할 수 있음을 주의하도록 한다.&lt;/p&gt;
+&lt;p&gt;escaping 이 명시되어있지 않으면 기본적으로 non-escaping 이며, 이는 메서드의 실행이 끝나기 전에 closure 의 사용이 모두 완료됨을 보장하며,&lt;/p&gt;
+&lt;p&gt;따라서 closure 내에서 weak 을 굳이 사용하지 않아도 안전할 수 있음을 의미하기도 한다.&lt;/p&gt;
+&lt;h2 id=&#34;타입-캐스팅을-할-때-사용하는-키워드인-as-as-as-이-셋의-차이는-무엇인가요&#34;&gt;타입 캐스팅을 할 때 사용하는 키워드인 as, as?, as! 이 셋의 차이는 무엇인가요?&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;as&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;컴파일러가 타입 변환의 성공을 보장. 컴파일타임에 가능/불가능 여부를 알 수 있음&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;as?&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;타입변환에 실패하는 경우 nil 을 리턴. 컴파일타임에 가능/불가능 여부를 알 수 없음&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;as!&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;타입변환에 실패하는 경우 실행시간(Runtime) 오류를 발생시킴. 컴파일타임에 가능/불가능 여부를 알 수 없음&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;p.s - Xcode 와 같은 IDE 에서는 코드 정적검사를 통해 as, as?, as! 모두에 대해 warning 을 준다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;swift에서-class와-struct의-차이는-무엇인가요&#34;&gt;Swift에서 Class와 Struct의 차이는 무엇인가요?&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;Class&lt;/em&gt; - Reference type&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;객체화 시 힙 메모리영역에 저장되며 ARC 로 객체의 메모리해제가 관리된다.&lt;/li&gt;
+&lt;li&gt;대입 연산 시 레퍼런스가 복사되어 할당됨. (공유 가능)&lt;/li&gt;
+&lt;li&gt;멀티스레딩 시 적절한 Lock 활용이 필요.&lt;/li&gt;
+&lt;li&gt;상속 가능.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;Struct&lt;/em&gt; - Value type&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;대입 연산 시 값 자체가 복제되어 할당됨(공유가 불가능).&lt;/li&gt;
+&lt;li&gt;불변성(Immutable) 구현에 유리.&lt;/li&gt;
+&lt;li&gt;멀티스레딩에 안전함.&lt;/li&gt;
+&lt;li&gt;상속이 불가능. (protocol 은 사용 가능)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;frame-과-bounds-의-차이는-무엇인가요&#34;&gt;Frame 과 Bounds 의 차이는 무엇인가요?&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;Frame&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;SuperView(상위뷰) 좌표시스템 내에서의 view 의  위치(origin) 과 크기(size)&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Bounds&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;view 자기 자신의 좌표시스템에서의 위치와 크기. 부모부와의 위치관계와는 아무런 관계가 없다.&lt;/p&gt;
+&lt;p&gt;자기 자신의 좌표시스템을 가리키기 때문에 기본적으로 origin 은 x:0, y:0 을 가리킨다.&lt;/p&gt;
+&lt;p&gt;bounds 의 origin 을 변경한다는 것은 곧, subview 들이 화면상에서 drawing 되는 위치가 변경됨을 의미한다&lt;/p&gt;
+&lt;p&gt;이게 subview 들의 frame 값을 변화시키는게 아니다. 부모뷰 좌표축이 변하면서 subview 가 그려져야하는 위치가 달라졌기 떄문이다.&lt;/p&gt;
+&lt;p&gt;ScrollView/TabeView 등을 스크롤 할때, scrollView.bounds 가 변하고, 그리하여 subview 들의 그려지는 위치가 달라지는 것이 대표적인 예 이다. (subview 들의 frame 이 달라지는게 아님!)&lt;/p&gt;
+&lt;h2 id=&#34;uiviewcontroller클래스내-프로퍼티인toplayoutguide와-bottomlayoutguide가-ios11에서-deprecate된-이유와-이를-대체하기위해-어떤것이-생겼을까요&#34;&gt;UIViewController클래스내 프로퍼티인TopLayoutGuide와 BottomLayoutGuide가 iOS11에서 deprecate된 이유와 이를 대체하기위해 어떤것이 생겼을까요?&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;SafeAreaLayoutGuide&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;기존 Top, Bottom 레이아웃 가이드와는 다르게, 안전한 컨텐츠 영역의 개념으로 등장했다.&lt;/p&gt;
+&lt;p&gt;기존이 상단, 하단, 두개의 사각 영역으로 되어있는 가이드영역이었다면,&lt;/p&gt;
+&lt;p&gt;SafeAreaLayoutGuide 의 영역은 하나의 사각 영역으로 되어있다.&lt;/p&gt;
+&lt;h2 id=&#34;uistackview의-장점은-무엇이라고-생각하시나요&#34;&gt;UIStackView의 장점은 무엇이라고 생각하시나요?&lt;/h2&gt;
+&lt;p&gt;여러 뷰를 가로방향 또는 세로방향으로 배치할 때, 복잡한 컨스트레인트 설정 없이, 또는 컨스트레인트 만으로 설정하기 어려운 뷰의 배치등을 구현할 때 쓰일 수 있는 뷰.&lt;/p&gt;
+&lt;p&gt;aggangedSubview 로 하위뷰들이 관리되며, 이 하위뷰들에 Axis(가로 세로 방향), Alignment(세로방향 정렬), Distribution(가로방향 정렬), Spacing(하위뷰들간의 간격) 의 규칙을 적용할 수 있다.&lt;/p&gt;
+&lt;h2 id=&#34;autolayout-constraint의-priority의-개념이-무엇이고-어떤상황에-사용하나요&#34;&gt;Autolayout Constraint의 Priority의 개념이 무엇이고, 어떤상황에 사용하나요?&lt;/h2&gt;
+&lt;p&gt;말그대로 제약들간의 우선순위를 말한다.&lt;/p&gt;
+&lt;p&gt;다수의 뷰들에 여러제약이 걸려있을 때, 보통은 제약간의 충돌이 일어나지 않게끔 제약들을 설계하는게 일반적이지만,&lt;/p&gt;
+&lt;p&gt;상황에 따라서는 뷰들의 크기가 유동적으로 변하는 경우가 있는데, 이럴때 어떤 제약들이 서로간에 충돌이 일어나는 경우가 있을 수 있다.&lt;/p&gt;
+&lt;p&gt;이럴때에는 어떤 제약의 우선순위를 더 우위에 둘것이냐를 결정함으로써 이러한 충돌을 해결할 수 있다.&lt;/p&gt;
+&lt;h2 id=&#34;content-hugging-priority의-개념이-무엇이고-어떤상황에-사용하나요&#34;&gt;Content Hugging Priority의 개념이 무엇이고, 어떤상황에 사용하나요?&lt;/h2&gt;
+&lt;p&gt;UI Framework 에서 제공되는 일부 뷰에는 컨테츠 고유의 사이즈(Contrisic content size)라는 개념이 있다.&lt;/p&gt;
+&lt;p&gt;예를 들자면, UILabel, UIButton 들과 같이 뷰의 속성(텍스트 / 이미지) 에 따라 크기가 결정되는 (특정한 너비/높이 사이즈의 제약을 걸지 않은 한) 뷰들이 있겠다.&lt;/p&gt;
+&lt;p&gt;이러한 뷰들은 다른 뷰들간에 걸린 제약에 의해, 본래의 컨텐츠 고유 사이즈보다 더 늘어나거나 줄어들게 될 수 있다.&lt;/p&gt;
+&lt;p&gt;이때 더 늘어나게 되는 것에 대해 저항하는 제약을 Content Hugging 이라 하고,&lt;/p&gt;
+&lt;p&gt;더 줄어들게 되는 것에 대해 저항하는 제약을 Content Compression Resistance 라고 한다.&lt;/p&gt;
+&lt;p&gt;이 고유 컨텐츠 사이즈의 변경에 대한 제약에도 우선순위(Priority) 가 있는데, 이는 Autolayout constraint priority 보다는 우선순위가 낮다.&lt;/p&gt;
+&lt;p&gt;다시 말해서, 우선순위가 서로 같은 값을 가진다고 하면, 오토레이아웃 제약의 우선순위가 적용이 된다는 얘기다.&lt;/p&gt;
+&lt;p&gt;이 중, Content Hugging 에 대해 간략히 설명해 보자면, 예를 들어, 부모뷰의 너비/높이가 100x100 이라고 하고,&lt;/p&gt;
+&lt;p&gt;그 안에 UILabel 을 하나 두되, 이 레이블에는 너비 높이 제약을 주지 않고, 다만 leading, tailing, top, bottom 의 제약을 주어, 각각의 제약들에 10의 값을 지정한다고 하자.&lt;/p&gt;
+&lt;p&gt;그렇다면 해당 레이블의 크기는 80x80 이 되도록 제약에 의해 결정되어진다고 볼 수 있다.&lt;/p&gt;
+&lt;p&gt;그러나 이는 항상 맞는 얘기가 아니다.&lt;/p&gt;
+&lt;p&gt;예를 들어,  레이블의 leading, tailing, top, bottom 제약의 우선순위를 250 으로 주고, ContentHugging priority 를 750 으로 준다면,&lt;/p&gt;
+&lt;p&gt;우선순위에 따라 레이블의 크기는 레이블 컨텐츠 고유의 크기로 결정이 되고, 따라서 네 방향의 제약은 모두 충돌이 나게 된다.&lt;/p&gt;
+&lt;p&gt;실제로 사용될 수 있는 예를 하나 들어보자면,&lt;/p&gt;
+&lt;p&gt;높이 제약이 설정되어있지 않은 어떤 뷰의 하위에, 세로방향으로 2개의 레이블을 배치하고, 서브뷰 끼리의 vertical spacing 제약, 각각의 뷰들과 부모뷰와의 top, bottom 제약을 걸어 chaining 형태의 제약을 걸었다고 생각해보자.&lt;/p&gt;
+&lt;p&gt;그러면, 부모뷰의 높이는 자식뷰(두개의 레이블)의 높이(intrinsic content size) 와 뷰들 간의 간격, 부모뷰와의 간격값의 합으로 결정이 된다.(AutoLayout)&lt;/p&gt;
+&lt;p&gt;이러한 경우, 부모뷰의 높이값을 어떤 특정한 값으로 지정해 더 커지도록 하게 되면, 자식뷰(레이블)들의 높이또한 변경되어야 하는데, (상하 간격 제약을 위반하지 않기 위해서)&lt;/p&gt;
+&lt;p&gt;이때 상단의 레이블의 크기는 고정시키고, 하단의 레이블의 높이만을 변경되게 하고 싶다면,&lt;/p&gt;
+&lt;p&gt;해당 레이블의 ContentHugging priority 값을 다른 레이블의 priority 보다 낮게 지정함으로써 원하는 레이아웃을 이룰 수 있게 된다.&lt;/p&gt;
+&lt;p&gt;물론 이때, 모든 레이블의 ContentHugging priority 는 자식 뷰와(그리고 자식 뷰들 사이의 간격) 부모 뷰 사이에 설정된 상하 간격 제약들의 priority 보다 같거나 작아야 한다.&lt;/p&gt;
+&lt;h2 id=&#34;uicollectionviewlayout클래스에-prepare-메소드는-어떤-역할을-하나요&#34;&gt;UICollectionViewLayout클래스에 prepare 메소드는 어떤 역할을 하나요?&lt;/h2&gt;
+&lt;p&gt;레이아웃관련 연산이 일어날 때마다 가장 먼저 호출된다. 이 메소드에서 셀의 위치/크기 등을 계산하기 위한 사전처리를 할 수 있다.&lt;/p&gt;
+&lt;p&gt;UICollectionViewLayout 를 상속받아 Custom 한 CollectionView Layout 을 구성하고자 할때, 데이터소스를 참조하여 셀의 위치 및 크기를 미리 계산하여 캐싱해두고,&lt;/p&gt;
+&lt;p&gt;CollectionView 로부터 셀의 위치 및 크기 요청이 들어올때, 미리 계산하여 캐싱해둔 데이터를 전달해주는 방식으로 커스텀 레이아웃을 구성하는 방식이 있겠다.&lt;/p&gt;
+&lt;h2 id=&#34;uitableview를-구성할때-셀의-컨텐츠에-따라-높이를-설정하고싶다면-어떻게-해야하나요&#34;&gt;UITableView를 구성할때 셀의 컨텐츠에 따라 높이를 설정하고싶다면 어떻게 해야하나요?&lt;/h2&gt;
+&lt;p&gt;델리게이트 메서드 rowHeight 에서는 UITableView.automaticDimension 값을 리턴하고 ,estimatedRowHeight 에서는  셀의 예측 높이값을 리턴한다.&lt;/p&gt;
+&lt;p&gt;이렇게 하면 오토레이아웃 테이블뷰 셀 구현이 가능하다.&lt;/p&gt;
+&lt;p&gt;마찬가지로 테이블뷰 셀은, 고정 높이가 아닌, 셀 안의 서브뷰들의 제약 구성으로 셀의 크기가 결정될 수 있도록 해야한다.&lt;/p&gt;
+</description>
+     </item>
+   
+     <item>
+       <title>RxSwift retain self</title>
+       <link>http://brannpark.github.io/blog/posts/20190306_rxswift_retain_self/</link>
+       <pubDate>Wed, 06 Mar 2019 13:35:23 +0900</pubDate>
+       
+       <guid>http://brannpark.github.io/blog/posts/20190306_rxswift_retain_self/</guid>
+       <description>&lt;p&gt;RxSwift 의 클로저에서의 self retain 에 대해 정리해보고자 한다.&lt;/p&gt;
+&lt;h1 id=&#34;rxswift&#34;&gt;RxSwift&lt;/h1&gt;
+&lt;p&gt;다음과 같은 코드를 살펴보자.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;TestViewController&lt;/span&gt; : UIViewController {
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; disposeBag = DisposeBag()
+	
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;viewDidLoad&lt;/span&gt;() {
+		&lt;span style=&#34;color:#66d9ef&#34;&gt;super&lt;/span&gt;.viewDidLoad()
+		
+		Observable.just(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)
+			.delay(&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;, scheduler: MainScheduler.asyncInstance)
+			.subscribe(onNext: { value &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt;
+				&lt;span style=&#34;color:#66d9ef&#34;&gt;self&lt;/span&gt;.test(value)
+			}, onDisposed: { 
+			&lt;span style=&#34;color:#66d9ef&#34;&gt;self&lt;/span&gt;.test()
+		})
+		.disposed(by: disposeBag)
+	}
+
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;test&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;_&lt;/span&gt; value: Int = &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;) {
+		print(value)
+	}
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;TestViewController 화면이 로드가 되면, 5초의 딜레이 후에 0 이라는 value 를 내뱉는 Observable 을 정의하고, subscribe 해두었다.&lt;/p&gt;
+&lt;p&gt;이 subscription 의 dispose 는 disposeBag 이 소멸될 때 자동으로 dispose 되도록 disposed(by: disposeBag) 을 지정해두었다.&lt;/p&gt;
+&lt;p&gt;이 disposeBag 이라는 프로퍼티는 let 선언이 되어있으며, 컨트롤러 객체가 소멸될 때 함꼐 소멸되도록 되어있다. (var 로 선언해두고, 적절한 lifecycle 에 disposeBag = DisposeBag() 으로 사용할 수도 있으나, 여기서는 다루지 않도록 한다.)&lt;/p&gt;
+&lt;p&gt;그리고 subscribe 에서는 onNext 와 onDisposed 파라미터에 클로저를 선언해두었다.
+클로저는 모두 컨트롤러내의 test 라는 메서드를 호출하도록 되어있다.&lt;/p&gt;
+&lt;p&gt;그렇다면, 이 화면에 Push ViewController 등으로 진입하자 마자, Back 키를 통해 화면을 나가버리면 어떻게 될까?&lt;/p&gt;
+&lt;p&gt;onNext 와 onDisposed 의 클로저에서 self 를 사용하고 있는 부분에 유의하자.
+그렇다 그러므로, 이 코드에 의해서 컨트롤러 객체의 retain count 가 +2 될 것이다.&lt;/p&gt;
+&lt;p&gt;그렇다는 말인 즉, 화면을 Back 해서 빠져나갔다고 하더라도, 컨트롤러 객체는 메모리해제가 되질 않는다. (deinit 이 호출되지 않는다.)&lt;/p&gt;
+&lt;p&gt;그러므로 disposeBag 프로퍼티 객체도 역시 메모리 해제 되지 않는다. 그러므로 Subscription 역시도 구독해제 되지 않는다.&lt;/p&gt;
+&lt;p&gt;따라서 5초가 지난 후, onNext 클로저가 먼저 실행되고(ref count -1), 더이상 emit 되는 데이터가 없으므로, 자동으로 dispose 되어 onDisposed 클로저가 실행된다(ref count -1).&lt;/p&gt;
+&lt;p&gt;이렇게 된 이후에야, 컨트롤러 객체에 대한 reference count 가 0 가 되므로, 이때에 이 객체가 메모리해제 될 수 있다. (deinit 실행)&lt;/p&gt;
+&lt;p&gt;이는 화면이 종료(back) 되었음에도 불구하고, Task 를 중단 시키지도 못했을 뿐 더러, 5초라는 시간동안 메모리가 누수된 상태가 되는 것이다.&lt;/p&gt;
+&lt;p&gt;으흠? 그렇담 뭔가를 조치해줘야겠지. 클로저에서 사용되는 self 에 약한(weak) 참조 내지는 미소유(unowned) 참조를 쓰면 어떻게 될까?&lt;/p&gt;
+&lt;p&gt;일단 둘 모두 레퍼런스 카운트를 증가시키지 않는 개념이다. weak 은 메모리해제 시 nil 을 가지게 되는 참조형태이고, unowned 는 Non nil, 그러나 메모리 보장하지 않는 참조 형태이다.&lt;/p&gt;
+&lt;p&gt;그럼 이제 코드를 살짝 바꿔보자. 먼저 unowned 를 적용해보자.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;Observable.just(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)
+	.delay(&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;, scheduler: MainScheduler.asyncInstance)
+	.subscribe(onNext: { [&lt;span style=&#34;color:#66d9ef&#34;&gt;unowned&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;self&lt;/span&gt;] value &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;// self 레퍼런스 카운트를 증가시키지 않음&lt;/span&gt;
+		&lt;span style=&#34;color:#66d9ef&#34;&gt;self&lt;/span&gt;.test(value)
+	}, onDisposed: { [&lt;span style=&#34;color:#66d9ef&#34;&gt;unowned&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;self&lt;/span&gt;] &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;// self 레퍼런스 카운트를 증가시키지 않음&lt;/span&gt;
+		&lt;span style=&#34;color:#66d9ef&#34;&gt;self&lt;/span&gt;.test()
+	})
+	.disposed(by: disposeBag)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;이제 화면에서 back 으로 빠져나갈때, 컨트롤러 객체가 메모리해제되며 disposeBag 이 해제되고, disposed(by: disposeBag) 에 의해 subscription 이 dispose 될 것이다.&lt;/p&gt;
+&lt;p&gt;따라서 onNext 클로저는 실행되지 않을 것이고, onDisposed 클로저가 다음으로 실행될 것이다.&lt;/p&gt;
+&lt;p&gt;이 onDisposed 클로저의 self 는 unowned 로 되어있다. 그럼 이때의 self 를 사용하는것은 안전할까??&lt;/p&gt;
+&lt;p&gt;아니다. 해제된 객체에 대한 접근을 하게되는거이고, 런타임 에러를 유발하여 앱이 크래시나게 될 것이다.&lt;/p&gt;
+&lt;p&gt;그렇다면&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;onDisposed: { [&lt;span style=&#34;color:#66d9ef&#34;&gt;unowned&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;self&lt;/span&gt;] &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; 
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;guard&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; `&lt;span style=&#34;color:#66d9ef&#34;&gt;self&lt;/span&gt;` = &lt;span style=&#34;color:#66d9ef&#34;&gt;self&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; { &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; }
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;self&lt;/span&gt;.test()
+})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;이런 코드는 어떨까? 답은 안된다 이다. unowned self 는 Optional 타입이 아니기 때문이다.&lt;/p&gt;
+&lt;p&gt;그렇다. 그래서 onDisposed 의 경우에는 [weak self] 를 써야만 하는것이다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;onDisposed: { [&lt;span style=&#34;color:#66d9ef&#34;&gt;weak&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;self&lt;/span&gt;] &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; 
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;guard&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; `&lt;span style=&#34;color:#66d9ef&#34;&gt;self&lt;/span&gt;` = &lt;span style=&#34;color:#66d9ef&#34;&gt;self&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; { &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; }
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;self&lt;/span&gt;.test() 
+})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;자, 그럼 이런 단발성 이벤트 스트림이 아닌 경우는 어떨까? RxCocoa 를 이용하여 버튼 탭 이벤트를 구독하는 Subscription 을 살펴보자.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;button.rx.tap
+   .subscribe(onNext: { 
+	   &lt;span style=&#34;color:#66d9ef&#34;&gt;self&lt;/span&gt;.close()
+   })
+   .disposed(by: disposeBag)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;처음의 예제와 마찬가지로, onNext 클로저에서 self 를 strong reference 타입으로 사용하고 있다.&lt;/p&gt;
+&lt;p&gt;이는 컨트롤러의 레퍼런스 카운트를 +1 시키며, 컨트롤러 객체의 정상적인 메모리 해제를 막는다.&lt;/p&gt;
+&lt;p&gt;그러므로 Subscription 또한 영원히 해지 되지 않는다. 이 subscription 은 button 의 tap 이벤트를 영원히 기다리고 있기 때문에, 컨트롤러 객체는 프로세스가 종료될 때 까지 계속해서 메모리에 상주하게 된다.&lt;/p&gt;
+&lt;p&gt;disposed(by: disposeBag) 을 통해 subscribe onNext 클로저의 실행은 컨트롤러 객체가 소멸되지 전에 실행되는것을 보장할 수 있으므로, 이런 경우 가장 적절한 retain 정책은 unowned 가 될것이다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;button.rx.tap
+   .subscribe(onNext: { [&lt;span style=&#34;color:#66d9ef&#34;&gt;unowned&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;self&lt;/span&gt;] &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt;
+	   &lt;span style=&#34;color:#66d9ef&#34;&gt;self&lt;/span&gt;.close()
+   })
+   .disposed(by: disposeBag)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+     </item>
+   
+     <item>
+       <title>iOS10&#43; 노티피케이션 정리</title>
+       <link>http://brannpark.github.io/blog/posts/20180615_ios10plus_notification/</link>
+       <pubDate>Fri, 15 Jun 2018 15:10:28 +0900</pubDate>
+       
+       <guid>http://brannpark.github.io/blog/posts/20180615_ios10plus_notification/</guid>
+       <description>&lt;h1 id=&#34;usernotifications-framework&#34;&gt;UserNotifications Framework&lt;/h1&gt;
+&lt;p&gt;iOS10 부터는 UserNotifications 라는 새로운 사용자 노티피케이션 프레임워크가 제공된다.&lt;/p&gt;
+&lt;p&gt;사용자 노티피케이션.. 그렇다면 우리가 컴포넌트간 메시지를 보낼 때 쓰는 NotificationCenter 는 시스템 노티피케이션이(사용자에게 보여지는 UI가 없는 알림이니?)라고 하면 될까..? 아무튼..&lt;/p&gt;
+&lt;p&gt;UNUserNotificationCenterDelegate 프로토콜에는 다음과 같은 메서드들이 제공된다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;optional&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;userNotificationCenter&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;_&lt;/span&gt; center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -&amp;gt; Void)
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;optional&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;userNotificationCenter&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;_&lt;/span&gt; center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -&amp;gt; Void)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;UNUserNotificationCenter.current()&lt;/code&gt; 객체의 &lt;code&gt;delegate&lt;/code&gt; 프로퍼티를 사용하여 위 프로토콜의 구현체를 지정할 수 있다.&lt;/p&gt;
+&lt;p&gt;노티피케이션을 받기 위해서는 당연히 우선적으로 노티피케이션을 받을 수 있는 권한을 사용자로부터 받아야 한다.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;UNUserNotificationCenter.requestAuthorization(options:completionHandler:)&lt;/code&gt; 메서드를 사용하여 사용자에게 권한을 요청 하고, &lt;code&gt;UIApplication.shared.registerForRemoteNotifications()&lt;/code&gt; 를 통해 APNS 등록을 진행하면 된다.&lt;/p&gt;
+&lt;p&gt;등록하고 토큰 받아내는 거야 뭐.. 자료가 많이 있으니 그다지 어려울 것은 없다.&lt;/p&gt;
+&lt;h1 id=&#34;usernotification-did-received&#34;&gt;UserNotification did received!&lt;/h1&gt;
+&lt;p&gt;자, 그럼 이제 이 글을 작성한 이유인, 앱이 푸시 알림을 받는 상황들에 대해서 알아보자.&lt;/p&gt;
+&lt;p&gt;APN 페이로드의 내용에 따라 여러 시나리오 생긴다. 다음과 같은 네가지의 경우가 있다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A. alert, badge 및 sound 만 포함(B, C 의 옵션을 포함하지 않음을 의미)&lt;/li&gt;
+&lt;li&gt;B. &lt;code&gt;content-available: 1&lt;/code&gt; 포함.&lt;/li&gt;
+&lt;li&gt;C. &lt;code&gt;mutable-content: 1&lt;/code&gt; 포함.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;a&#34;&gt;A.&lt;/h2&gt;
+&lt;h3 id=&#34;1-앱이-포그라운드-상태에-있다면&#34;&gt;1) 앱이 포그라운드 상태에 있다면,&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;userNotificationCenter&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;_&lt;/span&gt; center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -&amp;gt; Void)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;메서드가 호출된다. completionHandler 를 호출하여 노티피케이션이 보이거나 보이지 않게 컨트롤 가능하다.&lt;/p&gt;
+&lt;h3 id=&#34;2-앱이-백그라운드프로세스가-생성되어-있지만-백그라운드-상태-또는-프로세스가-종료된-상태에-있다면&#34;&gt;2) 앱이 백그라운드(프로세스가 생성되어 있지만 백그라운드 상태, 또는 프로세스가 종료된 상태)에 있다면,&lt;/h3&gt;
+&lt;p&gt;아무런 메서드도 호출되지 않는다.&lt;/p&gt;
+&lt;h3 id=&#34;3-사용자에-의해-앱이-강제종료force-quit-되었다면&#34;&gt;3) 사용자에 의해 앱이 강제종료(Force-quit) 되었다면,&lt;/h3&gt;
+&lt;p&gt;아무런 메서드도 호출되지 않는다.&lt;/p&gt;
+&lt;p&gt;1,2,3 모두의 경우에 대해, 사용자가 알림센터에서 노티피케이션을 탭하게 되면,&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;userNotificationCenter&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;_&lt;/span&gt; center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -&amp;gt; Void)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;메서드가 호출된다.&lt;/p&gt;
+&lt;h2 id=&#34;b-content-available--1&#34;&gt;B. content-available == 1&lt;/h2&gt;
+&lt;p&gt;Slient Push Notification 의 동작이다. 이때 앱 프로세스는 &lt;strong&gt;사용자에 의한 강제종료 상태&lt;/strong&gt;가 아니어야만 하며, 백그라운드 모드에서의 코드 실행시간은 30초 정도로 제한된다. 이 기능이 동작되게 하기 위해선 간단한 작업이 필요하다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;XCode iOS 프로젝트 타겟에서 Capabilities 항목내의 BackgroundModes 를 ON 으로 활성화. Remote Notifications 항목을 체크.&lt;/li&gt;
+&lt;li&gt;APNS 로 푸시 패킷을 만들어 보낼 때 apn 항목 안에 content-available 이라는 키를 1 이라는 값으로 추가해준다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;{
+                &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;aps&amp;#34;&lt;/span&gt;: {
+                                &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;content-available&amp;#34;&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,
+                                &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;...&lt;/span&gt;
+                },
+                &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;...&lt;/span&gt;
+
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;a href=&#34;https://medium.com/@m.imadali10/ios-silent-push-notifications-84009d57794c&#34;&gt;자세한 설정 참고&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;1-앱이-포그라운드-상태에-있다면-1&#34;&gt;1) 앱이 포그라운드 상태에 있다면,&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;userNotificationCenter&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;_&lt;/span&gt; center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -&amp;gt; Void)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;위 메서드가 호출된다. completionHandler 를 호출하여 노티피케이션이 보이거나 보이지 않게 컨트롤 가능하다.&lt;/p&gt;
+&lt;h3 id=&#34;2-앱이-백그라운드프로세스가-생성되어-있지만-백그라운드-상태-또는-프로세스가-자동-종료된-상태에-있다면&#34;&gt;2) 앱이 백그라운드(프로세스가 생성되어 있지만 백그라운드 상태, 또는 프로세스가 자동 종료된 상태)에 있다면,&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;application&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;_&lt;/span&gt; application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -&amp;gt; Void)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;위의 메서드가 실행된다. 메서드 구현 시 무언가 처리를 하고 마지막에 completionHandler 를 적절한 값(UIBackgroundFetchResult)을 인자로 하여 호출해주면 된다.&lt;/p&gt;
+&lt;h2 id=&#34;c-mutable-content--1&#34;&gt;C. mutable-content == 1&lt;/h2&gt;
+&lt;p&gt;이 속성은 말 그대로, 푸시알림을 기기가 수신할 때(화면에 보이기 이전에) 푸시노티의 내용을 변경하고, 변경된 내용에 따라 노티피케이션이 화면에 보이도록 하는데에 쓰인다. content-available 과 마찬가지로, APNS 로 보내는 푸시 패킷 내의 &amp;ldquo;aps&amp;rdquo; 항목에 추가하면 되는데&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;{
+                &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;aps&amp;#34;&lt;/span&gt;: {
+                                &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;mutable-content&amp;#34;&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,
+                                &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;alert&amp;#34;&lt;/span&gt;: {
+                                                &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;title&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Title&amp;#34;&lt;/span&gt;,
+                                                &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;body&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Body...&amp;#34;&lt;/span&gt;
+                                },
+                                &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;sound&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;default&amp;#34;&lt;/span&gt;,
+                },
+                &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;...&lt;/span&gt;
+
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;alert 항목이 필수로 있어야 한다. 이 항목이 없다면 시스템이 mutable 하지 않은 알림으로 처리해버린다.&lt;/p&gt;
+&lt;p&gt;단순히 이렇게 패킷을 구성하기만 해서는 바로 뭐가 되는건 아니다. 프로젝트에 UNNotificationServiceExtension 타겟을 추가하여야 하는데, 이 과정이 꽤나 번거롭다.&lt;/p&gt;
+&lt;p&gt;단계를 정리하자면..&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;프로젝트에 Notification Service Extension 타겟을 추가.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://developer.apple.com/account/ios/identifier/bundle&#34;&gt;Apple Developer console&lt;/a&gt; 에서 타겟 생성시 지정한 번들ID 를 가지는 App ID 를 신규 생성.&lt;/li&gt;
+&lt;li&gt;기존의 앱과 묶어주기 위해 AppGroup 을 신규 생성.&lt;/li&gt;
+&lt;li&gt;기존의 App 과, Notification Service Extension App 의 설정에서 AppGroup 기능을 활성화 시키고 신규 생성한 AppGroup 에 두개의 App 이 속하도록 지정.&lt;/li&gt;
+&lt;li&gt;Notification Service Extension App 의 프로비저닝 프로파일을 신규 생성하고 Xcode 의 Notification Service Extension App 타겟에 적용.&lt;/li&gt;
+&lt;li&gt;기존 App 의 프로비저닝 프로파일을 다시 생성해서(기존것은 invalid 상태가 됨) Xcode 에 업데이트.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;왜 이렇게 번거로운 짓을 하느냐&amp;hellip;
+두가지 목적이 있을거라고 생각하는데&amp;hellip;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;하나&lt;/strong&gt; 는 iOS10 부터 지원되는 Rich Notification 때문이다.
+이게 뭐냐면.. 알림에 이미지나 동영상을 첨부할 수 있게 하는건데, 푸시를 통해서 이미지나 동영상의 URL 을 보내면
+푸시를 수신했을때(아직 화면에 보인게 아님) 백그라운드에서 이미지와 동영상을 파일로 다운로드하고, 이 다운로드된 파일의 URL을 Notification 에 첨부한 후에, 노티피케이션이 사용자에게 보이도록 하는거다. 노티피케이션의 내용이 변경이 되므로 (첨부파일이 생겨서..) 그래서 mutant-content 라 하는거였다. 이 값이 패킷에 포함되어있다면, 일반 노티가 아닌 NotificationServiceExtension 에서 처리되도록 하라(있다면)는 얘기고, 이는 기존 앱 프로세스가 아닌 이 NotificationServiceExtension 프로세스에서 처리되는 것이다. 그래서 별도 타겟에 별도 AppId 에 별도 프로비져닝 프로파일까지  복잡하게 구성하는 것이었다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;두번째&lt;/strong&gt; 는 content-available 의 한계점 때문이다.
+푸시 수신 시 Background Mode 로 무언갈 할 수 있는건 좋은데&amp;hellip; 앱이 &lt;strong&gt;사용자에 의한 강제종료 상태&lt;/strong&gt;가 아니어야만 한다는 골때리는 제약사항이 있다. 그러나 앱이 강종되었더라도 NotificationServiceExtension 은 실행이 된다. 우와!! 하긴 이르지.. 그러나 이 경우에도 단점은 있다. 사용자에게 푸시 노티를 안보이게 할 수는 없다는것&amp;hellip; 따라서, 알림을 사용자에게 보이면서 무언가를 백그라운드에서 처리하고자 할 때 유용하다고 할 수 있겠다.&lt;/p&gt;
+&lt;h1 id=&#34;notification-service-extension-notification-content-extension&#34;&gt;Notification Service Extension? Notification Content Extension?&lt;/h1&gt;
+&lt;p&gt;위에서 잠깐 설명했지만, Notification Service Extension 은 mutable-content 를 가진 노티피케이션을 사용자에게 보이기 이전에 무언가 코드를 실행하고 이후에 변경된 노티피케이션을 보여주기 위하여 사용된다.&lt;/p&gt;
+&lt;p&gt;그렇다면 Notification Content Extension 은? 이는, 알림의 UI 를 커스터마이징하기 위해 쓰인다.
+이 내용에 대해선 다음의 링크를 참고하자.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://rhammer.tistory.com/tag/%ED%91%B8%EC%89%AC&#34;&gt;여기&lt;/a&gt;&lt;/p&gt;
+</description>
+     </item>
+   
+     <item>
+       <title>iOS_Adhoc_아카이브와 크래시리틱스, 그리고 Bitcode</title>
+       <link>http://brannpark.github.io/blog/posts/20180605_ios_adhoc_distribution_archive_and_crashlytics/</link>
+       <pubDate>Tue, 05 Jun 2018 16:12:15 +0900</pubDate>
+       
+       <guid>http://brannpark.github.io/blog/posts/20180605_ios_adhoc_distribution_archive_and_crashlytics/</guid>
+       <description>&lt;p&gt;오랫만의 포스팅!&lt;/p&gt;
+&lt;p&gt;회사를 옮기고 나서 어찌어찌 하다보니 iOS 개발을 맡게 되었다.&lt;/p&gt;
+&lt;p&gt;현 팀에서는 사내에 별도록 구축된 앱 빌드 &amp;amp; 배포 서비스를 이용하고 있었고, 앱 크래시 관리용으로는 Fabric crashlytics 를 사용중이었다.&lt;/p&gt;
+&lt;p&gt;그리고 얼마전 업데이트 작업을 마치고 앱스토어에 릴리즈할때 무심코 본 옵션..  Bitcode!!&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://kevindelord.io/images/itunesconnect/summary.png&#34; alt=&#34;Figure 1. Bitcode? 누구냐 넌!&#34;&gt;&lt;/p&gt;
+&lt;p&gt;예전 회사에서는 저 옵션을 끈 채로 배포를 했던것 같은데.. 아무튼, 저게 문제가 되는 상황이 생겼다.&lt;/p&gt;
+&lt;p&gt;차근히 썰을 풀어가보겠다.&lt;/p&gt;
+&lt;p&gt;참고로..&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Xcode 7부터는 Bitcode가 기본적으로 enabled 되어있다. (빌드 속성화면에서 아무리 뒤져봐야 나오지 않는다..;;) &lt;a href=&#34;https://blog.asamaru.net/2015/10/20/ios-9-xcode-you-must-rebuild-it-with-bitcode-enabled/&#34;&gt;참고&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;강제로 Bitcode 를 비활성화하려면? (가능한가..?) &lt;a href=&#34;http://theeye.pe.kr/archives/2501&#34;&gt;여기&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;h2 id=&#34;크래시가-보이지-않아요&#34;&gt;크래시가 보이지 않아요.&lt;/h2&gt;
+&lt;p&gt;테스트를 위해 사내 배포를 진행하고나면 테스터들이 설치 후 테스트를 하게 되는데, 혹여라도 사용 중 크래시가 발생한다면 Crashlytics 쪽으로 크래시들이 수집이 되어야 한다.&lt;/p&gt;
+&lt;p&gt;그런데 나오라는 크래시는 나오지 않고 이런 화면만을 내게 보여준다!&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.stack.imgur.com/noyDG.png&#34; alt=&#34;Figure 2. dSYM 을 찾습니다!&#34;&gt;&lt;/p&gt;
+&lt;p&gt;dSYM 이 없어서 심볼화하지 못한 크래시가 있다는 말인데..&lt;/p&gt;
+&lt;p&gt;그럼 먼저 dSYM 이 뭔지 정확히 알아봐야겠다.&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;h2 id=&#34;dsym&#34;&gt;dSYM&lt;/h2&gt;
+&lt;p&gt;대략 뭐하는 파일인지 검색을 해보니..&lt;/p&gt;
+&lt;p&gt;리버스 엔지니어링을 어렵게하고(난독화), 앱 바이너리의 사이즈를 줄이기 위한 목적으로 만들어지는 파일이라 한다.&lt;/p&gt;
+&lt;p&gt;Crashlytics 와 같은 서비스에서는 이 dSYM 이 있어야, 크래시 로그를 사람이 읽을 수 있도록 만들어줄 수 있다.&lt;/p&gt;
+&lt;p&gt;이 dSYM 은 배포를 위해 아카이브를 만들때 자동으로 만들어진다. (물론 Xcode 옵션에 따라서!)&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://brannpark.github.io/blog/blog/img/ios_fabric_and_bitcode/build_option.png&#34; alt=&#34;Figure 3. 드워프와 dSYM&#34;&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;자, 그럼 여기까지 알았으니.. dSYM 을 찾아서 Fabric 에 업로드해보자!&lt;/p&gt;
+&lt;p&gt;Fabric 대쉬보드에서, 설정화면으로 가서 App 메뉴를 선택하고, 알맞는 App 을 선택하면 다음과 같은 화면을 볼 수 있다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.stack.imgur.com/hQnbI.png&#34; alt=&#34;Figure 4. App setting 페이지&#34;&gt;&lt;/p&gt;
+&lt;p&gt;이제 이곳에 dSYM 파일을 찾아 압축을 해서 올리기만 하면 되는것처럼 보인다.&lt;/p&gt;
+&lt;p&gt;그래서 시도해보았다.&lt;/p&gt;
+&lt;p&gt;결과는&amp;hellip;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://brannpark.github.io/blog/blog/img/ios_fabric_and_bitcode/hidden.png&#34; alt=&#34;Figure 5. ___hidden&#34;&gt;&lt;/p&gt;
+&lt;p&gt;hidden?!&lt;/p&gt;
+&lt;p&gt;심볼이.. 감춰져있다고 한다. 왜지? dSYM 이 심볼을 가지고 있다면서?!!&lt;/p&gt;
+&lt;p&gt;원인이 뭔지 구글링을 해봤다..&lt;/p&gt;
+&lt;p&gt;bitcode.. bitcode&amp;hellip;?&lt;/p&gt;
+&lt;p&gt;아카이브를 &lt;strong&gt;Export&lt;/strong&gt; 시 비트코드란 녀석을 활성화하는게 이 문제의 원흉임을 알 수 있었다.&lt;/p&gt;
+&lt;p&gt;내가 찾아본 대부분의 글들은, 앱스토어에 올리고 나서 어떻게 해야하는가에 대한 질답이 대부분이었는데, (필자의 경우는 Adhoc 배포!)&lt;/p&gt;
+&lt;p&gt;이런 경우에는 단순한 솔루션이 주어졌다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;앱스토어에 릴리즈&lt;/li&gt;
+&lt;li&gt;Xcode Organizer -&amp;gt; 아카이브 선택 -&amp;gt; 우측에 Download dSyms 버튼 클릭!&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;을 하면 아카이브 내의 dSYM 이 자동으로 갱신된단다.
+(갱신.. 응? 갱신이 필요해?)
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+위 방법의 대체 방법으로는,&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;itunesconnect 에 접속해서&lt;/li&gt;
+&lt;li&gt;앱을 선택하고&lt;/li&gt;
+&lt;li&gt;Activity (활동) 항목에서 업로드한 빌드를 선택&lt;/li&gt;
+&lt;li&gt;화면 UI 중에 dSYM 을 다운로드 링크를 클릭&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;가 있다고 한다.&lt;/p&gt;
+&lt;p&gt;자.. 그렇다면 이제는 Bitcode 가 활성화된 채로 AppStore 에 업로드를 하면 무슨일이 발생하는건지 알아볼 차례다.&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;먼저, 릴리즈 아카이브를 앱스토어에 올리려할떄 뜨는 디어얼로그 화면이다.
+&lt;img src=&#34;http://brannpark.github.io/blog/blog/img/ios_fabric_and_bitcode/appstore_upload.png&#34; alt=&#34;Figure 6.&#34;&gt;&lt;/p&gt;
+&lt;p&gt;다음은, 애드혹 아카이브를 Export 하려 할 때 뜨는 다이얼로그 화면이다.
+&lt;img src=&#34;http://brannpark.github.io/blog/blog/img/ios_fabric_and_bitcode/adhoc_export.png&#34; alt=&#34;Figure 7.&#34;&gt;&lt;/p&gt;
+&lt;p&gt;묘하게 다르다.
+어쩃든 Appstore Upload 화면을 잘 보면.. Bitcode 라는 건,&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;하드웨어, 소프트웨어, 컴파일러의 변경에 따라 AppStore 가 앱을 재빌드 할 수 있도록 해주는 것&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;을 말한다는것을 알 수 있다.&lt;/p&gt;
+&lt;p&gt;좀 더 자세한 설명은 아래와 같다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;iOS9 에서 LLVM Compiler에서 Bitcode를 생성을 지원한다. Bitcode를 사용하는 경우 AppStore에서 필요한 경우에 해당 코드를 사용하여 다시 최적화 된 바이너리를 생성하여 End user에게 전송해 주는 역할을 담당한다. Xcode에서 Bitcode를 포함한 iOS 앱을 AppStore로 전송하면, AppStore 내에서 사용자의 디바이스에 따라 최적화된 바이너리를 다시 빌드하는 과정을 거친다. 따라서, Bitcode가 적용된 앱을 앱스토어로 전송한 경우 개발자는 추후 새롭게 출시되는 디바이스의 특성에 따라 다시 빌드하는 수고를 덜어줄 것으로 예상된다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;설명은 다음과 같다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;앱스토어가 하는 방식과 같이, Bitcode 를 컴파일 하여 앱을 Export 합니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;그렇다.. 결국 Bitcode 를 포함(맞는 표현일까..?) 하여 다시 빌드가 된다는거다.&lt;/p&gt;
+&lt;p&gt;그리고 이 때 Pods 플젝 dSYM 들을 제외한 App.dSYM 은 여러개로 쪼개진다.&lt;/p&gt;
+&lt;p&gt;새롭게 생성되는 dSYM 들은 UUID 포맷의 파일명을 가진다. (원본 App.dSYM 은 이떄부터 쓸모없어지게(?) 된다)&lt;/p&gt;
+&lt;p&gt;여기서 앱스토어 upload 냐, 애드혹 export 냐에 따라 이 dSYM 들에 차이점이 생긴다.&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;Bitcode 로 rebuild 됨에 따라 dSYM 이 새롭게 생성이 되는데..&lt;/p&gt;
+&lt;p&gt;이때 이 dSYM 이 수상하다. dSYM 이 obfuscated 상태이다. 이 상태의 dSYM 을 그대로 Fabric 에 올려두면..&lt;/p&gt;
+&lt;p&gt;__parent#123123 와 같은 심볼을 크래시 Stacktrace 에서 보게 된다. (한번 dSYM 을 올려서 Fabric 에 기록된 크래시 로그에 dSYM 이 프로세싱 되어 적용되면.. 다시 못돌립니다.. 크래시 내용이 뭔지 소중하다면 반드시 주의하세요!)&lt;/p&gt;
+&lt;p&gt;그래서 de-obfuscate 프로세싱을 해줘야 하는데.. 앱스토어 업로드 시에는 그걸 자동으로 해주는것 같다.&lt;/p&gt;
+&lt;p&gt;따라서 업로드 후 dSYM 을 다시 다운로드 받으면 바로 Fabric 에 올려도 된다.&lt;/p&gt;
+&lt;p&gt;그런데&amp;hellip;&lt;/p&gt;
+&lt;p&gt;Adhoc 은 de-obfuscate 프로세싱을 자동으로 해주지 않는다. 그래서 내가 이렇게 장황하게 이 글을 쓰고 있는 것이었다..&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;필자의 회사에서 사용하고 있는 사내 빌드 &amp;amp; 배포 서비스의 경우 Jenkins CI 를 기반으로 만들어져 있고,&lt;/p&gt;
+&lt;p&gt;플젝을 빌드하고 나면 빌드 아웃풋으로 plist, ipa, dSYM, xcarchive 등의 Artifacts 들이 생성된다.&lt;/p&gt;
+&lt;p&gt;여기서 제공되는 dSYM 은 원본 App.dSYM.zip 이었기에 이를 쓸 수는 없고&amp;hellip;&lt;/p&gt;
+&lt;p&gt;최종 빌드 산물인 xcarchive 를 내려받는 수밖에 없다.&lt;/p&gt;
+&lt;p&gt;이를 받아서 내용물을 보면 다음과 같은 디렉토리를 찾을 수 있다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;dSYMs&lt;/li&gt;
+&lt;li&gt;BCSymbolMaps&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;dSYMs 는 dSYM 파일들이 위치하는곳이다.
+BCSymbolMaps 는 dSYM 을 de-obfuscate 할 수 있는 정보를 가진 파일들이 위치한다!&lt;/p&gt;
+&lt;p&gt;위에서도 언급했듯이 Adhoc export 시에는 수동으로 난독화된 Symbol 정보를 매핑 시켜줘야 한다.&lt;/p&gt;
+&lt;p&gt;이때 쓰이는 도구가 dsymutil 이라는 녀석이다.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ dsymutil -symbol-map {YourApp.xcarchive}/BCSymbolMaps  {YourApp.xcarchive}/dSYMs/*.dSYM
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;위와 같이 실행해주고 나면 dSYM 들의 난독화된 심볼이 복원이 된다.&lt;/p&gt;
+&lt;p&gt;이제 Fabric 에는.. dSYMs 디렉토리에 있는 dSYM 파일들 중 {YourApp}.App.dSYM 파일 (원본 dSYM 파일) 을 제외한 나머지 모든 dSYM 들을 Zip 으로 압축하여 올리기만 하면 된다.&lt;/p&gt;
+&lt;p&gt;끝이다! 야호.&lt;/p&gt;
+&lt;p&gt;부디 누군가에게 유용한 정보가 되었길!&lt;/p&gt;
+</description>
+     </item>
+   
+     <item>
+       <title>안드로이드 앱 실행 시의 세가지 상태</title>
+       <link>http://brannpark.github.io/blog/posts/20171031_android_launch_process/</link>
+       <pubDate>Fri, 13 Oct 2017 16:25:46 +0900</pubDate>
+       
+       <guid>http://brannpark.github.io/blog/posts/20171031_android_launch_process/</guid>
+       <description>&lt;p&gt;안드로이드 앱이 실행이 될때, 세가지의 다른 실행 상태가 존재한다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Cold start (차가운 시작)&lt;/li&gt;
+&lt;li&gt;Hot start (따듯한 시작)&lt;/li&gt;
+&lt;li&gt;Warm Start (미지근한 시작)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;앱 실행 성능을 개선하기 위해서는 각각의 시작 실행 상태들이 의미하는게 무엇인지 이해하는게 중요하다.&lt;/p&gt;
+&lt;h2 id=&#34;cold-start&#34;&gt;Cold start&lt;/h2&gt;
+&lt;p&gt;Cold start 는 안드로이드 시스템 프로세스가 아직 앱 프로세스를 만들지 않은 상태에서 앱을 실행하는 것을 말한다.
+기기가 부팅 된 이후 최초로 앱을 실행할 때나, 앱 프로세스를 완전히 종료시켰을 경우 등이 해당된다.
+이 실행 상태는 다른 실행 상태들에 비해 앱을 실행하기 위해 더욱 많은 작업을 처리해야 하기 때문에 느릴 수 밖에 없다.
+따라서 앱 실행속도의 최적화 관점에서 가장 신경써야하는 상태가 되는 것이다.&lt;/p&gt;
+&lt;p&gt;이 상태에서의 앱 실행 시, 시스템은 다음의 세가지 Task 를 처리한다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;앱을 로딩하고 실행한다.&lt;/li&gt;
+&lt;li&gt;앱 실행 직후, 빈(blank) starting window 를 화면에 보인다. (System process 가 담당)&lt;/li&gt;
+&lt;li&gt;앱 프로세스를 생성한다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;앱 프로세스가 생성 된 이후에는,&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Application Object 를 생성.&lt;/li&gt;
+&lt;li&gt;Main(UI) 스레드를 실행.&lt;/li&gt;
+&lt;li&gt;기본 액티비티를 생성. (android.intent.action.MAIN action 을 가지는 액티비티)&lt;/li&gt;
+&lt;li&gt;뷰를 생성(inflating).&lt;/li&gt;
+&lt;li&gt;화면(screen)에 뷰를 배치.&lt;/li&gt;
+&lt;li&gt;초기 draw 를 수행.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;hot-start&#34;&gt;Hot start&lt;/h2&gt;
+&lt;p&gt;Hot start 는 Cold start 보다 훨씬 더 단순하고 오버헤드가 적은 실행 상태이다. 시스템은 단순히 앱의 액티비티를 background 에서 foreground 로 가져오는 일을 할 뿐이다.
+앱의 Activity 가 아직 메모리에 남아있는 경우, 별도의 객체 초기화, View inflating, Rendering 을 할 필요가 없다.
+Warm start 또한 Cold start 와 마찬가지로 동일한 On-Screen 과정을 수행한다. 즉, 앱이 액태비티 렌더링을 완료 하기 전까지 시스템 프로세스는 blank window 를 화면에 보여준다.&lt;/p&gt;
+&lt;h2 id=&#34;warm-start&#34;&gt;Warm start&lt;/h2&gt;
+&lt;p&gt;Warm start 는 Cold start 에서 발생하는 작업들의 일부를 포함하며, Hot start 보다는 더 많은 오버헤드를 일으키는 앱 실행 상태이다.
+대표적인 예로는,&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;사용자가 백키를 통해 앱을 종료시킨다.
+그러나 앱 프로세스가 Empty Process (아직 메모리에 상주해 있으나, 우선순위가 가장 낮은 상태의 프로세스이며, 필요에 따라 시스템에 의해 결국은 종료 될 프로세스) 상태 일 때,
+사용자가 앱을 다시 실행시킨다.
+이러한 경우 프로세스 자체는 기존의 프로세스가 그대로 사용되지만, 액티비티는 새로 생성되며, onCreate 단계부터 진행이 된다.&lt;/li&gt;
+&lt;li&gt;사용자가 앱 프로세스를 완전히 종료시키거나, 시스템이 메모리 확보를 위해 앱 프로세스를 종료시킨다.
+이후 사용자가 앱을 재실행한다.
+이러한 경우, 프로세스와 액티비티는 모두 새롭게 생성되어야 한다. (cold start)
+다만, Cold start 에 비교하여, Warm Start 의 경우에는 savedInstanceState 를 활용할 수 있으며, 이를 통해 미리 저장된 데이터를 활용하여 액티비티를 실행 할 수 있다는 장점이 있다.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+     </item>
+   
+     <item>
+       <title>Emacs, Mac osx 클립보드 공유</title>
+       <link>http://brannpark.github.io/blog/posts/20170719_share_clipboard_buffer_share_with_macosx_and_emacs/</link>
+       <pubDate>Wed, 19 Jul 2017 14:45:52 +0900</pubDate>
+       
+       <guid>http://brannpark.github.io/blog/posts/20170719_share_clipboard_buffer_share_with_macosx_and_emacs/</guid>
+       <description>&lt;p&gt;가끔 Mac 에서 Emacs 를 쓸 때, OS 의 clipboard 가 Emacs 의 clipboard(?) 가 별도의 공간이어서 불편함을 느꼈던 적이 많았다.&lt;/p&gt;
+&lt;p&gt;붙여넣기야&amp;hellip; Cmd + V 를 이용하면 된다지만, Emacs 상의 텍스트 블록을 복사해서 다른 Mac 어플리케이션에 붙여넣기를 하려면 마우스를 이용해서 드래깅하여 영역을 지정하고 Cmd + C 키를 이용하여 복사하여야만 했고, Emacs 의 창이 분할이 되어있는 경우라면(가로분할), 먼저 해당 창을 닫지 않으면 마우스로 여러줄을 복사해야 할때, 다른창의 글자까지 복사가 되어버린다. (실제 OS 의 &amp;lsquo;창&amp;rsquo; 이 아니기 때문)&lt;/p&gt;
+&lt;p&gt;이럴때는 다음과 같은 설정을 통해 OS 와 Emacs 의 Clipboard 가 공유되게(실제로는 공유 되는 것 &amp;ldquo;처럼&amp;rdquo;) 만들 수 있다.&lt;/p&gt;
+&lt;h3 id=&#34;guide&#34;&gt;Guide&lt;/h3&gt;
+&lt;p&gt;먼저 본인의 이맥스 설정파일을 연다. (이 파일이 없다면, 새로 생성하면 된다.)&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ emacs ~/.emacs
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;그리고는 아래와 같이 적당한 위치에 다음의 코드를 삽입한다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://brannpark.github.io/blog/blog/img/emacs_clipboard_with_osx/emacs_pbpaste.png&#34; alt=&#34;.Emacs 설정파일&#34;&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;;; pbcopy for OSX&lt;/span&gt;
+(defun copy-from-osx ()
+  (shell-command-to-string &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;pbpaste&amp;#34;&lt;/span&gt;))
+(defun paste-to-osx (text &lt;span style=&#34;color:#66d9ef&#34;&gt;&amp;amp;optional&lt;/span&gt; push)
+  (&lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; ((process-connection-type &lt;span style=&#34;color:#66d9ef&#34;&gt;nil&lt;/span&gt;))
+    (&lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; ((proc (start-process &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;pbcopy&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;*Messages*&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;pbcopy&amp;#34;&lt;/span&gt;)))
+      (process-send-string proc text)
+      (process-send-eof proc))))
+
+(&lt;span style=&#34;color:#66d9ef&#34;&gt;setq&lt;/span&gt; interprogram-cut-function &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;paste-to-osx&lt;/span&gt;)
+(&lt;span style=&#34;color:#66d9ef&#34;&gt;setq&lt;/span&gt; interprogram-paste-function &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;copy-from-osx&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;그리고 Emacs 를 리스타트 하면 설정 끝!&lt;/p&gt;
+</description>
+     </item>
+   
+     <item>
+       <title>Emacs Keybinding for Mac osx</title>
+       <link>http://brannpark.github.io/blog/posts/20161011_xcode_emacs_keybinding/</link>
+       <pubDate>Tue, 11 Oct 2016 14:52:05 +0900</pubDate>
+       
+       <guid>http://brannpark.github.io/blog/posts/20161011_xcode_emacs_keybinding/</guid>
+       <description>&lt;h1 id=&#34;시작은-xcode-에-emacs-keybinding-적용해보기&#34;&gt;시작은.. Xcode 에 Emacs keybinding 적용해보기!&lt;/h1&gt;
+&lt;p&gt;Xcode 는 기본적으로 Emacs 키바인딩을 지원하지 않는다. Option 메타키를 사용하는것을 쉽사리 허용하지 않는데..&lt;/p&gt;
+&lt;p&gt;이리저리 찾아보고 하다가 최종 적용한 방법이 있어 정리해본다.&lt;/p&gt;
+&lt;p&gt;맥에서 실행되는 모든 Cocoa 어플리케이션들의 키바인딩을 오버라이딩 하는 개념으로 이해하면 된다. 따라서 Xcode 뿐 아니라&lt;/p&gt;
+&lt;p&gt;맥의 모든 프로그램(Notes, TextEdit 같은 편집기도 마찬가지!) 에서도 설정된 키바인딩으로 사용 가능하다.&lt;/p&gt;
+&lt;p&gt;다만 아래 바인딩 된 단축키셋은 기존 설정이 오버라이드 되어버리므로,&lt;/p&gt;
+&lt;p&gt;기존 Option 키를 이용한 특수기호를 입력하는게 불가능해진다는 단점이 있다&amp;hellip; (그런기능이었는지도 몰랐&amp;hellip;)&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;BEWARE:
+This file uses the Option key as a meta key.  This has the side-effect
+of overriding Mac OS keybindings for the option key, which generally
+make common symbols and non-english letters.
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;defaultkeybindingdict&#34;&gt;DefaultKeyBinding.dict&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ cd ~/Library
+$ ls | grep KeyBindings &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;디렉토리가 없다면 생성&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+$ cd KeyBindings
+$ touch DefaultKeyBinding.dict &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;파일이 없다면 생성&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;DefaultKeyBinding.dict 파일에 다음과 같이 작성.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;{
+&lt;span style=&#34;color:#75715e&#34;&gt;/* Keybindings for emacs emulation.  Compiled by Jacob Rus.
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; *
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; * To use: copy this file to ~/Library/KeyBindings/
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; * after that any Cocoa applications you launch will inherit these bindings
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; *
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; * This is a pretty good set, especially considering that many emacs bindings
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; * such as C-o, C-a, C-e, C-k, C-y, C-v, C-f, C-b, C-p, C-n, C-t, and
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; * perhaps a few more, are already built into the system.
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; *
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; * BEWARE:
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; * This file uses the Option key as a meta key.  This has the side-effect
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; * of overriding Mac OS keybindings for the option key, which generally
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; * make common symbols and non-english letters.
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; */&lt;/span&gt;
+
+&lt;span style=&#34;color:#75715e&#34;&gt;/* Ctrl shortcuts */&lt;/span&gt;
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;^l&amp;#34;&lt;/span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;centerSelectionInVisibleArea:&amp;#34;&lt;/span&gt;;  &lt;span style=&#34;color:#75715e&#34;&gt;/* C-l          Recenter */&lt;/span&gt;
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;^/&amp;#34;&lt;/span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;undo:&amp;#34;&lt;/span&gt;;                          &lt;span style=&#34;color:#75715e&#34;&gt;/* C-/          Undo */&lt;/span&gt;
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;^_&amp;#34;&lt;/span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;undo:&amp;#34;&lt;/span&gt;;                          &lt;span style=&#34;color:#75715e&#34;&gt;/* C-_          Undo */&lt;/span&gt;
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;^ &amp;#34;&lt;/span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;setMark:&amp;#34;&lt;/span&gt;;                       &lt;span style=&#34;color:#75715e&#34;&gt;/* C-Spc        Set mark */&lt;/span&gt;
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;^\@&amp;#34;&lt;/span&gt;       &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;setMark:&amp;#34;&lt;/span&gt;;                       &lt;span style=&#34;color:#75715e&#34;&gt;/* C-@          Set mark */&lt;/span&gt;
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;^w&amp;#34;&lt;/span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;deleteToMark:&amp;#34;&lt;/span&gt;;                  &lt;span style=&#34;color:#75715e&#34;&gt;/* C-w          Delete to mark */&lt;/span&gt;
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;^y&amp;#34;&lt;/span&gt;	&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;yank:&amp;#34;&lt;/span&gt;;               &lt;span style=&#34;color:#75715e&#34;&gt;/* C-y          Cycle through kill ring */&lt;/span&gt;
+
+    &lt;span style=&#34;color:#75715e&#34;&gt;/* Meta shortcuts */&lt;/span&gt;
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;~f&amp;#34;&lt;/span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;moveWordForward:&amp;#34;&lt;/span&gt;;               &lt;span style=&#34;color:#75715e&#34;&gt;/* M-f          Move forward word */&lt;/span&gt;
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;~b&amp;#34;&lt;/span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;moveWordBackward:&amp;#34;&lt;/span&gt;;              &lt;span style=&#34;color:#75715e&#34;&gt;/* M-b          Move backward word */&lt;/span&gt;
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;~&amp;lt;&amp;#34;&lt;/span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;moveToBeginningOfDocument:&amp;#34;&lt;/span&gt;;     &lt;span style=&#34;color:#75715e&#34;&gt;/* M-&amp;lt;          Move to beginning of document */&lt;/span&gt;
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;~&amp;gt;&amp;#34;&lt;/span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;moveToEndOfDocument:&amp;#34;&lt;/span&gt;;           &lt;span style=&#34;color:#75715e&#34;&gt;/* M-&amp;gt;          Move to end of document */&lt;/span&gt;
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;~v&amp;#34;&lt;/span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;pageUp:&amp;#34;&lt;/span&gt;;                        &lt;span style=&#34;color:#75715e&#34;&gt;/* M-v          Page Up */&lt;/span&gt;
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;~/&amp;#34;&lt;/span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;complete:&amp;#34;&lt;/span&gt;;                      &lt;span style=&#34;color:#75715e&#34;&gt;/* M-/          Complete */&lt;/span&gt;
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;~c&amp;#34;&lt;/span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ( &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;capitalizeWord:&amp;#34;&lt;/span&gt;,              &lt;span style=&#34;color:#75715e&#34;&gt;/* M-c          Capitalize */&lt;/span&gt;
+                    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;moveForward:&amp;#34;&lt;/span&gt;,
+                    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;moveForward:&amp;#34;&lt;/span&gt;);                                
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;~u&amp;#34;&lt;/span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ( &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;uppercaseWord:&amp;#34;&lt;/span&gt;,               &lt;span style=&#34;color:#75715e&#34;&gt;/* M-u          Uppercase */&lt;/span&gt;
+                    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;moveForward:&amp;#34;&lt;/span&gt;,
+                    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;moveForward:&amp;#34;&lt;/span&gt;);
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;~l&amp;#34;&lt;/span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ( &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;lowercaseWord:&amp;#34;&lt;/span&gt;,               &lt;span style=&#34;color:#75715e&#34;&gt;/* M-l          Lowercase */&lt;/span&gt;
+                    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;moveForward:&amp;#34;&lt;/span&gt;,
+                    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;moveForward:&amp;#34;&lt;/span&gt;);
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;~d&amp;#34;&lt;/span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;deleteWordForward:&amp;#34;&lt;/span&gt;;             &lt;span style=&#34;color:#75715e&#34;&gt;/* M-d          Delete word forward */&lt;/span&gt;
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;^~h&amp;#34;&lt;/span&gt;       &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;deleteWordBackward:&amp;#34;&lt;/span&gt;;            &lt;span style=&#34;color:#75715e&#34;&gt;/* M-C-h        Delete word backward */&lt;/span&gt;
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;~\U007F&amp;#34;&lt;/span&gt;   &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;deleteWordBackward:&amp;#34;&lt;/span&gt;;            &lt;span style=&#34;color:#75715e&#34;&gt;/* M-Bksp       Delete word backward */&lt;/span&gt;
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;~t&amp;#34;&lt;/span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;transposeWords:&amp;#34;&lt;/span&gt;;                &lt;span style=&#34;color:#75715e&#34;&gt;/* M-t          Transpose words */&lt;/span&gt;
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;~\@&amp;#34;&lt;/span&gt;       &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ( &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;setMark:&amp;#34;&lt;/span&gt;,                     &lt;span style=&#34;color:#75715e&#34;&gt;/* M-@          Mark word */&lt;/span&gt;
+                    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;moveWordForward:&amp;#34;&lt;/span&gt;,
+                    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;swapWithMark&amp;#34;&lt;/span&gt;);
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;~h&amp;#34;&lt;/span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ( &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;setMark:&amp;#34;&lt;/span&gt;,                     &lt;span style=&#34;color:#75715e&#34;&gt;/* M-h          Mark paragraph */&lt;/span&gt;
+                    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;moveToEndOfParagraph:&amp;#34;&lt;/span&gt;,
+                    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;swapWithMark:&amp;#34;&lt;/span&gt;);
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;~w&amp;#34;&lt;/span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ( &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;deleteToMark:&amp;#34;&lt;/span&gt;,
+		    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;yankAndSelect:&amp;#34;&lt;/span&gt;,
+		    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;moveDown:&amp;#34;&lt;/span&gt;,
+		    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;moveUp:&amp;#34;&lt;/span&gt;);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;이렇게 하면 기본적으로 TextEdit 과 같은 프로그램들에서 위에 정의된 키바인딩들이 가능해진다. 다만 순차 조합 키바인딩, 예를 들어 ^x^f(파일열기) 혹은 ^x^s(파일저장) 과 같은 키바인딩은 동작하지 않는다. (이리저리 해보았지만 결국 실패..!!)&lt;/p&gt;
+</description>
+     </item>
+   
+     <item>
+       <title>Presenter First</title>
+       <link>http://brannpark.github.io/blog/posts/20160615_presenter_first/</link>
+       <pubDate>Wed, 15 Jun 2016 19:20:21 +0900</pubDate>
+       
+       <guid>http://brannpark.github.io/blog/posts/20160615_presenter_first/</guid>
+       <description>&lt;h1 id=&#34;presenter-first-tdd-for-large-complex-applications-with-graphical-user-interfaces&#34;&gt;Presenter First: TDD for Large, Complex Applications with Graphical User Interfaces&lt;/h1&gt;
+&lt;p&gt;Michael Marsiglia, Brian Harleton, Carl Erickson&lt;/p&gt;
+&lt;p&gt;번역: Brann Park&lt;/p&gt;
+&lt;p&gt;원문: &lt;a href=&#34;https://atomicobject.com/uploadedImages/archive/files/PF_March2005.pdf&#34;&gt;https://atomicobject.com/uploadedImages/archive/files/PF_March2005.pdf&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;motivation&#34;&gt;Motivation&lt;/h2&gt;
+&lt;p&gt;GUI를 다루는것은 힘들다. 처음에는 매우 단순했던 것들이 어떻게 이리도 빠르게 거대해지고 복잡해지는걸까? 디자인에 작은 변화를 가하는 것이 왜 어려운걸까? 우리는 어쩌다가 구현할 기능도 확정되지 않은  순간에 개발공수가 큰 코드를 계속해서 작성하는 함정에 빠지게 된 걸까? 어쩌다가 기능 중심의 개발이라는 애초의 목표에서 어긋나게 된걸까? 스트레스와 고통을 덜어줄 유닛 테스트들을 만드는것이 어째서 어려운걸까? 커스텀 다이얼로그에 작은 변화를 주는것에 일주일의 시간이 든다는 말을 어떻게 고객에게 이해시킬 수 있을까?&lt;/p&gt;
+&lt;p&gt;그 첫 단계는 비지니스 로직과 인터페이스를 분리하는 것이다. MVP(Model-View-Presenter) 패턴을 사용하여, Model을 Presenter와 View로부터 격리하였다. 이를 이용하여 TDD 원칙을 따라 비지니스 로직(model)을 유닛 테스트 할 수 있다. 하지만 이 방식은 어플리케이션의 플로우 코드나, 기능 코드들을 GUI에 남겨두었기에 충분하지 않다. 왜냐하면 시스템 자동화 수준의 테스트 프레임워크를 이용하여 GUI 기능을 테스트 하는 것이 가능하지만, 우리의 경험상 이러한 테스트들을 만들고 유지보수 하는데에는 높은 비용이 발생하기 때문이다.&lt;/p&gt;
+&lt;p&gt;Michael Feathers의 Humble Dialog Box는 사용자 그래픽 인터페이스를 가진 어플리케이션의  View로부터 모든 기능과 로직을 제거함으로써 테스트성을 향상시켰다. Smart Object 라는 것을 만들어, Presenter를 View에서 Model로 이동시켰다. 그러나 이런 Smart Object를 만들고 관리하는 것은 사용자 인터페이스의 플로우와 로직이 어플리케이션의 비지니스 로직과 결합된다는 점에서 이상적이지 못하다. 어플리케이션 플로우에 대한 모든 변화는 직접적으로 비지니스 로직에 영향을 미치고 반대로 비지니스 로직의 변화 또한 어플리케이션 플로우에 영향을 끼치게 된다. 이러한 커플링의 문제는 요구사항의 변화에 대응하는것을 어렵게 만든다.&lt;/p&gt;
+&lt;p&gt;비용 효율적인 관점에서 우리는, 사용자 우선순위 기반의, 스토리 기반의, 테스트 주도의 개발이라는 &lt;a href=&#34;https://en.wikipedia.org/wiki/Extreme_programming_practices&#34;&gt;Extreme Programming practice&lt;/a&gt;를 따르기를 원한다. 이를 위해선 개발 프로세스 전반에 걸쳐 TDD의 도입이 필요하다. 우리는 깔끔하고(clean), 믿을만 하며(robust), 비결합적이며(decoupled), 완전히 테스트된(tested) 코드를 작성할 수 있어야한다. 우리는 요구사항의 변화에 쉽게 대응 할 수 있는 개발 프로세스와 코드를 원한다.&lt;/p&gt;
+&lt;p&gt;Presenter First는 GUI를 가진 복잡한 어플리케이션과 패키지들을 만들어내는 문제를 다룬다. 또한 끊임없이 변화하는 인터페이스로부터 개발을 분리시키고 기능의 문제에 집중하도록 해준다. 사용자 스토리들은 일반적으로 기능 중심적이기 때문에, Present First는 우리가 버튼, 슬라이더, 체크박스 따위가 아닌, 기능의 관점에서 생각할 수 있게끔 도와준다. 또한 테스트된, 유지보수 가능한 코드를 만들어내고, 어플리케이션 기능의 구현 및 테스트를 위한 프로세스를 제공해준다.&lt;/p&gt;
+&lt;h2 id=&#34;presenter-first&#34;&gt;Presenter First&lt;/h2&gt;
+&lt;p&gt;Presenter First는 변형된 MVP 패턴과 프로세스의 결합이다. 프로세스란 어플리케이션이 MVP를 이용하여 어떻게 만들어지고 테스트되는지를 나타낸다. 이러한 결합의 결과, TDD의 효과가 고객이 이야기하는 기능 요건들에까지 이를 수 있게 된다.&lt;/p&gt;
+&lt;p&gt;시스템이 실제 운영 환경에서 사용될 준비가 되었는지 최종적으로 확인하는 단계인 인수 테스트는, 고객의 관점에서 시스템의 기능을 검증한다. 고객의 관점은 어플리케이션의 인터페이스를 포함하기 때문에, 인수 테스트의 자동화는 곧 인터페이스 테스트의 자동화를 요구한다. 이는 복잡하고 비싸며, 특히 인터페이스가 그래픽 요소를 가진다면 더더욱 그러하다. Extreme Programming 커뮤니티에서 흔히 이야기되는 한가지 대처방안은, GUI를 가능한 한 얇은 레이어 구조로 만들고 그 바로 아래에서 테스트하라는 것이다. Presenter First는 이러한 개념의 구체적인 실현을 제공한다.&lt;/p&gt;
+&lt;p&gt;MVP 패턴은 &lt;a href=&#34;https://en.wikipedia.org/wiki/Taligent&#34;&gt;Taligent&lt;/a&gt;에 의해 처음 알려지고, &lt;a href=&#34;https://en.wikipedia.org/wiki/Dolphin_Smalltalk&#34;&gt;Dolphin&lt;/a&gt;에 의해 널리 쓰이고, 가장 최근에는 &lt;a href=&#34;https://en.wikipedia.org/wiki/Martin_Fowler&#34;&gt;Fowler&lt;/a&gt; 에 의해 소개되어진 SmallTalk의 전통적 MVC 패턴으로 부터 유래되었다. MVP의 의도는 MVC처럼 프리젠테이션에서 비지니스 로직을 분리시키데 그치지 않고, 더 나아가 행동을 분리시키는데에 있다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Model&lt;/strong&gt; 어플리케이션의 비지니스 로직과 데이터. 고객에게 보이지않으며 관련되어있지 않다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;View&lt;/strong&gt; 어플리케이션의 인터페이스. 고객에게 있어서는, View가 곧 어플리케이션이다. 고객 스토리는 View에 무언가를 하고 View에서 결과를 보는 관점에서의 기능성을 대해 설명한다. 그러므로 View는 프로젝트 전반에 걸쳐 가장 높은 변화율을 가지게 된다. 이러한 변화들로부터 디커플링 시키는 것이 Presenter First의 가장 주요한 목적이다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Presenter&lt;/strong&gt; Presenter는 Model과 View가 서로 상호작용할 수 있도록 허용해주는 커스텀 로직이다. 이것은 MVP 각각의 요소들의 기능 또는 흐름을 나타낸다. 고객 스토리들이나 요구사항들은 Presenter내의 기능과 대응된다.&lt;/p&gt;
+&lt;p&gt;Presenter First에서 사용되는 MVP의 변형은 MVP 각각의 요소들 내에서의 커뮤니케이션 패턴들에 영향을 미친다. 본래의 MVP 패턴은 Model이 직접적으로 View 와 커뮤니케이션하는 것을 허용한다. 그러나 Presenter First는 모든 커뮤니케이션이 Presenter를 통해서 이뤄지는 것을 요구한다. 이런 제약은 Model과 View의 디커플링을 보장한다. 그리고 MVP 각각의 요소들에 대한 테스트성을 크게 증대시킨다. [그림 1]은 MVP와 Presenter First에서의 커뮤니케이션 패턴을 대조하여 보여준다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://brannpark.github.io/blog/blog/img/present_first/figure1.png&#34; alt=&#34;Figure 1&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Presenter First의 프로세스 측면은 시간의 흐름에 따라 개발이 어떻게 이뤄지는지, 그리고 개발과정에서 어플리케이션이 어떻게 테스트되는가라는 점을 다룬다. 모든 어플리케이션 개발에서 가장 먼저 마주하게 되는 궁금증은, 어디에서부터 개발을 시작해야하는가 이다. MVP에 기반한 어플리케이션에서는 다음과 같은 세가지 답변이 가능하다.&lt;/p&gt;
+&lt;p&gt;Model에서 시작하는 것은 전통적인 소프트웨어 개발의 &amp;ldquo;infrastructure first&amp;rdquo; 접근의 형태이다. 이 접근에는, 무엇이 필요한지 확실히 인지하지 못한 채 Model을 만든다라는 점과, 초기 개발 과정에서 개발의 초점을 사용자에게 보이지 않는 것들에 대해 맞춘다는 등의 단점들을 가진다. Model은 테스트하기 쉬워야 하며, 테스트 주도 방식으로 개발하기 용이해야 한다. 고객의 기능 요청에 의해 Model에 대한 요구조건들이 명확해질 때까지 작업을 연기하는 것이 핵심이다.&lt;/p&gt;
+&lt;p&gt;View에서 시작하는 것은 고객 우선순위 기능 주도 개발 프로세스에서 MVP를 사용할 때 꽤나 합리적인듯이 보인다. 이 접근의 논리는 매력적이다. 고객 스토리들은 View에서 일어나는 액션들과 View에서 보여지는 결과, 그들이 어플리케이션을 사용하는데 있어 어떤 인터페이스들이 필요한지에 대한 피드백, 그리고 최소의 Model(infrastructure)의 중요성을  이야기한다. 하지만 View First는 쉽게 만들어지지만, 불행히도 쉽게 값비싼 실수를 야기하기도 한다.&lt;/p&gt;
+&lt;p&gt;위에서 이야기했듯이 View First 개발은 몇가지 문제점들을 가지고 있다. View는 고객에게 있어 어떤 확고한 생각을 가지게 하고, 세부사항의 결정에 대한 망설임들을 만들어 결국 요구사항의 높은 변경률들을 불러일으키는데 쉬운 요소다. 경험적으로, 사용자 스토리들은 거의 대부분 인터페이스에 대한 자세한 명세를 하지 않는다. 그들은 좀 더 일반적인 어플리케이션 기능들에 대해서 이야기한다. 이렇게 남겨진 모호성은 고객이 만들어진 인터페이스를 반려하도록 함으로써 인터페이스의 개발에만 수시간을 써버리게 될 수도 있다. 뿐만 아니라, View에 초점을 맞추게 되면, View를 비지니스 로직으로 두텁게 만들어 버리는 위험성을 증대시킬 수 있다. 끝으로 View 인터페이스 테스트의 어려움은 테스트 주도 개발의 올바른 개발 사이클을 허물어 버린다.&lt;/p&gt;
+&lt;p&gt;우리의 경험상, 최고의 대안은 Presenter First이다. Presenter에서 시작하고 그 주위에서 개발을 구성해나감으로써, 테스트 주도 개발 실행을 따라 사용자 스토리로부터 어플리케이션이 만들수 있다. Presenter에서의 유닛 테스트들은 작성하고 유지하는데 경제적이며, 특정 인터페이스 요소들에 묶이지 않은 채 어플리케이션 기능의 정상 동작을 확인한다. Presenter First로 개발함으로써, 개발자의 관심을 고객 기능에 두면서도, 동시에 Model과 View에 대한 최소 완전한 명세들이 만들어지게 된다.&lt;/p&gt;
+&lt;p&gt;이는 MVP의 하나의 구현 옵션이지만, Model과 View 모두의 인터페이스를 필요로 한다. Presenter와의 커뮤니케이션은 Model과 View 모두 Presenter로 부터 디커플링 된 채 이벤트 서브시스템을 통해서 이뤄진다. [그림2]는 Presenter First에서의 클래스들의 관계를 보여준다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://brannpark.github.io/blog/blog/img/present_first/figure2.png&#34; alt=&#34;Figure 2&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;how-it-works&#34;&gt;How it works&lt;/h3&gt;
+&lt;p&gt;Presenter First 의 강점은 접근방식의 단순하고 구체적인 모습이다. 개발은 다음과 같이 진행된다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;생성자에서 Model 인터페이스와 View 인터페이스를 취하는 Stub Presenter 클래스를 만든다.&lt;/li&gt;
+&lt;li&gt;Model, View의 인터페이스를 만족시키는 Mock 테스트 객체들을 만든다.&lt;/li&gt;
+&lt;li&gt;모든 사용자 스토리들에 대해서
+&lt;ul&gt;
+&lt;li&gt;3.1 우선순위화 된 사용자 스토리를 선택한다.&lt;/li&gt;
+&lt;li&gt;3.2 스토리의 View에 대한 영향력을 분석한다.&lt;/li&gt;
+&lt;li&gt;3.3 스토리에 대한 View 인터페이스를 추가한다.&lt;/li&gt;
+&lt;li&gt;3.4 스토리의 Model에 대한 영향력을 분석한다.&lt;/li&gt;
+&lt;li&gt;3.5 스토리에 대한 Model 인터페이스를 추가한다.&lt;/li&gt;
+&lt;li&gt;3.6 Mock 객체들에서, 호출되고 데이터들을 리턴 하는 인터페이스 메서드들을 구현한다.&lt;/li&gt;
+&lt;li&gt;3.7 끊어낼 수 있는 모든 요소들에 대해서(TDD 반복)
+&lt;ul&gt;
+&lt;li&gt;3.7.1 Do for each test&lt;/li&gt;
+&lt;li&gt;3.7.1.1 View 또는 Model에 대한 액션 또는 이벤트를 통해 앱을 활동시키는 Presenter에 대한 테스트를 작성하라.&lt;/li&gt;
+&lt;li&gt;3.7.1.2 Model의 상태와 View의 상태에 대한 Assertion을 만들어라.&lt;/li&gt;
+&lt;li&gt;3.7.1.3 Presenter 내의 private method들을 구현하라.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;3.8 이 스토리의 View 인터페이스를 만족하는 최소의 사용자 인터페이스 구현체를 만들어라.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Presenter First 프로세스의 바깥쪽 루프는 Model과 View 인터페이스에 빈번한 리팩토링을 요구한다. 그렇지만 이 시점에서는 인터페이스들은 Mock 오브젝트만을 가지고 있기에 리팩토링에 많은 비용이 발생하지 않는다.&lt;/p&gt;
+&lt;p&gt;Presenter First의 한가지 아주 훌륭한 점은, 모든 현재의 고객 요구사항들이 Presenter에 코드화 되었을 때, Model과 View의 인터페이스들은 각각 최소 완전한 명세서가 된다는 것이다. 이 지점으로 부터 어플리케이션을 완성해낸다라는것은, 표준 TDD 실행에 따라 Model을 &amp;ldquo;구현&amp;quot;하고, View를 고객의 요구와 View의 인터페이스를 총족시키도록 &amp;ldquo;구현&amp;quot;해 내는 것이 된다.&lt;/p&gt;
+&lt;p&gt;고객으로부터 피드백을 얻기 위해, 우리는 일반적으로 최소의 시간과 노력으로 매우 단순한 사용자 인터페이스를 만든다. 고객은 아마도 그런 인터페이스가 유능한 전문가에 의해 새롭게 디자인되어야 하는지, 마케팅적으로 디자인 되어야 하는지, 혹은 이미 목적에 맞게 충분히 괜찮은지를 판단할 것이다. 그러는 동안에, 어플리케이션의 기능들이 테스트되고, 인터페이스 코드에는 적은 수고를 필요로하며, 새로운 인터페이스들은 View 인터페이스를 충족시키는 순간에 손쉽게 개발될 것이다.&lt;/p&gt;
+&lt;p&gt;실제의 View를 테스트하는 것은 툴과 예산이 허용된다면 자동화될 수 있을것이고, 그렇지 않다면 최종적으로 수동 시스템 테스트 단계로 남겨질 것이다. View는 매우 얇게 구성되어있으며, 적절히 분류된 이벤트들을 Presenter가 처리하도록 호출하는 메소드 이외의 몇몇 메서드들을 가지는 형태이다. GUI 위젯이 동작하는(버튼클릭과 같은) 내부를 생각해보자. 그 View에 대한 유닛 테스트는 주로 스크린내에 위젯이 올바르게 놓여있는지, 적절한 이벤트 타입을 발생시키도록 프로그래밍 되어있는지를 확인하는 것이다.&lt;/p&gt;
+&lt;p&gt;Presenter는 비상태성이고 public 메서드가 존재하지 않도록 의도되었다. Presenter의 유닛 테스트들은 어플리케이션의 &amp;ldquo;wiring&amp;quot;이 Presenter의 private 메서드들이 표현하는대로 적절히 구현되었는지를 명시적으로 테스트한다. 어플리케이션의 기능은 View와 Model의 사이에서 Presenter에 의해 조정된다. 이는 어플리케이션 행동에 대한 Presenter의 유닛 테스트 묶음을 만들고, 응집력(cohesive)있고 집중화된(centralized) 문서 소스를 만든다. 다시말해서 사실상 Presenter와 Presenter의 테스트들은 어플리케이션에 대한 실재하는, 실행가능한 명세서이다. 어플리케이션 요구사항들의 변화와 추가는 보통 Presenter에 의해 단독으로 처리(사용자 인터페이스의 변경이 아닐때)될 수 있다는게 우리의 경험이다. Presenter는 철저하게 유닛 테스트 커버리지를 가지므로, 이런 작업은 고객의 관점에서 나오는 어플리케이션의 단순 변화, 추가 작업들을 지원 하기 위한 개발자의 수고를 단순하게 만들어서 빠르고 자신감있는 처리가 될 수 있게 한다.&lt;/p&gt;
+&lt;p&gt;Presenter와의 커뮤니케이션은 Model과 View를 Presenter에 느슨하게 연결하기 위한 이벤트 서브시스템을 사용함으로써 가능해진다. 가장 흔한 케이스는, Model 트리거 이벤트 또한 가능하겠지만, View의 이벤트를 Presenter가 소비하도록 발생시키는 것이다. View가 Presenter와의 커뮤니케이션에 이벤트를 사용하는것은 View의 로직을 매우 얇게 유지시킨다. View는 모든 이벤트 처리를 Presenter에 위임시킨다. 이런 디자인은 View 자체의 행동성에 대해 테스트할 것이 거의 없는 &amp;ldquo;얇은 GUI&amp;quot;를 만들어낸다. Presenter와의 커뮤니케이션에 이벤트를 사용하는 것은, 컴포넌트의 패키지를 분리하고, 컴파일 의존성들을 줄이고, 동일한 View가 다른 행동성을 가진 Presenter들에 연결되어질 수 있도록 한다.&lt;/p&gt;
+&lt;p&gt;얇은 View의 결과, View 인터페이스는 Primitive 타입만을 파라미터로 취한다. 복잡한 타입들을 View에 전달하는 것은 View에서 Processing을 야기하고 View 층을 두텁게 하고, 유닛 테스트가 필요하도록 만든다.&lt;/p&gt;
+&lt;h3 id=&#34;example-use-of-presenter-first&#34;&gt;Example use of Presenter First&lt;/h3&gt;
+&lt;p&gt;X-Rite는 색상 측정 솔루션의 글로벌 선두 업체이다. X-Rite 시스템들은 색상 데이터에 대한 검증과 커뮤니케이션을 위한 하드웨어, 소프트웨어, 그리고 서비스들로 구성되어있다. Atomic Object는 프린팅 출력기의 프린팅 품질을 관리하는 크고, 복잡한 소프트웨어 시스템을 디자인하기 위해 X-Rite와 함께 일했다. 이 시스템은 대략 45개의 MVP 삼요소들과 8개의 독립적인 어플리케이션들로 구성된다. [Appendix 1]은 이 어플리케이션의 스크린샷을 보여준다.&lt;/p&gt;
+&lt;p&gt;Presenter First의 사용은 출력기 품질을 컨트롤하기 위해 개발된 어플리케이션 패키지의 복잡도를 관리하는것을 도왔다. 기능의 변경, 추가, 삭제에 대응하는 것은 아무런 문제가 없었고, 관련없는 코드 베이스에도 영향을 끼치지 않았다. 이 프로젝트에서 MVP 삼요소 중 한가지 예는 사용자들을 그들의 제품에 회원등록시키도록 하는 방법이었다. 우리는 다양한 스크린 해상도지원 뿐 아니라 사용자가 등록할 수 있는 다양한 수단을 지원해야만 했다. Presenter First를 이용하여 이 작업은 매우 쉽게 구현되고 테스트되었다.&lt;/p&gt;
+&lt;p&gt;[Figure 3]은 회원등록 예제를 테스트들과 함께 이에 대한 관계들을 설명하는 클래스 다이어그램을 보여준다. Presenter First를 이용하여 회원등록 기능을 만들어내는 것을 입증하는 샘플코드는 [Appendix 2]에서 보여준다. RegPresenter라는 Presenter의 구현체는 보이지 않는것에 주목해라. 두가지 테스트(test_registration_Fail과 test_Registration_Pass)는 사용자가 어플레이케이션에 등록할 때 RegPresenter가 발생시키는 같은 이벤트들이 RegPresenter의 구현체를 테스트하기 위해 어떻게 사용되는지를 보여준다. Presenter내에서 회원등록 로직들이 적절하게 wire 되었는지를 확인하기 위해 Mock View와 Mock Model에서 Assertion들이 작성된다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://brannpark.github.io/blog/blog/img/present_first/figure3.png&#34; alt=&#34;Figure 3&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Presenter First를 사용함으로써 고객의 추가 요청이나 변화는 개발자에게 더이상 골칫거리로 남겨지지 않게된다. 예를들면, 고객이 그저 엔터키를 누르는 대신 그래픽의 푸쉬 버튼을 클릭하여 회원등록을 전송하기로 결정했다면, 그 변화는 Presenter 혹은 Model 어디에도 영향을 끼치지 않은 채 View를 변경하는 것만으로 처리될 수 있을 것이다. 만약 고객이 회원등록 코드에 대한 검증을 데이터베이스 검색에서 웹서비스를 통한 검증으로 변경하기로 했다면, 그 결과는 Presenter나 View 가 아닌 Model에서의 변화로 나타날 것이다.&lt;/p&gt;
+&lt;h2 id=&#34;benefits-of-presenter-first&#34;&gt;Benefits of Presenter First&lt;/h2&gt;
+&lt;p&gt;Presenter First는 기능에 초점을 유지시키고 사용자 우선순위의 기능을 전달하는데 도움을 준다. 개발자들은 특징들(model과 View)의 디테일들에 집중하는데에 더 적은 시간을 쓰게되며, 기능성(Presenter)에 더 많은 시간을 쓰게 될 것이다. 개발자는 초기 개발단계에서 디테일들로 인해 너무 빠르게 산만해지는 대신, 높은 수준의 추상화 단계에서 작업을 할 수 있다.&lt;/p&gt;
+&lt;p&gt;기능성은 Presenter First로 쉽게 테스트 될 수 있다. Model과 View의 인터페이스들은 쉽게 Mock 될 수 있기에 Presenter 클래스 안의 기능 레벨에서 테스트들의 초점을 둔다. Mock된 View와 Model 컴포넌트들은 개발자들에게 View와 Model의 모든 측면에 대한 완전한 제어를 주고, Presenter 클래스 내의 모든 기능 케이스들에 대해 쉽게 테스트할 수 있는 자유를 준다.&lt;/p&gt;
+&lt;p&gt;사용자 인터페이스의 모든 기능성의 유닛테스트를 만들어내는 능력을 향상시키는 것 뿐 아니라, View와 Model을 나타내는 Mock 클래스들을 만들어내는것은 추가적인 이득 또한 제공한다. Model 인터페이스를 Mock 오브젝트화 함으로써, 개발자는 라이브 데이터베이스에 연결하는 것, 커뮤니케이션 디바이스들을 사용하게끔 하는것, 파일을 다루게 하는것과 같은 문제를 피한다. 그러한 타입의 기능들을 테스트 하는 책임은 실제 Model의 다른 클래스들에 놓여진다. Presenter First는 이런 기능들이 실제로 어떻게 구현되었는가 하는 디테일이 아닌, 단지 사용자 인터페이스를 통한 기능 접근을 테스트하는것을 중시한다.&lt;/p&gt;
+&lt;p&gt;View를 Mock 하는것 또한 장점을 가진다. 실제의 사용자 인터페이스 컨트롤과 폼들은 인스턴스화 되어질 필요가 없기 때문에 유닛 테스트 패키지는 이러한 비싼 연산들로 인해 성능이 저하되지 않는다. 유닛 테스트들이 실행하기에 느려서 고통스럽다면, 개발자들은 테스트를 덜 실행하고자 할 것이고, 따라서 개발팀에게서 테스트의 가치는 더욱 떨어지게 될 것이다.&lt;/p&gt;
+&lt;p&gt;사용자 인터페이스를 관리하는것은 Presenter First를 사용함으로써 매우 효율적이게 된다. Presenter 클래스들에 대한 유닛 테스트들은 사용자 인터페이스에 대한 살아있는 명세서가 될 것이다. Presenter 클래스의 유닛 테스트를 설명하는 것으로 개발자들은 쉽사리 사용자 인터페이스의 행동과 룰을 알아낼 수 있다.&lt;/p&gt;
+&lt;p&gt;기능성은 Presenter 클래스의 유닛 테스트들에 의해 쉽게 관리될 수 있다. 기능이 추가 또는 삭제가 될 때, Presenter 클래스의 유닛 테스트는 모든게 정상적으로 동작한다는 자신감을 제공해준다. 테스트 주도 개발은 높은 수준의 시스템 기능성까지 포함하도록 발전되어왔다.&lt;/p&gt;
+&lt;p&gt;비지니스 로직으로부터 사용자 인터페이스를 디커플링 시키는 것이 우리가 따라야만 하는 중요한 행동이라고 충분히 이해를 했을지라도, 대부분의 개발자들은 부적절하게 커플링 된 코드를 작성하고 있는 자신을 발견한다. Presenter First는 비지니스 로직과 사용자 인터페이스의 디커플링을 강제한다. 철저하게 디커플링 하는 것은 개발자 코드의 유연성을 증대시키고 그들이 요구사항의 변화에 따른 고통을 최소화 하도록 한다.&lt;/p&gt;
+&lt;p&gt;많은 고객들이 특정한 Look and Feel을 요청한다면, 이는 단순히 그래픽 요소들을 변경하여 처리할 수 있다. 또는 마케팅이 제품이 Palm Pilot을 반드시 지원해야 한다고 결정할지도 모른다. 사용자 인터페이스 관점에서 이제 이런 변화는 쉽게 처리된다. 단순히 그래픽 컴포넌트들을 같은 View 인터페이스를 구현하는 Palm Pilot의 컴포넌트들로 교체하면 사용자 인터페이스의 변경이 완료된다. 단순히 다른 패키지를 인스톨하는 것으로 지원하는 플랫폼이나 Look and Feel을 완전히 변경하는 용이함과 강력함을 상상해보자. 이러한 변경들은, 그래픽 컴포넌트들을 변경하는것이 기능적인 어떠한것도 변화시키지 않고, 따라서 다른 어떤 부분들에 대해 살펴볼 필요가 없다는 확신을 가지게 해 준다.&lt;/p&gt;
+&lt;p&gt;Presenter First의 컴포넌트들의 디커플링을 강제함으로써, MVP 중 한 컴포넌트를 교체하는일은 사소한 일이 되고, 다른 컴포넌트들에 영향을 끼치지 않게 된다. View 컴포넌트가 View 인터페이스를 구현하는 한, 사용할 사용자 그래픽 인터페이스를 변경하는 것은 더이상 어렵지 않다. 다른 사용자 그래픽 인터페이스들 또한 쉽게 교체 되어질 수 있다. 이제는 실제로, 사용자 그래픽 인터페이스가 인스톨 또는 실행 시점에 결정될 수 있다. 같은 점에서 Model 컴포넌트도 Presenter나 View에 영향을 끼치지 않고 수정되거나 완전히 교체될 수 있다. 파일로 부터 정보를 액세스하는 오늘날의 사용자 인터페이스는, Presenter나 View에 영향없이 데이터베이스를 통해 엑세스 하는 내일의 인터페이스로 쉽게 만들어질 수 있다. 우리는 심지어 어떤 케이스에서는 같은 View에 다른 Presenter를 사용했다. 사용자 그래픽 View는 같다. 그러나 행동(Presenter)이 다르다.&lt;/p&gt;
+&lt;p&gt;Presenter First는 유연하다. MVP 패턴으로 복잡한 어플리케이션들은 효율적으로 수많은 작은 어플리케이션들이 묶인 구성이 된다. 각각의 미니 어플레이케이션들은 그 자체로 MVP 트라이어드 하다. 이런 미니 어플리케이션들은 관리가 용이하고, 전적으로 다른 어플레이케이션들에 디커플링되어있다. 구조적으로, 각 부분들이 독립적으로 만들어질 수 있고, 의존성에 대한 두려움없이 나중에 합쳐 질 수 있기에, 이는 프로젝트의 관리성을 증가시킨다. MVP 트라이어드를 구성하고 만들어내는 패턴들은 중첩된 트라이어드들의 테스트성을 유지하는데 도움을 준다.&lt;/p&gt;
+&lt;p&gt;Presenter First는 팀에 있어서 비용 효율적이고 실용적이다. 개발은 streamlined이고 관리가능하다. Presenter의 부분은 View와 Model이 시작되게 할 필요 없이 홀로 완료되게 둠으로써 온전히 테스트 되고 끝마쳐질 수 있다. 각자가 그들의 계약(Model, View 인테퍼이스)의 끝을 지키는 한, 각 팀들은 서로에 독립적으로 독립적인 속도와 타임라인으로 코드를 만들어 낼 수 있게 된다.&lt;/p&gt;
+&lt;p&gt;Presenter First를 사용함으로써, 그래픽 View는 적절한 툴과 그래픽 디자이너들 또는 그래픽 View를 만들어 내도록 훈련될 수 있는 사용성 전문가들과 함께 매우 단순해지고 얇아지게된다. 개발자들은 더이상 사용자 그래픽 인터페이스를 구현하기 위해 많은 시간을 낭비하지 않아도 된다. 개발자들은 일반적으로 그래픽 사용자 인터페이스를 구현해내는데 있어 충분한 역량을 가지지 않기에 엉성한 결과물을 만드는게 많은 시간을 쏟게 된다. Presenter First는 개발자들이 가장 잘할 수 있는 프로그램 같은것을 하게 해주고, 사용가능한 인터페이스를 만드는 것과 같은 훈련되지 않은 것들에 대해 시간을 소비하는것을 피하게 해준다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://brannpark.github.io/blog/blog/img/present_first/appendix1.png&#34; alt=&#34;Appendix 1&#34;&gt;&lt;/p&gt;
+&lt;h5 id=&#34;appendix-2-sample-code-showing-model-and-view-interfaces-mock-test-classes-and-test-methods&#34;&gt;Appendix 2. Sample code showing model and view interfaces, mock test classes, and test methods.&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; delegate &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;RegSubmitted&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;();&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;interface&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;IregView&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;AddRegSubmittedEvent&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;RegSubmitted ev&lt;span style=&#34;color:#f92672&#34;&gt;);&lt;/span&gt;
+	string &lt;span style=&#34;color:#a6e22e&#34;&gt;GetSubmittedData&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;();&lt;/span&gt;
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;SetRegistrationStatus&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;bool bSuccess&lt;span style=&#34;color:#f92672&#34;&gt;);&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;interface&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;IregModel&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+	bool &lt;span style=&#34;color:#a6e22e&#34;&gt;Register&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;string strRegistration&lt;span style=&#34;color:#f92672&#34;&gt;);&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;RegViewMock&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; IregView &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; RegSubmitted regSubmittedEvent&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;FireRegSubmittedEvent&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+		RegSubmitted evtCopy &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; regSubmittedEvent&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+		&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;evtCopy &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+			evtCopy&lt;span style=&#34;color:#f92672&#34;&gt;();&lt;/span&gt;
+		&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+	&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;AddRegSubmittedEvent&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;RegSubmitted ev&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+		regSubmittedEvent &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; ev&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+	&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; string &lt;span style=&#34;color:#a6e22e&#34;&gt;GetSubmittedData&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+		&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ThisIsMyRegistration&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+	&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; bool bRegistrationStatus&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;SetRegistrationStatus&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;bool bSuccess&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+		bRegistrationStatus &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; bSuccess&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+	&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;RegModelMock&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; IregModel &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; bool regSuccess&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; string regInput&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; bool &lt;span style=&#34;color:#a6e22e&#34;&gt;Register&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;string strRegistration&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+		regInput &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; strRegistration&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+		&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; regSuccess&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+	&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;test_Registration_Pass&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+	&lt;span style=&#34;color:#75715e&#34;&gt;/* force the registration to succeed */&lt;/span&gt;
+	modelMock&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;regSuccess&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+	&lt;span style=&#34;color:#75715e&#34;&gt;/* Simulates the user submits event by firing an event
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;	 * that the presenter should handle.
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;	 */&lt;/span&gt;
+	viewMock&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;FireRegSubmittedEvent&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;();&lt;/span&gt;
+	&lt;span style=&#34;color:#75715e&#34;&gt;/* Now just verify that what the user entered as the
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;	 * registration code is what the model actually uses
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;     * as input.
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;     */&lt;/span&gt;
+	Assert&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;AreEqual&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ThisIsMyRegistration&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; modelMock&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;regInput&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;);&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;/* Verify that the view has been updated to reflect
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;     * a successful registration.
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;     */&lt;/span&gt;
+    Assert&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;IsTrue&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;viewMock&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;bRegistrationStatus&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;);&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;test_Registration_Fail&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;/* force registration process to fail */&lt;/span&gt;
+    modelMock&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;regSuccess&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+    viewMock&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;FireRegSubmittedEvent&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;();&lt;/span&gt;
+    Assert&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;AreEqual&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ThisIsMyRegistration&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; modelMock&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;regInput&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;);&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;/* verifies that the view was updated to reflect
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;     * an unsuccessful registration.
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;     */&lt;/span&gt;
+    Assert&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;IsFalse&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;viewMock&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;bRegistrationStatus&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;);&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+     </item>
+   
+     <item>
+       <title>안드로이드 앱 개발 시 주의사항</title>
+       <link>http://brannpark.github.io/blog/posts/20151204_notices_for_android_app_development/</link>
+       <pubDate>Fri, 04 Dec 2015 14:46:07 +0900</pubDate>
+       
+       <guid>http://brannpark.github.io/blog/posts/20151204_notices_for_android_app_development/</guid>
+       <description>&lt;p&gt;이 포스팅은 앞으로 쓰게 될 안드로이드 앱 개발 관련 주의사항 포스트들에 대한 게이트웨이 정도가 되겠다.
+보통.. 이렇게 하면 좋다, 저렇게 하면 좋다라는 글들은 많고, 의견도 분분하고.. 하면 좋다 이지 안하면 안된다는것도 아니고.
+그런데 이렇게 제발 쫌 하지 말라는 흘려버리기엔 너무 치명적이지 않을까? 왜 하지말라는지 꼭 알아봐야 한다고 생각한다. 그렇다고 누군가의 이야기를 그냥 맹신하는것은 위험! 과거엔 맞는 이야기가 현재에는 맞지 않을 수도 있으니&amp;hellip;&lt;/p&gt;
+&lt;p&gt;간략하게 주제별로 리스팅을 하고, 원문 링크과 간략한 설명으로 작성해 나갈예정이다.&lt;/p&gt;
+&lt;h1 id=&#34;안드로이드-앱-개발간-주의할-점들&#34;&gt;안드로이드 앱 개발간 주의할 점들!&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.developerphil.com/dont-store-data-in-the-application-object/&#34;&gt;Don&amp;rsquo;t Store Data in the Application Object&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;우리는 흔히 Application 객체는 단일 객체로 앱이 사용자에 의해 명확하게 종료되기 전 까지는 값이 해제되지 않고 유지된다고 생각하기 쉽다. 그러나 이는 잘못된 생각이다. 앱이 백그라운드에 진입해 있는 동안 시스템에 의해 언제든지 종료될 수 있다. 예를들어, 어떤 A 라는 앱을 사용 하다가 앱을 전환(종료x)해서, 유튜브를 보다가 다시 앱을 전환해서, A 앱으로 돌아왔을 때, 과연 이 앱은 그 사이에 종료가 되지 않고 메모리에 계속 남아있을까? 이는 순전히 OS 에 의해 결정될 뿐이다. 그러나 OS 는 이렇게 종료시킨 앱의 &amp;ldquo;상태&amp;rdquo; 를 저장하고, 다음번 실행될 때 저장된 상태를 &amp;ldquo;복원&amp;rdquo; 해 줌으로써, 마치 사용자가 그 앱을 계속 사용하던 것처럼 보이도록 해 준다. (물론 개발자가 이에 맞게 적절히 개발을 했다고 가정한다.)  이러한 프로세스에 대한 이해가 충분하지 않은 상황에서, Application 객체에 어떠한 상태를 저장해두고 다른곳에서 읽기를 하는 코드는 위험하다. 왜일까? 다음과 같은 예를 한번 살펴보자.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;MyApplication&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;extends&lt;/span&gt; Application &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; String mAppName&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;// MyApplication 객체는 AppName 이라는 값을 가지고 있다. 기본값은 별도로 지정되어있지 않으므로 Null 이다. 
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;// Setter
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;setAppName&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;String name&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt; 
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;mAppName&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; name&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+
+    &lt;span style=&#34;color:#75715e&#34;&gt;// Getter
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; String &lt;span style=&#34;color:#a6e22e&#34;&gt;getAppName&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; mAppName&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;FirstActivity&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;extends&lt;/span&gt; Activity &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;onCreate&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;Bundle bundle&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+        MyApplication app &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;MyApplication&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;getApplication&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+		app&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;setName&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;MyAppName&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;);&lt;/span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;// 앱이 시작될 때 가장 먼저 실행되는 액티비티에서 애플리케이션 객체에 접근하여 AppName 을 지정해주고 있다. 
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;SecondActivity&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;extends&lt;/span&gt; Activity &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;onCreate&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;Bundle bundle&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+	    MyApplication app &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;MyApplication&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;getApplication&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+
+        &lt;span style=&#34;color:#75715e&#34;&gt;// 애플리케이션 객체의 AppName 값을 토스트메시지로 띄워주는 코드. 
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;// 그러나 app.getName() 은 상황에 따라서 Null 이 리턴될 수 있다. 따라서 이 코드는 NullPointerException 이 발생할 수 있는 잘못된 코드이다.
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;		Toast&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;makeText&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; app&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getName&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; is Application Name&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; Toast&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;LENGTH_SHORT&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;).&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;show&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;();&lt;/span&gt;  
+	&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;위의 예제에서 보면, 상황에 따라서 app.getName() 이 Null 이 될 수 있다고 밝혔는데, 왜 그런지 좀 더 자세히 설명해보겠다.
+일단 앱이 시작되어, FirstActivity -&amp;gt; SecondActivity 를 거쳐 실행되어있는 상태로 백그라운드 상태로 진입을 했고, 오랜 시간이 지났거나, 다른 앱의 실행에 필요한 메모리를 확보하기 위한 과정 등에서 &amp;ldquo;OS 에 의해 앱 프로세스가 종료&amp;rdquo; 되었다고 해보자.&lt;/p&gt;
+&lt;p&gt;프로세스가 종료되었다는 얘기는 즉, 프로세스에 할당된 모든 메모리가 해제가 됨을 이야기한다.(여기서 백그라운드 서비스와 같은 특수한 것들은 예외가 될 수 있겠다.)
+이러한 상태에서 앱을 다시 실행한다면?&lt;/p&gt;
+&lt;p&gt;앱은 즉시 복원프로세스로 들어간다. 먼저 MyApplication 객체를 생성한다. Application 클래스 자체에는 상태저장/복원프로세스가 없다. 따라서 그냥 새롭게 생성이 될 뿐이다.
+물론 이는 개발자가 특별히 뭔가 코드를 짜서 별도의 상태저장/복원 프로세스를 만들어 두지 않았음을 전제로 한다.
+이렇게 새롭게 생성된 MyApplication 객체의 mAppName 프로퍼티가 가지는 값은? 그렇다, Null 이다.&lt;/p&gt;
+&lt;p&gt;다음으로 Activity 들이 복원된다. 복원이 될 때에는 당연히 마지막 Activity Stack 상태에 따라 복원이 된다. 다시말해서, 마지막 화면이었던 SecondActivity 가 먼저 생성/복원이 된다.
+자 그러면.. FirstActivity 의 onCreate() 는 언제 호출이 된다는건가? 이곳에서 MyApplication.appName 을 지정해줬는데 말이다.
+FirstActivity 는 SecondActivity 에서 Back press 등을 통해 이전화면으로 돌아가려할 때, 그떄야 비로소 생성/복원되게 된다.&lt;/p&gt;
+&lt;p&gt;그러므로 SecondActivity.onCreate() 가 먼저 실행이 되며, 이떄 실행하는 코드 중 app.getName() 의 리턴값은, 기대했던 값 &amp;ldquo;MyAppName&amp;rdquo; 이 아닌 Null 이 될 것이다.&lt;/p&gt;
+&lt;p&gt;Application 클래스를 이용하여 단순한 예를 들어놨지만, 실제로는 Lifecycle 을 가진 모든 안드로이드 컴포너트에서 주의해야 하는 일이다.
+이는 실제 내가 다뤘던 많은 레거시 코드들에서 많이 발견된 문제이기도 했다. 심지어는 이런 상황이 왜 일어나는지 제대로 알지 못하고, 급한대로 예외처리를 하고자
+&lt;code&gt;if (xx != null) restart()&lt;/code&gt;
+재시작 시켜버리는 코드가 여기저기에 있던 기억이&amp;hellip;&lt;/p&gt;
+&lt;p&gt;여기에는 class initialize 타임에 Null 이 아닌 값으로 초기화 되지 않는 static 변수들 또한 예외가 아닌다. static 변수는 프로세스의 라이프사이클 내에서 유효할 뿐이다. 그러므로 프로세스가 종료되면 static 메모리도 모두 해제가된다.
+다만 final static 의 경우는 &lt;em&gt;상수&lt;/em&gt; 이므로 이 주제에는 맞지 않음을 주의하자.
+그럼 일단 예제를 보자.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;FirstActivity&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; String name &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;FiratActivity&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;// class initialize 시점에 값을 할당
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; String name2&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; String name3&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; String name4&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;// class initialize 시점에 값을 할당
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        name2 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;FirstActivity2&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+	&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+
+    &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;// object initialize 시점에 값을 할당
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;	    name4 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;FirstActivity4&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; String &lt;span style=&#34;color:#a6e22e&#34;&gt;getName&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; name&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; String &lt;span style=&#34;color:#a6e22e&#34;&gt;getName2&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; name2&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; String &lt;span style=&#34;color:#a6e22e&#34;&gt;getName3&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; name3&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+	&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; String &lt;span style=&#34;color:#a6e22e&#34;&gt;getName4&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;		
+	    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; name4&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;onCreate&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;Bundle savedInstanceState&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;super&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;onCreate&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;savedInstanceState&lt;span style=&#34;color:#f92672&#34;&gt;);&lt;/span&gt;
+        name3 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;FirstActivity3&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;// onCreate 시점에 값을 할당
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;SecondActivity&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;onCreate&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;Bundle savedInstanceState&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;super&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;onCreate&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;savedInstanceState&lt;span style=&#34;color:#f92672&#34;&gt;);&lt;/span&gt;
+
+        Toast&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;makeText&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; FirstActivity&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getName&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(),&lt;/span&gt; Toast&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;LENGTH_SHORT&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;).&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;show&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;();&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;// class 초기화 시점에 할당되는 값이므로, 정상적으로 할당된 값을 가져올 수 있다. 
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        Toast&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;makeText&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; FirstActivity&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getName2&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(),&lt;/span&gt; Toast&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;LENGTH_SHORT&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;).&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;show&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;();&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;// 위 케이스와 동일.
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+        Toast&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;makeText&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; FirstActivity&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getName3&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(),&lt;/span&gt; Toast&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;LENGTH_SHORT&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;).&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;show&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;();&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;// LowMemory 시점에 OS에 의해 앱이 kill 된 후 recreate 되는 경우 getName3() 의 리턴값은 NULL 이다.
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;		Toast&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;makeText&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; FirstActivity&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getName4&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(),&lt;/span&gt; Toast&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;LENGTH_SHORT&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;).&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;show&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;();&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;// getName3() 과 마찬가지로 recreate 시점에서 NULL 값을 리턴한다.
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
     
-  </channel>
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;위의 예제에서 보듯 Process 의 종료/복원 프로세스에서는 static 메모리라 하여도 일반 객체들과 다를바가 없다.
+이 뿐 아니라, 내가 static 변수의 사용을 조심하라고 강조하는데는 다음과 같은 경우를 많이 보았기 때문이다.&lt;/p&gt;
+&lt;p&gt;안드로이드에서 컴포넌트간 데이터를 주고받을 때, 일반적으로 쓰이는 데이터 타입은 Parcelable 이며 이는 Intent 를 통해 Framework 에서 제공하는 API를 이용하여 다른 컴포넌트로 전달되어질 수 있다.
+컴포넌트끼리 데이터를 주고 받을 때는 특별한 이유가 없는 한 이러한 방식을 써야만 한다. Intent 로 제공된 정보는 자동으로 액티비티의 상태저장 시점에 저장되며, 복원시점에 복원된다. 개별 액티비티가 독립적으로 생성/저장/복원/종료 될 수 있는게 안드로이드 앱 이기 때문이다.&lt;/p&gt;
+&lt;p&gt;그러나 기존의 개발자들에게는 안드로이드 앱 라이프사이클과 데이터 교환 매커니즘이 익숙하지가 않았던게 문제다. Activity 는 new 로 객체를 생성하는 방식이 아니다. 그러다보니 액티비티 간 데이터 교환을 쉽게 처리하려다 보니 static 변수를 이용하여 Global 액세스 가능한 변수들을 남발하는 경우가 가장 큰 문제가 되었다.
+이는 디자인패턴 관점에서도 의존성을 높이는 문제도 있지만, 그런건 아무래도 상관없이, 이런 코드가 라이프사이클과 엮이면 그 존재 자체만으로도 아주 치명적인 버그양산 코드가 되는것이다.&lt;/p&gt;
+&lt;p&gt;또한 앱 개발 과정에서 싱글톤패턴의 객체를 자주 사용하는데, 당연히 프로세스 강제종료/복원 시점에 이 싱글톤 객체도 초기화가 됨을 유의해야한다.
+만약 이 싱글톤 객체가 사용자 설정값을 저장하고 있던 객체라면? 복원되고 난 이후에는 사용자가 설정한 모든 값이 초기화가 되어버릴 것이다. (메모리에만 존재하던 거라면) 따라서 이러한 경우에는 적절한 상태저장/복원 매커니즘을 별도로 구현하여야만 할 것이다.&lt;/p&gt;
+</description>
+     </item>
+   
+     <item>
+       <title>OSX El Capitan 개발환경 세팅</title>
+       <link>http://brannpark.github.io/blog/posts/20151202_elcapitan_setup/</link>
+       <pubDate>Wed, 02 Dec 2015 18:46:37 +0900</pubDate>
+       
+       <guid>http://brannpark.github.io/blog/posts/20151202_elcapitan_setup/</guid>
+       <description>&lt;p&gt;&lt;a href=&#34;http://herblover.github.io/&#34;&gt;Kenny&lt;/a&gt;님이 작성하신 OSX El Capitan 개발환경 세팅 포스트 공유합니다.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://herblover.github.io/environments/mac/El-Capitan-Setup/&#34;&gt;http://herblover.github.io/environments/mac/El-Capitan-Setup&lt;/a&gt;&lt;/p&gt;
+</description>
+     </item>
+   
+     <item>
+       <title>Made by HUGO and GitHub Pages</title>
+       <link>http://brannpark.github.io/blog/posts/20151201_hugo_with_github_pages/</link>
+       <pubDate>Tue, 01 Dec 2015 15:36:31 +0900</pubDate>
+       
+       <guid>http://brannpark.github.io/blog/posts/20151201_hugo_with_github_pages/</guid>
+       <description>&lt;p&gt;일반적인 웹사이트의 경우, 여러 웹 컨텐츠들을 동적으로 생성하여 이용자에게 전달한다.&lt;/p&gt;
+&lt;p&gt;다시 말해서, 웹어플리케이션은 동적 컨텐츠를 정적 컨텐츠로 변환하는 과정을 수행한다.&lt;/p&gt;
+&lt;p&gt;그러다 보니, 이렇게 생성된 동적 컨텐츠는 일반적으로 브라우저 레벨에서의 캐싱을 이용할 수 없다. 따라서 매 페이지 요청시 마다 웹어플리케이션이 반복적인 일을 해야한다.&lt;/p&gt;
+&lt;p&gt;그런데 정적 컨텐츠가 컨텐츠의 대부분을 차지하는 사이트의 경우에 따라서는 정적 웹사이트를 만들어서 운영해 볼 수 있다. 예전에는 정말 단순하고 반복적이지 않은 소수의 페이지들을 제공하는 목적으로 사용되었는데, 요즈음에는 관련 도구들이 매우 뛰어나졌다. 그 적용 방법이 나름 재미있다.&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;또한 특정 테마를 지정하여 빠르고 쉽게 사이트의 레이아웃과 스타일을 만들어 낼 수 있다.&lt;/p&gt;
+&lt;p&gt;이 모든 과정은 사용자의 로컬 호스트에서 이뤄진다. 그러나 내 로컬에 결과물을 만들어낸 것만으로는 사이트를 인터넷에 띄울 수 없다.&lt;/p&gt;
+&lt;p&gt;이 결과물을 GitHub, Amazon S3, 기타 클라우드 스토리지(public url access 가능한) 등에 업로드 하여 내 사이트를 인터넷에 띄우게 된다.&lt;/p&gt;
+&lt;p&gt;본 블로그는 보다시피 Github Pages 를 이용하여 호스팅되고 있으며, Hugo 가이드를 마치고 호스팅에 대한 이야기를 이어 가겠다.&lt;/p&gt;
+&lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
+&lt;p&gt;설치과정은 다음과 같다.&lt;/p&gt;
+&lt;p&gt;본인은 Mac 을 쓰기에 Homebrew 를 이용한 설치 방법을 따랐지만, 그 외의 &lt;a href=&#34;https://github.com/spf13/hugo/releases&#34;&gt;다양한 플랫폼에 설치하는 방법&lt;/a&gt;을 제공한다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ brew install hugo
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;단순하다. hugo는 사이트 URL(gohugo.io) 에서도 알 수 있듯이 golang으로 작성되어있다. 따라서 의존 패키지 설치와 같은 귀찮은 과정 없이 심플하게 설치된다.&lt;/p&gt;
+&lt;h2 id=&#34;create-hugo-project&#34;&gt;Create Hugo Project&lt;/h2&gt;
+&lt;p&gt;/usr/local/bin 에 hugo 바이너리가 위치하며 이를 이용해 새 스켈레톤 프로젝트를 생성할 수 있다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ cd /path/to/workspace
+$ hugo new site &amp;lt;sitename&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;생성된 파일 및 디렉토리 구조는 다음과 같다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;  ▸ archetypes/
+  ▸ content/
+  ▸ data/
+  ▸ layouts/
+  ▸ static/
+    config.toml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;자동 생성된 각 디렉토리에 대한 간단한 셜명을 하자면,&lt;/p&gt;
+&lt;h3 id=&#34;archetypes&#34;&gt;archetypes&lt;/h3&gt;
+&lt;p&gt;hugo new 명령어로 컨텐츠를 생성 시, 자동으로 생성되는 header 템플릿을 생성하고자 하는 컨텐츠의 타입에 맞게 커스터마이징 가능하다.&lt;/p&gt;
+&lt;p&gt;예를 들어, /content/musician 의 서브디렉토리 구조가 존재하는 경우,&lt;/p&gt;
+&lt;p&gt;/archetypes/musician.md 라는 파일을 생성하여 내용을 다음과 같이 작성한다.&lt;/p&gt;
+&lt;p&gt;만약 이름이 매칭되는 archetypes가 없고, /archetypes/default.md 가 존재하는 경우는 해당 파일의 내용을 header에 추가하게 된다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;+++
+name &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;
+bio &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;
+genre &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;
++++
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;그리고 &lt;code&gt;hugo new musician/mozart.md&lt;/code&gt; 의 명령어를 수행하면
+위에 지정된 name, bio, genre 구문이 header 에 추가로 자동 생성되는 것을 확인 할 수 있다.&lt;/p&gt;
+&lt;h3 id=&#34;content&#34;&gt;content&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;hugo new &amp;lt;path/to/&amp;gt;filename.md&lt;/code&gt; 명령어 수행 시 생성된 마크다운 문서가 저장되는 곳&lt;/p&gt;
+&lt;h3 id=&#34;data&#34;&gt;data&lt;/h3&gt;
+&lt;p&gt;사이트 생성 시 필요한 추가적인 데이터를 저장할 수 있는 곳이다.
+toml 의 형식으로 variable 을 선언하고 특정 데이터를 assign 가능하다.
+또한 data 디렉토리의 하위 디렉토리 구조를 이용하여 데이터의 계층구조를 만들어 낼 수 있으며 같은 디렉토리내의 여러 toml 파일들은 Array 로 처리되어진다.
+좀 복잡하게 다음과 같이 data 디렉토리가 구성되어있고&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;/data/human/info/a.toml&lt;/code&gt;, &lt;code&gt;/data/human/info/b.toml&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;각각의 a.toml, b.toml 의 내용이 다음과 같다면&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;[ a.toml ]&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-toml&#34; data-lang=&#34;toml&#34;&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;name&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Steve&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;age&lt;/span&gt; = &lt;span style=&#34;color:#ae81ff&#34;&gt;30&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;[ b.toml ]&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-toml&#34; data-lang=&#34;toml&#34;&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;name&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Peter&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;age&lt;/span&gt; = &lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;이를 html 템플릿에서 다음과 같이 사용할 수 있다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;{{ range $.Site.Data.human.info }}
+&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt;&amp;gt;
+  &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;p&lt;/span&gt;&amp;gt;Name : {{ .name }}&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;p&lt;/span&gt;&amp;gt;
+  &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;p&lt;/span&gt;&amp;gt;Age  : {{ .age }}&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;p&lt;/span&gt;&amp;gt;
+&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt;&amp;gt;
+{{ end }}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;layouts&#34;&gt;layouts&lt;/h3&gt;
+&lt;p&gt;테마에서 사용되는 HTML 템플릿 파일들을 overwrite 할 수 있는 곳&lt;/p&gt;
+&lt;h3 id=&#34;static&#34;&gt;static&lt;/h3&gt;
+&lt;p&gt;테마에서 사용되는 asset 을 overwrite 하거나, 추가 asset 들을 제공할 수 있는 곳&lt;/p&gt;
+&lt;h2 id=&#34;select-theme&#34;&gt;Select Theme&lt;/h2&gt;
+&lt;p&gt;Hugo 에는 다양한 오픈소스 테마들이 존재한다.
+&lt;a href=&#34;http://themes.gohugo.io&#34;&gt;이곳&lt;/a&gt;에서 Hugo 의 다양한 테마들을 살펴볼 수 있다.&lt;/p&gt;
+&lt;p&gt;본 블로그에 적용된 테마는 &lt;a href=&#34;http://themes.gohugo.io/redlounge/&#34;&gt;RedLounge&lt;/a&gt; 라는 테마이다.&lt;/p&gt;
+&lt;p&gt;먼저, 적용하고자 하는 테마의 git 저장소 URL을 확인한다. 그리고, 사이트 프로젝트 root 에서 다음과 같은 명령어들을 수행한다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ mkdir themes
+$ cd themes
+$ git clone &amp;lt;repository_url_of_theme&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;다운받은 테마를 살펴보면, 기본 구조가 &lt;code&gt;hugo new site&lt;/code&gt; 를 통해 만들어진 구조와 거의 흡사하다는것을 알 수 있다.&lt;/p&gt;
+&lt;p&gt;RedLounge 테마를 기준으로 분석해보니&amp;hellip;&lt;/p&gt;
+&lt;p&gt;content 와 data 디렉토리가 없는 대신 images 디렉토리가 존재한다.&lt;/p&gt;
+&lt;p&gt;또한, config.toml 대신 theme.toml 설정파일이 존재한다.&lt;/p&gt;
+&lt;p&gt;images 디렉토리는 Hugo의 ThemeShowcase 를 위한 이미지파일을 제공하며, theme.toml 또한 테마에 대한 설명, 버젼, 작성자 등에 대한 정보를 제공하는데에 쓰인다.&lt;/p&gt;
+&lt;p&gt;hugo 는 프로젝트를 빌드 시, 테마의 파일시스템을 임시 파일시스템위에 카피하고, 다시 이곳에 사용자 프로젝트의 파일시스템을 덮어씌운 결과물을 빌드하는 것으로 보인다. 그러므로 theme 의 레이아웃 파일을 overwrite 하고 싶다면 동일한 stucture 내의 동일한 이름의 컨텐츠 파일을 생성하여 overwrite 가능하다.&lt;/p&gt;
+&lt;h2 id=&#34;configuration&#34;&gt;Configuration&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;config.[toml|yaml|json]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Hugo 프로젝트의 설정파일. toml, yaml, json 모두 사용 가능하다.
+기본적인 빌드관련 설정과 테마별 추가 파라미터 변수들의 설정또한 이곳에서 처리한다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;[ config.toml]&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;contentdir = &amp;quot;content&amp;quot;
+layoutdir = &amp;quot;layouts&amp;quot;
+staticdir = &amp;quot;static&amp;quot;
+publishdir = &amp;quot;dist&amp;quot;
+baseurl = &amp;quot;http://brannpark.github.io/blog&amp;quot;
+title = &amp;quot;개발지식저장소&amp;quot;
+theme = &amp;quot;redlounge&amp;quot;
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;위의 내용은 본 블로그 hugo 프로젝트의 configuration 중 일부로써 여기서 중요한 부분은 publishdir, baseurl, theme 정도가 되겠다.&lt;/p&gt;
+&lt;p&gt;publishdir 의 경우 기본값은 publish 인데, 여기서는 dist 라고 지정되어있다. 이는 GitHub Pages 에 배포하기 위해 사용할 배포 스크립트가 기본적으로 소스 디렉토리 이름을 dist로 사용하기 때문이다. 관련 내용은 젤 마지막 Deploying To GitHub Pages 섹션에서 확인 할 수 있다.&lt;/p&gt;
+&lt;p&gt;baseurl 은 위와같이 본인의 블로그 사이트 베이스 url 을 입력하면 되고, theme 는 themes 디렉토리 하위의 사용할 테마 디렉토리 이름을 입력하면 된다. 참고로 RedLounge 의 경우 저장소를 그대로 clone 할 경우 디렉토리 이름이 hugo-redlounge 인데 redlounge 로 리네임하였기에 위와같이 적용하하였다.&lt;/p&gt;
+&lt;p&gt;추가 Hugo Configuration 에 대한 도큐먼트는 &lt;a href=&#34;https://gohugo.io/overview/configuration/&#34;&gt;이곳&lt;/a&gt;을 참조하여 확인하자.&lt;/p&gt;
+&lt;p&gt;또한 각각의 테마에서 커스텀하게 사용하는 파라미터 설정들은 guide document 에 명시되어있다. &lt;a href=&#34;https://github.com/tmaiaroto/hugo-redlounge&#34;&gt;예시(RedLounge)&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;create-page&#34;&gt;Create Page&lt;/h2&gt;
+&lt;p&gt;새 페이지를 만들기 위해서는 다음과 같은 명령어를 이용한다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ hugo new content/newpost.md
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;혹은 서브 URL 형태로 컨텐츠를 제공 하고자 한다면,&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ hugo new content/&amp;lt;subdir&amp;gt;/newpost.md
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;와 같이 명령어를 수행하여 새 컨텐츠를 생성한다.&lt;/p&gt;
+&lt;p&gt;이렇게 생성된 md 파일은 다음과 같은 특수한 header 부분을 가진다.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;+++
+Categories = [&amp;quot;Development&amp;quot;]
+Description = &amp;quot;Hugo와 GitHub Pages 를 이용한 블로그 구축 가이드&amp;quot;
+Tags = [&amp;quot;hugo&amp;quot;, &amp;quot;redlounge&amp;quot;, &amp;quot;static-website-engine&amp;quot;, &amp;quot;github-pages&amp;quot;]
+date = &amp;quot;2015-12-01T15:36:31+09:00&amp;quot;
+title = &amp;quot;Made by HUGO and GitHub Pages&amp;quot;
++++
+
+&amp;lt;Markdown Content&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;이는, 본 게시글에 적용된 header 로 각각은 테마와 연동되어 사이트의 UI에 표시된다.&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;이제 사이트를 로컬환경에서 띄워 볼 준비가 되었다고 볼 수 있다.
+프로젝트의 루트에서 다음과 같은 명령어를 쳐보자&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ hugo server -D --watch
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;그러면 config 에 설정된 baseurl 의 Host 부분이 &lt;code&gt;127.0.0.1:1313&lt;/code&gt; 로 변경되어 웹서버가 띄워진다.&lt;/p&gt;
+&lt;p&gt;브라우저로 &lt;code&gt;http://localhost:1313/blog&lt;/code&gt; 로 접속하여 확인 가능하다. (위에 예시로 작성된 설정파일의 baseurl 의 base path 가 &lt;strong&gt;blog&lt;/strong&gt; 이다.)&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-D&lt;/code&gt; 옵션은 웹서버를 띄우기 전 프로젝트를 빌드하는 옵션이며,&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;--watch&lt;/code&gt; 옵션은 특정 파일시스템에 변화가 생기면 자동으로 rebuild 해주는 옵션이다. 프로젝트 설정 변경이나, 컨텐츠를 수정하고 미리보기 시 요긴하게 쓰인다.&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;a href=&#34;https://pages.github.com&#34;&gt;Pages&lt;/a&gt; 는 github repository 를 기반으로 웹사이트를 호스팅해주는 기능이다.&lt;/p&gt;
+&lt;p&gt;github의 username 을 이용하여, 다음과 같이 내 github.io 에 접근할 수 있다.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;http://&amp;lt;username&amp;gt;.github.io&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;그러나 위와 같은 식으로 접근하여 사이트를 호스팅 하려면 다음과 같은 특수한 이름의 저장소를 만들어야 한다.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;&amp;lt;username&amp;gt;.github.io&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;이 저장소의 master 브랜치에 index.html 을 만들어 remote 에 푸쉬해 두면, 위 링크 접속 시 해당 페이지를 브라우저에서 볼 수 있다.&lt;/p&gt;
+&lt;p&gt;이를 Pages 에서는 User/Organization Site 라 한다.&lt;/p&gt;
+&lt;p&gt;이와 별개로, 각각의 저장소들은 각각의 Pages 를 가질 수 있는데, 이를 Project site 라 한다.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;http://&amp;lt;username&amp;gt;.github.io/&amp;lt;repository_name&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;예를 들어 blog 라는 저장소를 가지고 있다면, blog 저장소에 gh-pages 라는 브랜치를 orphan 모드로 생성(기존의 브랜치, 커밋들에서 완전히 독립적인 새 브랜치)하여 index.html 만들어 remote 에 푸쉬 해 두면&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;http://&amp;lt;username&amp;gt;.github.io/blog&lt;/code&gt; 에 접속 시 해당 페이지를 브라우저에서 볼 수 있다.&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;Project site 형식으로 GitHub Pages 에 블로그 사이트를 호스팅하는 예를 들겠다.&lt;/p&gt;
+&lt;p&gt;GitHub 저장소 이름이 blog 라고 한다면,&lt;/p&gt;
+&lt;p&gt;Pages 에서 호스팅되는 내 블로그 사이트의 base URL 은 다음과 같다.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;http://&amp;lt;username&amp;gt;.github.io/blog&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;이 주소로 GET request 하게 되면 Pages 는 blog 라는 저장소의 gh-pages 브랜치의 index.html 을 serving 한다.
+먼저, blog 저장소의 master 브랜치에는 Hugo 프로젝트가 생성되어 있다고 가정한다.&lt;/p&gt;
+&lt;p&gt;이제 gh-pages 브랜치를 생성하자. 위에 설명한 대로 orphan 모드로 생성한다.&lt;/p&gt;
+&lt;p&gt;그리고 브랜치를 git rm 명령어를 이용해 모두 삭제, add, commit 하고 origin 에 푸쉬 후, master 브랜치로 체크아웃한다.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ git clone https://github.com/&amp;lt;username&amp;gt;/blog.git
+$ cd blog
+$ git checkout -b --orphan gh-pages
+$ git rm -rf .
+$ git add .
+$ git commit -am &amp;quot;initial commit&amp;quot;
+$ git push origin gh-pages
+$ git checkout master
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;그리고 다음과 같이 deployment script 를 내려받아 excutable 퍼미션을 할당한다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ wget https://github.com/X1011/git-directory-deploy/raw/master/deploy.sh &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; chmod +x deploy.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;본인의 경우 해당 스크립트의 설정값 변경없이 바로 사용하였어도 문제없이 배포가 되었지만,&lt;/p&gt;
+&lt;p&gt;혹여나 문제가 발생하였다면 해당 스크립트에 대한 &lt;a href=&#34;https://github.com/X1011/git-directory-deploy&#34;&gt;가이드&lt;/a&gt;를 꼭 확인해보자.&lt;/p&gt;
+&lt;p&gt;스크립트를 다운 받았으면 hugo 를 이용해 프로젝트를 빌드하고 결과물을 deploy 스크립트를 이용해 블로그를 배포할 준비가 모두 되었다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ hugo -d dist
+$ ./deploy.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;hugo -d dist&lt;/code&gt; 명령어를 통해 프로젝트를 빌드하여 dist에 빌드 결과물을 저장하고, &lt;code&gt;./deploy.sh&lt;/code&gt; 를 이용해 gh-pages 브랜치에 배포하게 된다.&lt;/p&gt;
+&lt;p&gt;여기서 중요한것은 dist 라는 디렉토리인데, deploy 스크립트는 기본값으로 dist 라는 디렉토리를 배포 소스 디렉토리로 설정되어있다는 점이다.&lt;/p&gt;
+&lt;p&gt;어찌되었든 성공적으로 수행되었다면, 잠시 후 &lt;code&gt;http://&amp;lt;username&amp;gt;.github.io/blog&lt;/code&gt; 로 접속 시 내 블로그 사이트를 볼 수 있다.&lt;/p&gt;
+</description>
+     </item>
+   
+     <item>
+       <title>블로그를 시작합니다</title>
+       <link>http://brannpark.github.io/blog/posts/new/</link>
+       <pubDate>Tue, 01 Dec 2015 11:47:56 +0900</pubDate>
+       
+       <guid>http://brannpark.github.io/blog/posts/new/</guid>
+       <description>&lt;hr&gt;
+&lt;p&gt;뭐.. 평소에도 계속 프로그래밍 관련 글들을 기록해놓는 블로그를 해볼까 했었습니다만,&lt;/p&gt;
+&lt;p&gt;생각보다 시작이 쉽지가 않더군요 ㅎㅎ..&lt;/p&gt;
+&lt;p&gt;Github Pages 를 이용한 static website 개설에 흥미가 생겨서 한번 이를 이용한 블로깅을 시작해 볼까 합니다!&lt;/p&gt;
+&lt;p&gt;아마도 첫번째 주제는 사이트 개설기 정도가 되겠네요 ㅎㅎ&lt;/p&gt;
+&lt;p&gt;글이 마무리되면 포스팅 하도록 하겠습니다!&lt;/p&gt;
+</description>
+     </item>
+   
+ </channel>
 </rss>

@@ -1,0 +1,334 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+  <title>iOS_Adhoc_아카이브와 크래시리틱스, 그리고 Bitcode - 개발지식저장소</title>
+  <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="The HTML5 Herald" />
+<meta name="author" content="Brann Park" /><meta property="og:title" content="iOS_Adhoc_아카이브와 크래시리틱스, 그리고 Bitcode" />
+<meta property="og:description" content="오랫만의 포스팅!
+회사를 옮기고 나서 어찌어찌 하다보니 iOS 개발을 맡게 되었다.
+현 팀에서는 사내에 별도록 구축된 앱 빌드 &amp; 배포 서비스를 이용하고 있었고, 앱 크래시 관리용으로는 Fabric crashlytics 를 사용중이었다.
+그리고 얼마전 업데이트 작업을 마치고 앱스토어에 릴리즈할때 무심코 본 옵션.. Bitcode!!
+예전 회사에서는 저 옵션을 끈 채로 배포를 했던것 같은데.. 아무튼, 저게 문제가 되는 상황이 생겼다.
+차근히 썰을 풀어가보겠다.
+참고로..
+  Xcode 7부터는 Bitcode가 기본적으로 enabled 되어있다. (빌드 속성화면에서 아무리 뒤져봐야 나오지 않는다." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://brannpark.github.io/blog/posts/20180605_ios_adhoc_distribution_archive_and_crashlytics/" />
+<meta property="article:published_time" content="2018-06-05T16:12:15+09:00" />
+<meta property="article:modified_time" content="2018-06-05T16:12:15+09:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="iOS_Adhoc_아카이브와 크래시리틱스, 그리고 Bitcode"/>
+<meta name="twitter:description" content="오랫만의 포스팅!
+회사를 옮기고 나서 어찌어찌 하다보니 iOS 개발을 맡게 되었다.
+현 팀에서는 사내에 별도록 구축된 앱 빌드 &amp; 배포 서비스를 이용하고 있었고, 앱 크래시 관리용으로는 Fabric crashlytics 를 사용중이었다.
+그리고 얼마전 업데이트 작업을 마치고 앱스토어에 릴리즈할때 무심코 본 옵션.. Bitcode!!
+예전 회사에서는 저 옵션을 끈 채로 배포를 했던것 같은데.. 아무튼, 저게 문제가 되는 상황이 생겼다.
+차근히 썰을 풀어가보겠다.
+참고로..
+  Xcode 7부터는 Bitcode가 기본적으로 enabled 되어있다. (빌드 속성화면에서 아무리 뒤져봐야 나오지 않는다."/>
+
+<meta name="generator" content="Hugo 0.76.5" />
+    
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="http://brannpark.github.io/blog/fontawesome/css/all.min.css" />
+  
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
+  
+  
+  <link rel="stylesheet" type="text/css" href="/blog/css/styles.css" /></head>
+
+<body>
+  <div id="container">
+    <header>
+      <h1>
+                <a href="/blog/">개발지식저장소</a>
+            </h1>
+
+      <ul id="social-media">
+             <li>
+               <a href="https://www.facebook.com/" title="Facebook">
+               <i class="fab fa-facebook fa-lg"></i>
+               </a>
+             </li>
+             <li>
+               <a href="https://github.com/brannpark" title="GitHub">
+               <i class="fab fa-github fa-lg"></i>
+               </a>
+             </li>
+             <li>
+               <a href="https://gitlab.com/" title="GitLab">
+               <i class="fab fa-gitlab fa-lg"></i>
+               </a>
+             </li>
+             <li>
+               <a href="https://twitter.com/" title="Twitter">
+               <i class="fab fa-twitter fa-lg"></i>
+               </a>
+             </li>
+             <li>
+               <a href="https://linkedin.com/in/ji-hoon-park-b39b61102" title="LinkedIn">
+               <i class="fab fa-linkedin fa-lg"></i>
+               </a>
+             </li>
+             <li>
+               <a href="https://stackoverflow.com/" title="StackOverflow">
+               <i class="fab fa-stack-overflow fa-lg"></i>
+               </a>
+             </li>
+             <li>
+               <a href="https://www.instagram.com/" title="Instagram">
+               <i class="fab fa-instagram fa-lg"></i>
+               </a>
+             </li>
+             <li>
+               <a href="https://dev.to/" title="devto">
+               <i class="fab fa-dev fa-lg"></i>
+               </a>
+             </li>
+      </ul>
+      
+    </header>
+
+    
+<nav>
+    <ul>
+        
+    </ul>
+</nav>
+
+
+    <main>
+
+
+
+
+<article>
+
+    <h1>iOS_Adhoc_아카이브와 크래시리틱스, 그리고 Bitcode</h1>
+
+    
+      <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2018-06-05T16:12:15&#43;09:00">Jun 5, 2018</time>
+        </li>
+        
+        <li>
+            Categories:
+            <em>
+                
+                    
+                    <a href="/blog/categories/development">Development</a>
+                
+            </em>
+        </li>
+        
+
+        
+        <li>
+            <em>
+                
+                    
+                    <a href="/blog/tags/ios">#ios</a>
+                
+                    , 
+                    <a href="/blog/tags/bitcode">#bitcode</a>
+                
+                    , 
+                    <a href="/blog/tags/adhoc">#adhoc</a>
+                
+                    , 
+                    <a href="/blog/tags/archive">#archive</a>
+                
+                    , 
+                    <a href="/blog/tags/crashlytics">#crashlytics</a>
+                
+                    , 
+                    <a href="/blog/tags/fabric">#fabric</a>
+                
+                    , 
+                    <a href="/blog/tags/dsym">#dsym</a>
+                
+                    , 
+                    <a href="/blog/tags/dsymutil">#dsymutil</a>
+                
+            </em>
+        </li>
+        
+
+        <li>4 minutes read</li>
+    </ul>
+</aside>
+
+    
+
+    
+
+
+    <p>오랫만의 포스팅!</p>
+<p>회사를 옮기고 나서 어찌어찌 하다보니 iOS 개발을 맡게 되었다.</p>
+<p>현 팀에서는 사내에 별도록 구축된 앱 빌드 &amp; 배포 서비스를 이용하고 있었고, 앱 크래시 관리용으로는 Fabric crashlytics 를 사용중이었다.</p>
+<p>그리고 얼마전 업데이트 작업을 마치고 앱스토어에 릴리즈할때 무심코 본 옵션..  Bitcode!!</p>
+<p><img src="http://kevindelord.io/images/itunesconnect/summary.png" alt="Figure 1. Bitcode? 누구냐 넌!"></p>
+<p>예전 회사에서는 저 옵션을 끈 채로 배포를 했던것 같은데.. 아무튼, 저게 문제가 되는 상황이 생겼다.</p>
+<p>차근히 썰을 풀어가보겠다.</p>
+<p>참고로..</p>
+<blockquote>
+<ul>
+<li>Xcode 7부터는 Bitcode가 기본적으로 enabled 되어있다. (빌드 속성화면에서 아무리 뒤져봐야 나오지 않는다..;;) <a href="https://blog.asamaru.net/2015/10/20/ios-9-xcode-you-must-rebuild-it-with-bitcode-enabled/">참고</a></li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>강제로 Bitcode 를 비활성화하려면? (가능한가..?) <a href="http://theeye.pe.kr/archives/2501">여기</a></li>
+</ul>
+</blockquote>
+<!-- raw HTML omitted -->
+<h2 id="크래시가-보이지-않아요">크래시가 보이지 않아요.</h2>
+<p>테스트를 위해 사내 배포를 진행하고나면 테스터들이 설치 후 테스트를 하게 되는데, 혹여라도 사용 중 크래시가 발생한다면 Crashlytics 쪽으로 크래시들이 수집이 되어야 한다.</p>
+<p>그런데 나오라는 크래시는 나오지 않고 이런 화면만을 내게 보여준다!</p>
+<p><img src="https://i.stack.imgur.com/noyDG.png" alt="Figure 2. dSYM 을 찾습니다!"></p>
+<p>dSYM 이 없어서 심볼화하지 못한 크래시가 있다는 말인데..</p>
+<p>그럼 먼저 dSYM 이 뭔지 정확히 알아봐야겠다.</p>
+<!-- raw HTML omitted -->
+<h2 id="dsym">dSYM</h2>
+<p>대략 뭐하는 파일인지 검색을 해보니..</p>
+<p>리버스 엔지니어링을 어렵게하고(난독화), 앱 바이너리의 사이즈를 줄이기 위한 목적으로 만들어지는 파일이라 한다.</p>
+<p>Crashlytics 와 같은 서비스에서는 이 dSYM 이 있어야, 크래시 로그를 사람이 읽을 수 있도록 만들어줄 수 있다.</p>
+<p>이 dSYM 은 배포를 위해 아카이브를 만들때 자동으로 만들어진다. (물론 Xcode 옵션에 따라서!)</p>
+<p><img src="/blog/img/ios_fabric_and_bitcode/build_option.png" alt="Figure 3. 드워프와 dSYM"></p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>자, 그럼 여기까지 알았으니.. dSYM 을 찾아서 Fabric 에 업로드해보자!</p>
+<p>Fabric 대쉬보드에서, 설정화면으로 가서 App 메뉴를 선택하고, 알맞는 App 을 선택하면 다음과 같은 화면을 볼 수 있다.</p>
+<p><img src="https://i.stack.imgur.com/hQnbI.png" alt="Figure 4. App setting 페이지"></p>
+<p>이제 이곳에 dSYM 파일을 찾아 압축을 해서 올리기만 하면 되는것처럼 보인다.</p>
+<p>그래서 시도해보았다.</p>
+<p>결과는&hellip;.</p>
+<p><img src="/blog/img/ios_fabric_and_bitcode/hidden.png" alt="Figure 5. ___hidden"></p>
+<p>hidden?!</p>
+<p>심볼이.. 감춰져있다고 한다. 왜지? dSYM 이 심볼을 가지고 있다면서?!!</p>
+<p>원인이 뭔지 구글링을 해봤다..</p>
+<p>bitcode.. bitcode&hellip;?</p>
+<p>아카이브를 <strong>Export</strong> 시 비트코드란 녀석을 활성화하는게 이 문제의 원흉임을 알 수 있었다.</p>
+<p>내가 찾아본 대부분의 글들은, 앱스토어에 올리고 나서 어떻게 해야하는가에 대한 질답이 대부분이었는데, (필자의 경우는 Adhoc 배포!)</p>
+<p>이런 경우에는 단순한 솔루션이 주어졌다.</p>
+<blockquote>
+</blockquote>
+<ol>
+<li>앱스토어에 릴리즈</li>
+<li>Xcode Organizer -&gt; 아카이브 선택 -&gt; 우측에 Download dSyms 버튼 클릭!</li>
+</ol>
+<p>을 하면 아카이브 내의 dSYM 이 자동으로 갱신된단다.
+(갱신.. 응? 갱신이 필요해?)
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+위 방법의 대체 방법으로는,</p>
+<blockquote>
+</blockquote>
+<ol>
+<li>itunesconnect 에 접속해서</li>
+<li>앱을 선택하고</li>
+<li>Activity (활동) 항목에서 업로드한 빌드를 선택</li>
+<li>화면 UI 중에 dSYM 을 다운로드 링크를 클릭</li>
+</ol>
+<p>가 있다고 한다.</p>
+<p>자.. 그렇다면 이제는 Bitcode 가 활성화된 채로 AppStore 에 업로드를 하면 무슨일이 발생하는건지 알아볼 차례다.</p>
+<!-- raw HTML omitted -->
+<p>먼저, 릴리즈 아카이브를 앱스토어에 올리려할떄 뜨는 디어얼로그 화면이다.
+<img src="/blog/img/ios_fabric_and_bitcode/appstore_upload.png" alt="Figure 6."></p>
+<p>다음은, 애드혹 아카이브를 Export 하려 할 때 뜨는 다이얼로그 화면이다.
+<img src="/blog/img/ios_fabric_and_bitcode/adhoc_export.png" alt="Figure 7."></p>
+<p>묘하게 다르다.
+어쩃든 Appstore Upload 화면을 잘 보면.. Bitcode 라는 건,</p>
+<blockquote>
+<p>하드웨어, 소프트웨어, 컴파일러의 변경에 따라 AppStore 가 앱을 재빌드 할 수 있도록 해주는 것</p>
+</blockquote>
+<p>을 말한다는것을 알 수 있다.</p>
+<p>좀 더 자세한 설명은 아래와 같다.</p>
+<blockquote>
+<p>iOS9 에서 LLVM Compiler에서 Bitcode를 생성을 지원한다. Bitcode를 사용하는 경우 AppStore에서 필요한 경우에 해당 코드를 사용하여 다시 최적화 된 바이너리를 생성하여 End user에게 전송해 주는 역할을 담당한다. Xcode에서 Bitcode를 포함한 iOS 앱을 AppStore로 전송하면, AppStore 내에서 사용자의 디바이스에 따라 최적화된 바이너리를 다시 빌드하는 과정을 거친다. 따라서, Bitcode가 적용된 앱을 앱스토어로 전송한 경우 개발자는 추후 새롭게 출시되는 디바이스의 특성에 따라 다시 빌드하는 수고를 덜어줄 것으로 예상된다.</p>
+</blockquote>
+<!-- raw HTML omitted -->
+<p>설명은 다음과 같다.</p>
+<blockquote>
+<p>앱스토어가 하는 방식과 같이, Bitcode 를 컴파일 하여 앱을 Export 합니다.</p>
+</blockquote>
+<p>그렇다.. 결국 Bitcode 를 포함(맞는 표현일까..?) 하여 다시 빌드가 된다는거다.</p>
+<p>그리고 이 때 Pods 플젝 dSYM 들을 제외한 App.dSYM 은 여러개로 쪼개진다.</p>
+<p>새롭게 생성되는 dSYM 들은 UUID 포맷의 파일명을 가진다. (원본 App.dSYM 은 이떄부터 쓸모없어지게(?) 된다)</p>
+<p>여기서 앱스토어 upload 냐, 애드혹 export 냐에 따라 이 dSYM 들에 차이점이 생긴다.</p>
+<!-- raw HTML omitted -->
+<p>Bitcode 로 rebuild 됨에 따라 dSYM 이 새롭게 생성이 되는데..</p>
+<p>이때 이 dSYM 이 수상하다. dSYM 이 obfuscated 상태이다. 이 상태의 dSYM 을 그대로 Fabric 에 올려두면..</p>
+<p>__parent#123123 와 같은 심볼을 크래시 Stacktrace 에서 보게 된다. (한번 dSYM 을 올려서 Fabric 에 기록된 크래시 로그에 dSYM 이 프로세싱 되어 적용되면.. 다시 못돌립니다.. 크래시 내용이 뭔지 소중하다면 반드시 주의하세요!)</p>
+<p>그래서 de-obfuscate 프로세싱을 해줘야 하는데.. 앱스토어 업로드 시에는 그걸 자동으로 해주는것 같다.</p>
+<p>따라서 업로드 후 dSYM 을 다시 다운로드 받으면 바로 Fabric 에 올려도 된다.</p>
+<p>그런데&hellip;</p>
+<p>Adhoc 은 de-obfuscate 프로세싱을 자동으로 해주지 않는다. 그래서 내가 이렇게 장황하게 이 글을 쓰고 있는 것이었다..</p>
+<!-- raw HTML omitted -->
+<p>필자의 회사에서 사용하고 있는 사내 빌드 &amp; 배포 서비스의 경우 Jenkins CI 를 기반으로 만들어져 있고,</p>
+<p>플젝을 빌드하고 나면 빌드 아웃풋으로 plist, ipa, dSYM, xcarchive 등의 Artifacts 들이 생성된다.</p>
+<p>여기서 제공되는 dSYM 은 원본 App.dSYM.zip 이었기에 이를 쓸 수는 없고&hellip;</p>
+<p>최종 빌드 산물인 xcarchive 를 내려받는 수밖에 없다.</p>
+<p>이를 받아서 내용물을 보면 다음과 같은 디렉토리를 찾을 수 있다.</p>
+<ul>
+<li>dSYMs</li>
+<li>BCSymbolMaps</li>
+</ul>
+<p>dSYMs 는 dSYM 파일들이 위치하는곳이다.
+BCSymbolMaps 는 dSYM 을 de-obfuscate 할 수 있는 정보를 가진 파일들이 위치한다!</p>
+<p>위에서도 언급했듯이 Adhoc export 시에는 수동으로 난독화된 Symbol 정보를 매핑 시켜줘야 한다.</p>
+<p>이때 쓰이는 도구가 dsymutil 이라는 녀석이다.</p>
+<pre><code>$ dsymutil -symbol-map {YourApp.xcarchive}/BCSymbolMaps  {YourApp.xcarchive}/dSYMs/*.dSYM
+</code></pre><p>위와 같이 실행해주고 나면 dSYM 들의 난독화된 심볼이 복원이 된다.</p>
+<p>이제 Fabric 에는.. dSYMs 디렉토리에 있는 dSYM 파일들 중 {YourApp}.App.dSYM 파일 (원본 dSYM 파일) 을 제외한 나머지 모든 dSYM 들을 Zip 으로 압축하여 올리기만 하면 된다.</p>
+<p>끝이다! 야호.</p>
+<p>부디 누군가에게 유용한 정보가 되었길!</p>
+
+
+</article>
+
+
+<section class="post-nav">
+    <ul>
+        
+        <li>
+            <a href="http://brannpark.github.io/blog/posts/20171031_android_launch_process/"><i class="fa fa-chevron-circle-left"></i> 안드로이드 앱 실행 시의 세가지 상태</a>
+        </li>
+        
+        
+        <li>
+            <a href="http://brannpark.github.io/blog/posts/20180615_ios10plus_notification/">iOS10&#43; 노티피케이션 정리 <i class="fa fa-chevron-circle-right"></i> </a>
+        </li>
+        
+    </ul>
+</section>
+  
+    
+    
+  
+
+
+
+
+
+</main>
+    <footer>
+        <h6> |
+            Rendered by <a href="https://gohugo.io" title="Hugo">Hugo</a> |
+            <a href="http://brannpark.github.io/blogindex.xml">Subscribe </a></h6>
+    </footer>
+</div>
+<script src="/blog/js/scripts.js"></script>
+
+</body>
+
+</html>
+

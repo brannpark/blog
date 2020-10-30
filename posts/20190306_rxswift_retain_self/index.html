@@ -1,0 +1,251 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+  <title>RxSwift retain self - 개발지식저장소</title>
+  <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="The HTML5 Herald" />
+<meta name="author" content="Brann Park" /><meta property="og:title" content="RxSwift retain self" />
+<meta property="og:description" content="RxSwift 의 클로저에서의 self retain 에 대해 정리해보고자 한다.
+RxSwift 다음과 같은 코드를 살펴보자.
+class TestViewController : UIViewController { private let disposeBag = DisposeBag() func viewDidLoad() { super.viewDidLoad() Observable.just(0) .delay(5, scheduler: MainScheduler.asyncInstance) .subscribe(onNext: { value in self.test(value) }, onDisposed: { self.test() }) .disposed(by: disposeBag) } func test(_ value: Int = -1) { print(value) } } TestViewController 화면이 로드가 되면, 5초의 딜레이 후에 0 이라는 value 를 내뱉는 Observable 을 정의하고, subscribe 해두었다." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://brannpark.github.io/blog/posts/20190306_rxswift_retain_self/" />
+<meta property="article:published_time" content="2019-03-06T13:35:23+09:00" />
+<meta property="article:modified_time" content="2019-03-06T13:35:23+09:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="RxSwift retain self"/>
+<meta name="twitter:description" content="RxSwift 의 클로저에서의 self retain 에 대해 정리해보고자 한다.
+RxSwift 다음과 같은 코드를 살펴보자.
+class TestViewController : UIViewController { private let disposeBag = DisposeBag() func viewDidLoad() { super.viewDidLoad() Observable.just(0) .delay(5, scheduler: MainScheduler.asyncInstance) .subscribe(onNext: { value in self.test(value) }, onDisposed: { self.test() }) .disposed(by: disposeBag) } func test(_ value: Int = -1) { print(value) } } TestViewController 화면이 로드가 되면, 5초의 딜레이 후에 0 이라는 value 를 내뱉는 Observable 을 정의하고, subscribe 해두었다."/>
+
+<meta name="generator" content="Hugo 0.76.5" />
+    
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="http://brannpark.github.io/blog/fontawesome/css/all.min.css" />
+  
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
+  
+  
+  <link rel="stylesheet" type="text/css" href="/blog/css/styles.css" /></head>
+
+<body>
+  <div id="container">
+    <header>
+      <h1>
+                <a href="/blog/">개발지식저장소</a>
+            </h1>
+
+      <ul id="social-media">
+             <li>
+               <a href="https://www.facebook.com/" title="Facebook">
+               <i class="fab fa-facebook fa-lg"></i>
+               </a>
+             </li>
+             <li>
+               <a href="https://github.com/brannpark" title="GitHub">
+               <i class="fab fa-github fa-lg"></i>
+               </a>
+             </li>
+             <li>
+               <a href="https://gitlab.com/" title="GitLab">
+               <i class="fab fa-gitlab fa-lg"></i>
+               </a>
+             </li>
+             <li>
+               <a href="https://twitter.com/" title="Twitter">
+               <i class="fab fa-twitter fa-lg"></i>
+               </a>
+             </li>
+             <li>
+               <a href="https://linkedin.com/in/ji-hoon-park-b39b61102" title="LinkedIn">
+               <i class="fab fa-linkedin fa-lg"></i>
+               </a>
+             </li>
+             <li>
+               <a href="https://stackoverflow.com/" title="StackOverflow">
+               <i class="fab fa-stack-overflow fa-lg"></i>
+               </a>
+             </li>
+             <li>
+               <a href="https://www.instagram.com/" title="Instagram">
+               <i class="fab fa-instagram fa-lg"></i>
+               </a>
+             </li>
+             <li>
+               <a href="https://dev.to/" title="devto">
+               <i class="fab fa-dev fa-lg"></i>
+               </a>
+             </li>
+      </ul>
+      
+    </header>
+
+    
+<nav>
+    <ul>
+        
+    </ul>
+</nav>
+
+
+    <main>
+
+
+
+
+<article>
+
+    <h1>RxSwift retain self</h1>
+
+    
+      <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2019-03-06T13:35:23&#43;09:00">Mar 6, 2019</time>
+        </li>
+        
+        <li>
+            Categories:
+            <em>
+                
+                    
+                    <a href="/blog/categories/development">Development</a>
+                
+            </em>
+        </li>
+        
+
+        
+
+        <li>3 minutes read</li>
+    </ul>
+</aside>
+
+    
+
+    
+
+
+    <p>RxSwift 의 클로저에서의 self retain 에 대해 정리해보고자 한다.</p>
+<h1 id="rxswift">RxSwift</h1>
+<p>다음과 같은 코드를 살펴보자.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TestViewController</span> : UIViewController {
+	<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">let</span> disposeBag = DisposeBag()
+	
+	<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">viewDidLoad</span>() {
+		<span style="color:#66d9ef">super</span>.viewDidLoad()
+		
+		Observable.just(<span style="color:#ae81ff">0</span>)
+			.delay(<span style="color:#ae81ff">5</span>, scheduler: MainScheduler.asyncInstance)
+			.subscribe(onNext: { value <span style="color:#66d9ef">in</span>
+				<span style="color:#66d9ef">self</span>.test(value)
+			}, onDisposed: { 
+			<span style="color:#66d9ef">self</span>.test()
+		})
+		.disposed(by: disposeBag)
+	}
+
+	<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">test</span>(<span style="color:#66d9ef">_</span> value: Int = <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) {
+		print(value)
+	}
+}
+</code></pre></div><p>TestViewController 화면이 로드가 되면, 5초의 딜레이 후에 0 이라는 value 를 내뱉는 Observable 을 정의하고, subscribe 해두었다.</p>
+<p>이 subscription 의 dispose 는 disposeBag 이 소멸될 때 자동으로 dispose 되도록 disposed(by: disposeBag) 을 지정해두었다.</p>
+<p>이 disposeBag 이라는 프로퍼티는 let 선언이 되어있으며, 컨트롤러 객체가 소멸될 때 함꼐 소멸되도록 되어있다. (var 로 선언해두고, 적절한 lifecycle 에 disposeBag = DisposeBag() 으로 사용할 수도 있으나, 여기서는 다루지 않도록 한다.)</p>
+<p>그리고 subscribe 에서는 onNext 와 onDisposed 파라미터에 클로저를 선언해두었다.
+클로저는 모두 컨트롤러내의 test 라는 메서드를 호출하도록 되어있다.</p>
+<p>그렇다면, 이 화면에 Push ViewController 등으로 진입하자 마자, Back 키를 통해 화면을 나가버리면 어떻게 될까?</p>
+<p>onNext 와 onDisposed 의 클로저에서 self 를 사용하고 있는 부분에 유의하자.
+그렇다 그러므로, 이 코드에 의해서 컨트롤러 객체의 retain count 가 +2 될 것이다.</p>
+<p>그렇다는 말인 즉, 화면을 Back 해서 빠져나갔다고 하더라도, 컨트롤러 객체는 메모리해제가 되질 않는다. (deinit 이 호출되지 않는다.)</p>
+<p>그러므로 disposeBag 프로퍼티 객체도 역시 메모리 해제 되지 않는다. 그러므로 Subscription 역시도 구독해제 되지 않는다.</p>
+<p>따라서 5초가 지난 후, onNext 클로저가 먼저 실행되고(ref count -1), 더이상 emit 되는 데이터가 없으므로, 자동으로 dispose 되어 onDisposed 클로저가 실행된다(ref count -1).</p>
+<p>이렇게 된 이후에야, 컨트롤러 객체에 대한 reference count 가 0 가 되므로, 이때에 이 객체가 메모리해제 될 수 있다. (deinit 실행)</p>
+<p>이는 화면이 종료(back) 되었음에도 불구하고, Task 를 중단 시키지도 못했을 뿐 더러, 5초라는 시간동안 메모리가 누수된 상태가 되는 것이다.</p>
+<p>으흠? 그렇담 뭔가를 조치해줘야겠지. 클로저에서 사용되는 self 에 약한(weak) 참조 내지는 미소유(unowned) 참조를 쓰면 어떻게 될까?</p>
+<p>일단 둘 모두 레퍼런스 카운트를 증가시키지 않는 개념이다. weak 은 메모리해제 시 nil 을 가지게 되는 참조형태이고, unowned 는 Non nil, 그러나 메모리 보장하지 않는 참조 형태이다.</p>
+<p>그럼 이제 코드를 살짝 바꿔보자. 먼저 unowned 를 적용해보자.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift">Observable.just(<span style="color:#ae81ff">0</span>)
+	.delay(<span style="color:#ae81ff">5</span>, scheduler: MainScheduler.asyncInstance)
+	.subscribe(onNext: { [<span style="color:#66d9ef">unowned</span> <span style="color:#66d9ef">self</span>] value <span style="color:#66d9ef">in</span> <span style="color:#75715e">// self 레퍼런스 카운트를 증가시키지 않음</span>
+		<span style="color:#66d9ef">self</span>.test(value)
+	}, onDisposed: { [<span style="color:#66d9ef">unowned</span> <span style="color:#66d9ef">self</span>] <span style="color:#66d9ef">in</span> <span style="color:#75715e">// self 레퍼런스 카운트를 증가시키지 않음</span>
+		<span style="color:#66d9ef">self</span>.test()
+	})
+	.disposed(by: disposeBag)
+</code></pre></div><p>이제 화면에서 back 으로 빠져나갈때, 컨트롤러 객체가 메모리해제되며 disposeBag 이 해제되고, disposed(by: disposeBag) 에 의해 subscription 이 dispose 될 것이다.</p>
+<p>따라서 onNext 클로저는 실행되지 않을 것이고, onDisposed 클로저가 다음으로 실행될 것이다.</p>
+<p>이 onDisposed 클로저의 self 는 unowned 로 되어있다. 그럼 이때의 self 를 사용하는것은 안전할까??</p>
+<p>아니다. 해제된 객체에 대한 접근을 하게되는거이고, 런타임 에러를 유발하여 앱이 크래시나게 될 것이다.</p>
+<p>그렇다면</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift">onDisposed: { [<span style="color:#66d9ef">unowned</span> <span style="color:#66d9ef">self</span>] <span style="color:#66d9ef">in</span> 
+	<span style="color:#66d9ef">guard</span> <span style="color:#66d9ef">let</span> `<span style="color:#66d9ef">self</span>` = <span style="color:#66d9ef">self</span> <span style="color:#66d9ef">else</span> { <span style="color:#66d9ef">return</span> }
+	<span style="color:#66d9ef">self</span>.test()
+})
+</code></pre></div><p>이런 코드는 어떨까? 답은 안된다 이다. unowned self 는 Optional 타입이 아니기 때문이다.</p>
+<p>그렇다. 그래서 onDisposed 의 경우에는 [weak self] 를 써야만 하는것이다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift">onDisposed: { [<span style="color:#66d9ef">weak</span> <span style="color:#66d9ef">self</span>] <span style="color:#66d9ef">in</span> 
+	<span style="color:#66d9ef">guard</span> <span style="color:#66d9ef">let</span> `<span style="color:#66d9ef">self</span>` = <span style="color:#66d9ef">self</span> <span style="color:#66d9ef">else</span> { <span style="color:#66d9ef">return</span> }
+	<span style="color:#66d9ef">self</span>.test() 
+})
+</code></pre></div><p>자, 그럼 이런 단발성 이벤트 스트림이 아닌 경우는 어떨까? RxCocoa 를 이용하여 버튼 탭 이벤트를 구독하는 Subscription 을 살펴보자.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift">button.rx.tap
+   .subscribe(onNext: { 
+	   <span style="color:#66d9ef">self</span>.close()
+   })
+   .disposed(by: disposeBag)
+</code></pre></div><p>처음의 예제와 마찬가지로, onNext 클로저에서 self 를 strong reference 타입으로 사용하고 있다.</p>
+<p>이는 컨트롤러의 레퍼런스 카운트를 +1 시키며, 컨트롤러 객체의 정상적인 메모리 해제를 막는다.</p>
+<p>그러므로 Subscription 또한 영원히 해지 되지 않는다. 이 subscription 은 button 의 tap 이벤트를 영원히 기다리고 있기 때문에, 컨트롤러 객체는 프로세스가 종료될 때 까지 계속해서 메모리에 상주하게 된다.</p>
+<p>disposed(by: disposeBag) 을 통해 subscribe onNext 클로저의 실행은 컨트롤러 객체가 소멸되지 전에 실행되는것을 보장할 수 있으므로, 이런 경우 가장 적절한 retain 정책은 unowned 가 될것이다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift">button.rx.tap
+   .subscribe(onNext: { [<span style="color:#66d9ef">unowned</span> <span style="color:#66d9ef">self</span>] <span style="color:#66d9ef">in</span>
+	   <span style="color:#66d9ef">self</span>.close()
+   })
+   .disposed(by: disposeBag)
+</code></pre></div>
+
+</article>
+
+
+<section class="post-nav">
+    <ul>
+        
+        <li>
+            <a href="http://brannpark.github.io/blog/posts/20180615_ios10plus_notification/"><i class="fa fa-chevron-circle-left"></i> iOS10&#43; 노티피케이션 정리</a>
+        </li>
+        
+        
+        <li>
+            <a href="http://brannpark.github.io/blog/posts/20190322_swift_ios_interview_qna/">Swift iOS 기본 인터뷰 질문에 대한 정리글 <i class="fa fa-chevron-circle-right"></i> </a>
+        </li>
+        
+    </ul>
+</section>
+  
+    
+    
+  
+
+
+
+
+
+</main>
+    <footer>
+        <h6> |
+            Rendered by <a href="https://gohugo.io" title="Hugo">Hugo</a> |
+            <a href="http://brannpark.github.io/blogindex.xml">Subscribe </a></h6>
+    </footer>
+</div>
+<script src="/blog/js/scripts.js"></script>
+
+</body>
+
+</html>
+
