@@ -11,13 +11,13 @@ googleAnalytics = "" #Google Analytics ID
 [author]
     name = "Brann Park"           #Author name
     github = "brannpark"         #Github username
-    gitlab = ""         #Gitlab username
+    # gitlab = ""         #Gitlab username
     linkedin = "ji-hoon-park-b39b61102"       #LinkedIn username
-    facebook = ""       #Facebook username
-    twitter = ""        #Twitter username
-    instagram = ""      #Instagram username
-    stackoverflow = ""  #StackOverflow username
-    devto = ""          #Dev.to username 
+    # facebook = ""       #Facebook username
+    # twitter = ""        #Twitter username
+    # instagram = ""      #Instagram username
+    # stackoverflow = ""  #StackOverflow username
+    # devto = ""          #Dev.to username 
 
 [params]
     tagline = ""
